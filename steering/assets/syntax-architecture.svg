@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" width="860" height="400" role="img" aria-labelledby="syntax-architecture-title syntax-architecture-desc">
+<title id="syntax-architecture-title">基础设施 SVG 模板</title>
+<desc id="syntax-architecture-desc">API 分组内数据库和服务器的基础设施关系示例。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="860" height="400" fill="#ffffff"/>
+<text x="430" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">基础设施 SVG 模板</text>
+<g id="groups">
+<g id="group-api">
+<rect x="100" y="60" width="660" height="270" rx="12" fill="#e0f2fe" fill-opacity="0.52" stroke="#0369a1" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="116" y="84" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#0c4a6e">API</text>
+</g>
+</g>
+<g id="connectors">
+<polyline data-edge="database-server" data-from="database" data-from-port="right" data-to="server" data-to-port="left" data-kind="undirected" points="360,215 500,215" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="database-server">
+<rect x="410" y="138" width="40" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="430" y="155">连接</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-database">
+<path data-node="database" fill="#f1f5f9" stroke="#64748b" stroke-width="2" d="M 190 181 C 190 157, 360 157, 360 181 V 249 C 360 273, 190 273, 190 249 Z M 190 181 C 190 205, 360 205, 360 181"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#334155"><tspan x="275" y="220">Database</tspan></text>
+</g>
+<g id="node-server">
+<rect data-node="server" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="500" y="165" width="170" height="100" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="585" y="220">Server</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

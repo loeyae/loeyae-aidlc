@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 580" width="1240" height="580" role="img" aria-labelledby="auto-context-platform-adaptation-title auto-context-platform-adaptation-desc">
+<title id="auto-context-platform-adaptation-title">自动上下文管理的三平台适配（历史方案）</title>
+<desc id="auto-context-platform-adaptation-desc">共享的上下文优化规则由 Claude Code、Kiro 和 OpenCode 分别以各自可用机制适配执行。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="1240" height="580" fill="#ffffff"/>
+<text x="620" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">自动上下文管理的三平台适配（历史方案）</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="shared-claude" data-from="shared-rule" data-from-port="bottom" data-to="claude" data-to-port="top" data-kind="directed" points="620,165 620,230 220,230 220,300" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="shared-kiro" data-from="shared-rule" data-from-port="bottom" data-to="kiro" data-to-port="top" data-kind="directed" points="620,165 620,300" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="shared-opencode" data-from="shared-rule" data-from-port="bottom" data-to="opencode" data-to-port="top" data-kind="directed" points="620,165 620,230 1020,230 1020,300" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="shared-claude">
+<rect x="400" y="203" width="40" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="420" y="220">引用</tspan></text>
+</g>
+<g data-edge-label="shared-opencode">
+<rect x="800" y="203" width="40" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="820" y="220">引用</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-shared-rule">
+<rect data-node="shared-rule" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="305" y="55" width="630" height="110" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="620" y="81">steering/common-context-optimization.md</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="620" y="107">分段规则、state.md 格式、进度提示</tspan><tspan x="620" y="123">三平台共享</tspan></text>
+</g>
+<g id="node-claude">
+<rect data-node="claude" fill="#f8fafc" stroke="#334155" stroke-width="2" x="75" y="300" width="290" height="160" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="220" y="326">Claude Code</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="220" y="352">.claude/workflows/</tspan><tspan x="220" y="368">aidlc-orchestrator.js</tspan><tspan x="220" y="384">→ agents/orchestrator.md</tspan></text>
+</g>
+<g id="node-kiro">
+<rect data-node="kiro" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="475" y="300" width="290" height="160" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="620" y="326">Kiro</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="620" y="352">Sub-Agent + Spec 任务</tspan><tspan x="620" y="368">PostTaskExec Hook</tspan><tspan x="620" y="384">→ agents/batch-executor.md</tspan></text>
+</g>
+<g id="node-opencode">
+<rect data-node="opencode" fill="#f1f5f9" stroke="#64748b" stroke-width="2" x="875" y="300" width="290" height="160" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#334155"><tspan x="1020" y="326">OpenCode</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#334155"><tspan x="1020" y="352">AI 自律执行 steering 规则</tspan><tspan x="1020" y="368">无自动化机制</tspan><tspan x="1020" y="384">state.md 手动恢复</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

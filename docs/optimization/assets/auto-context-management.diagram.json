@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "document": "docs/optimization/auto-context-management.md",
+  "diagrams": [
+    {
+      "id": "auto-context-platform-adaptation",
+      "output": "auto-context-platform-adaptation.svg",
+      "title": "自动上下文管理的三平台适配（历史方案）",
+      "description": "共享的上下文优化规则由 Claude Code、Kiro 和 OpenCode 分别以各自可用机制适配执行。",
+      "canvas": { "width": 1240, "height": 580 },
+      "nodes": [
+        { "id": "shared-rule", "shape": "round", "label": "steering/common-context-optimization.md", "details": ["分段规则、state.md 格式、进度提示", "三平台共享"], "x": 305, "y": 55, "width": 630, "height": 110, "tone": "accent" },
+        { "id": "claude", "shape": "rect", "label": "Claude Code", "details": [".claude/workflows/", "aidlc-orchestrator.js", "→ agents/orchestrator.md"], "x": 75, "y": 300, "width": 290, "height": 160, "tone": "neutral" },
+        { "id": "kiro", "shape": "rect", "label": "Kiro", "details": ["Sub-Agent + Spec 任务", "PostTaskExec Hook", "→ agents/batch-executor.md"], "x": 475, "y": 300, "width": 290, "height": 160, "tone": "accent" },
+        { "id": "opencode", "shape": "rect", "label": "OpenCode", "details": ["AI 自律执行 steering 规则", "无自动化机制", "state.md 手动恢复"], "x": 875, "y": 300, "width": 290, "height": 160, "tone": "muted" }
+      ],
+      "edges": [
+        { "id": "shared-claude", "from": "shared-rule", "to": "claude", "fromPort": "bottom", "toPort": "top", "points": [[620, 165], [620, 230], [220, 230], [220, 300]], "label": { "text": "引用", "x": 420, "y": 215 } },
+        { "id": "shared-kiro", "from": "shared-rule", "to": "kiro", "fromPort": "bottom", "toPort": "top", "points": [[620, 165], [620, 300]] },
+        { "id": "shared-opencode", "from": "shared-rule", "to": "opencode", "fromPort": "bottom", "toPort": "top", "points": [[620, 165], [620, 230], [1020, 230], [1020, 300]], "label": { "text": "引用", "x": 820, "y": 215 } }
+      ]
+    }
+  ]
+}

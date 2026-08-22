@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 430" width="980" height="430" role="img" aria-labelledby="syntax-c4-context-title syntax-c4-context-desc">
+<title id="syntax-c4-context-title">系统上下文 SVG 模板</title>
+<desc id="syntax-c4-context-desc">用户、目标系统和外部系统的系统上下文示例。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="980" height="430" fill="#ffffff"/>
+<text x="490" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">系统上下文 SVG 模板</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="user-system" data-from="user" data-from-port="right" data-to="system" data-to-port="left" data-kind="directed" points="255,215 390,207.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="system-external" data-from="system" data-from-port="right" data-to="external" data-to-port="left" data-kind="directed" points="610,207.5 735,215" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="user-system">
+<rect x="300" y="163" width="40" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="320" y="180">使用</tspan></text>
+</g>
+<g data-edge-label="system-external">
+<rect x="655" y="163" width="40" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="675" y="180">调用</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-user">
+<g data-node="user" fill="#f1f5f9" stroke="#64748b" stroke-width="2"><circle cx="165" cy="183" r="14"/><rect x="75" y="201" width="180" height="64" rx="8"/></g>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#334155"><tspan x="165" y="191">用户</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#334155"><tspan x="165" y="217">最终使用者</tspan></text>
+</g>
+<g id="node-system">
+<rect data-node="system" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="390" y="150" width="220" height="115" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="500" y="176">目标系统</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="500" y="202">核心业务系统</tspan></text>
+</g>
+<g id="node-external">
+<rect data-node="external" fill="#f1f5f9" stroke="#64748b" stroke-width="2" x="735" y="165" width="180" height="100" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#334155"><tspan x="825" y="191">外部系统</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#334155"><tspan x="825" y="217">第三方服务</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

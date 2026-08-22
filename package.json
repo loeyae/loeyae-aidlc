@@ -10,12 +10,16 @@
   "files": [
     ".opencode",
     "agents",
+    "docs",
     "scripts",
     "skills",
     "steering"
   ],
   "scripts": {
-    "setup": "node scripts/setup.mjs"
+    "setup": "node scripts/setup.mjs",
+    "render:svg-diagrams": "node scripts/render-all-svg-diagrams.mjs",
+    "validate:svg-diagrams": "node scripts/validate-svg-diagrams.mjs",
+    "render:delivery-business-flow-svg": "node scripts/render-delivery-business-flow-svg.mjs docs/assets/delivery-business-flow-test-10-nodes-3-branches.diagram.json docs/assets/delivery-business-flow-test-10-nodes-3-branches.svg"
   },
   "keywords": [
     "aidlc",
@@ -41,7 +45,7 @@
     "diagram",
     "图表设计",
     "架构图",
-    "mermaid"
+    "svg"
   ],
   "author": {
     "name": "Loeyae Team",

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 310" width="720" height="310" role="img" aria-labelledby="ascii-invalid-box-title ascii-invalid-box-desc">
+<title id="ascii-invalid-box-title">不一致宽度反例</title>
+<desc id="ascii-invalid-box-desc">内容行宽度不一致导致边界无法对齐的反例。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="720" height="310" fill="#ffffff"/>
+<text x="360" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">不一致宽度反例</text>
+<g id="groups">
+</g>
+<g id="connectors">
+</g>
+<g id="edge-labels">
+</g>
+<g id="nodes">
+<g id="node-component">
+<path data-node="component" fill="#fee2e2" stroke="#b91c1c" stroke-width="2" d="M 150 85 H 540 L 560 105 V 230 H 150 Z M 540 85 V 105 H 560"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#7f1d1d"><tspan x="355" y="111">Component Name</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#7f1d1d"><tspan x="355" y="137">Description text here</tspan><tspan x="355" y="153">内容宽度不一致</tspan></text>
+</g>
+</g>
+<g id="annotations">
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="400" fill="#7f1d1d"><tspan x="360" y="270">错误：边界与内容宽度不一致</tspan></text>
+</g>
+</svg>

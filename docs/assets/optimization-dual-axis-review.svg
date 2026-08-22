@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 690" width="1160" height="690" role="img" aria-labelledby="optimization-dual-axis-review-title optimization-dual-axis-review-desc">
+<title id="optimization-dual-axis-review-title">双轴审查闭环（历史实施说明）</title>
+<desc id="optimization-dual-axis-review-desc">Standards Axis 与 Spec Axis 独立审查后合并报告；存在关键问题则修复并仅复审修复部分。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="1160" height="690" fill="#ffffff"/>
+<text x="580" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">双轴审查闭环（历史实施说明）</text>
+<g id="groups">
+<g id="group-agents">
+<rect x="85" y="65" width="990" height="295" rx="12" fill="#e0f2fe" fill-opacity="0.52" stroke="#0369a1" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="101" y="89" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#0c4a6e">并行启动两个审查 Agent</text>
+</g>
+</g>
+<g id="connectors">
+<polyline data-edge="standards-merge" data-from="standards" data-from-port="bottom" data-to="merge" data-to-port="top" data-kind="directed" points="315,300 315,385 580,385 580,420" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="spec-merge" data-from="spec" data-from-port="bottom" data-to="merge" data-to-port="top" data-kind="directed" points="845,300 845,385 580,385 580,420" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="merge-critical" data-from="merge" data-from-port="bottom" data-to="critical" data-to-port="top" data-kind="directed" points="580,515 580,555" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="critical-repair" data-from="critical" data-from-port="left" data-to="repair" data-to-port="top" data-kind="directed" points="460,597.5 210,610" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="critical-pass" data-from="critical" data-from-port="right" data-to="pass" data-to-port="top" data-kind="directed" points="700,597.5 950,610" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="critical-repair">
+<rect x="351" y="613" width="38" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="370" y="630">是</tspan></text>
+</g>
+<g data-edge-label="critical-pass">
+<rect x="771" y="613" width="38" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="790" y="630">否</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-standards">
+<rect data-node="standards" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="155" y="155" width="320" height="145" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="315" y="181">Standards Axis</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="315" y="207">编码规范、Fowler Smells</tspan><tspan x="315" y="223">质量：关键 / 重要 / 建议</tspan><tspan x="315" y="239">输出 Standards 报告</tspan></text>
+</g>
+<g id="node-spec">
+<rect data-node="spec" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="685" y="155" width="320" height="145" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="845" y="181">Spec Axis</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="845" y="207">需求、功能设计、故事、UI</tspan><tspan x="845" y="223">数据流完整性</tspan><tspan x="845" y="239">输出 Spec 报告</tspan></text>
+</g>
+<g id="node-merge">
+<rect data-node="merge" fill="#f8fafc" stroke="#334155" stroke-width="2" x="360" y="420" width="440" height="95" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="580" y="446">合并两轴报告（不重排序）</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="580" y="472">Standards：X 个问题；Spec：Y 个问题</tspan></text>
+</g>
+<g id="node-critical">
+<polygon data-node="critical" fill="#fef3c7" stroke="#b45309" stroke-width="2" points="580,555 700,597.5 580,640 460,597.5"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#78350f"><tspan x="580" y="602.5">是否有关键问题？</tspan></text>
+</g>
+<g id="node-repair">
+<rect data-node="repair" fill="#fef3c7" stroke="#b45309" stroke-width="2" x="95" y="610" width="230" height="65" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#78350f"><tspan x="210" y="636">修复循环</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#78350f"><tspan x="210" y="662">仅审查修复部分</tspan></text>
+</g>
+<g id="node-pass">
+<rect data-node="pass" fill="#dcfce7" stroke="#15803d" stroke-width="2" x="835" y="610" width="230" height="65" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="950" y="647.5">审查通过</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

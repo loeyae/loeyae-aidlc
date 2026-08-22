@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" width="960" height="440" role="img" aria-labelledby="syntax-delivery-flow-title syntax-delivery-flow-desc">
+<title id="syntax-delivery-flow-title">交付流程 SVG 模板</title>
+<desc id="syntax-delivery-flow-desc">展示判断、通过、修改和回退关系的交付型业务流程模板。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="960" height="440" fill="#ffffff"/>
+<text x="480" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">交付流程 SVG 模板</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="start-review" data-from="start" data-from-port="bottom" data-to="review" data-to-port="top" data-kind="directed" points="480,95 480,145" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="review-done" data-from="review" data-from-port="left" data-to="done" data-to-port="top" data-kind="directed" points="390,185 200,300" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="review-revise" data-from="review" data-from-port="right" data-to="revise" data-to-port="top" data-kind="directed" points="570,185 720,300" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="revise-review" data-from="revise" data-from-port="left" data-to="review" data-to-port="bottom" data-kind="dashed" points="650,325 480,225" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="review-done">
+<rect x="301" y="252" width="38" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="320" y="269">是</tspan></text>
+</g>
+<g data-edge-label="review-revise">
+<rect x="621" y="252" width="38" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="640" y="269">否</tspan></text>
+</g>
+<g data-edge-label="revise-review">
+<rect x="515" y="358" width="40" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="535" y="375">回退</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-start">
+<rect data-node="start" fill="#f8fafc" stroke="#334155" stroke-width="2" x="410" y="45" width="140" height="50" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="480" y="75">开始</tspan></text>
+</g>
+<g id="node-review">
+<polygon data-node="review" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" points="480,145 570,185 480,225 390,185"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="480" y="190">是否通过</tspan></text>
+</g>
+<g id="node-done">
+<rect data-node="done" fill="#dcfce7" stroke="#15803d" stroke-width="2" x="130" y="300" width="140" height="50" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="200" y="330">完成</tspan></text>
+</g>
+<g id="node-revise">
+<rect data-node="revise" fill="#fef3c7" stroke="#b45309" stroke-width="2" x="650" y="300" width="140" height="50" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#78350f"><tspan x="720" y="330">修改</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 470" width="640" height="470" role="img" aria-labelledby="ascii-source-target-title ascii-source-target-desc">
+<title id="ascii-source-target-title">带标签连接示例</title>
+<desc id="ascii-source-target-desc">Source 通过 HTTP POST 连接 Target 的流程示例。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="640" height="470" fill="#ffffff"/>
+<text x="320" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">带标签连接示例</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="http-post" data-from="source" data-from-port="bottom" data-to="target" data-to-port="top" data-kind="directed" points="320,120 320,315" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="http-post">
+<rect x="258" y="228" width="124" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="320" y="245">HTTP POST</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-source">
+<rect data-node="source" fill="#f8fafc" stroke="#334155" stroke-width="2" x="240" y="65" width="160" height="55" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="320" y="97.5">Source</tspan></text>
+</g>
+<g id="node-target">
+<rect data-node="target" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="240" y="315" width="160" height="55" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="320" y="347.5">Target</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

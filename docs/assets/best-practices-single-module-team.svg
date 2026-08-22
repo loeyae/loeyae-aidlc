@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 610" width="1240" height="610" role="img" aria-labelledby="best-practices-single-module-team-title best-practices-single-module-team-desc">
+<title id="best-practices-single-module-team-title">单模块团队协作工作流（历史最佳实践）</title>
+<desc id="best-practices-single-module-team-desc">PM 与 Architect 在集中 Inception 中接力，随后多个开发者在 Construction 中按单元独立工作并合并 PR。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="1240" height="610" fill="#ffffff"/>
+<text x="620" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">单模块团队协作工作流（历史最佳实践）</text>
+<g id="groups">
+<g id="group-inception">
+<rect x="75" y="55" width="1090" height="220" rx="12" fill="#e0f2fe" fill-opacity="0.52" stroke="#0369a1" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="91" y="79" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#0c4a6e">Inception（集中）</text>
+</g>
+<g id="group-construction">
+<rect x="75" y="355" width="1090" height="180" rx="12" fill="#f1f5f9" fill-opacity="0.52" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="91" y="379" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#334155">Construction（分布）</text>
+</g>
+</g>
+<g id="connectors">
+<polyline data-edge="pm-architect" data-from="pm" data-from-port="right" data-to="architect" data-to-port="left" data-kind="directed" points="410,185 780,185" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="architect-dev-a" data-from="architect" data-from-port="bottom" data-to="dev-a" data-to-port="top" data-kind="directed" points="920,245 920,320 245,320 245,410" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="architect-dev-b" data-from="architect" data-from-port="bottom" data-to="dev-b" data-to-port="top" data-kind="directed" points="920,245 920,320 620,320 620,410" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="architect-dev-c" data-from="architect" data-from-port="bottom" data-to="dev-c" data-to-port="top" data-kind="directed" points="920,245 995,320 995,410" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="dev-a-merge" data-from="dev-a" data-from-port="bottom" data-to="merge" data-to-port="top" data-kind="directed" points="245,505 245,535 620,535 620,550" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="dev-b-merge" data-from="dev-b" data-from-port="bottom" data-to="merge" data-to-port="top" data-kind="directed" points="620,505 620,550" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="dev-c-merge" data-from="dev-c" data-from-port="bottom" data-to="merge" data-to-port="top" data-kind="directed" points="995,505 995,535 620,535 620,550" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="pm-architect">
+<rect x="557" y="138" width="76" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="595" y="155">拉取产出物</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-pm">
+<g data-node="pm" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"><circle cx="280" cy="153" r="14"/><rect x="150" y="171" width="260" height="64" rx="8"/></g>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="280" y="161">PM 会话</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="280" y="187">工作区检测、需求分析、用户故事</tspan><tspan x="280" y="203">提交主分支</tspan></text>
+</g>
+<g id="node-architect">
+<g data-node="architect" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"><circle cx="920" cy="143" r="14"/><rect x="780" y="161" width="280" height="84" rx="8"/></g>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="920" y="151">Architect 会话</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="920" y="177">拉取产出物、应用设计</tspan><tspan x="920" y="193">单元生成、工作流规划</tspan><tspan x="920" y="209">提交主分支</tspan></text>
+</g>
+<g id="node-dev-a">
+<g data-node="dev-a" fill="#f8fafc" stroke="#334155" stroke-width="2"><circle cx="245" cy="428" r="14"/><rect x="150" y="446" width="190" height="59" rx="8"/></g>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="245" y="436">Developer A</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="245" y="462">认领 unit-1</tspan><tspan x="245" y="478">feat/unit-1</tspan></text>
+</g>
+<g id="node-dev-b">
+<g data-node="dev-b" fill="#f8fafc" stroke="#334155" stroke-width="2"><circle cx="620" cy="428" r="14"/><rect x="525" y="446" width="190" height="59" rx="8"/></g>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="620" y="436">Developer B</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="620" y="462">认领 unit-2</tspan><tspan x="620" y="478">feat/unit-2</tspan></text>
+</g>
+<g id="node-dev-c">
+<g data-node="dev-c" fill="#f8fafc" stroke="#334155" stroke-width="2"><circle cx="995" cy="428" r="14"/><rect x="900" y="446" width="190" height="59" rx="8"/></g>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="995" y="436">Developer C</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="995" y="462">认领 unit-3</tspan><tspan x="995" y="478">feat/unit-3</tspan></text>
+</g>
+<g id="node-merge">
+<rect data-node="merge" fill="#dcfce7" stroke="#15803d" stroke-width="2" x="470" y="550" width="300" height="50" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="620" y="580">PR 合并到主分支</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

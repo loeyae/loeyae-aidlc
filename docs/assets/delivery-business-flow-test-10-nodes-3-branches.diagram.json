@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "delivery-business-flow-test-10-nodes-3-branches",
+  "title": "申请审批流程",
+  "description": "展示申请提交、材料补充、风险复核、审批结果与通知申请人的交付型业务流程。",
+  "direction": "TD",
+  "profile": {
+    "name": "delivery-business-flow-strict",
+    "version": "1.0.0",
+    "baseContract": "common-svg-diagram-standards.md",
+    "validator": "scripts/render-delivery-business-flow-svg.mjs",
+    "fieldMappings": {
+      "nodes[].kind": "nodes[].shape: terminal→round, step→rect, decision→diamond",
+      "nodes[].mainInputPort": "decision incoming edge.toPort; must be the declared main input vertex",
+      "edges[].kind": "directed only; bidirectional is not allowed for this flow profile",
+      "edges[].label.lines": "edges[].label.text as a non-empty string array"
+    }
+  },
+  "canvas": {
+    "width": 1280,
+    "height": 1360
+  },
+  "nodes": [
+    { "id": "N01", "label": "开始", "kind": "terminal", "x": 530, "y": 40, "width": 220, "height": 60 },
+    { "id": "N02", "label": "提交申请", "kind": "step", "x": 530, "y": 150, "width": 220, "height": 60 },
+    { "id": "N03", "label": "材料是否完整", "kind": "decision", "x": 525, "y": 270, "width": 230, "height": 120, "mainInputPort": "top" },
+    { "id": "N04", "label": "补充材料", "kind": "step", "x": 110, "y": 430, "width": 250, "height": 60 },
+    { "id": "N05", "label": "风险是否可接受", "kind": "decision", "x": 525, "y": 570, "width": 230, "height": 120, "mainInputPort": "top" },
+    { "id": "N06", "label": "人工复核", "kind": "step", "x": 930, "y": 600, "width": 220, "height": 60 },
+    { "id": "N07", "label": "审批是否通过", "kind": "decision", "x": 525, "y": 810, "width": 230, "height": 120, "mainInputPort": "top" },
+    { "id": "N08", "label": "生成审批结果", "kind": "step", "x": 180, "y": 1030, "width": 260, "height": 60 },
+    { "id": "N09", "label": "生成拒绝结果", "kind": "step", "x": 840, "y": 1030, "width": 260, "height": 60 },
+    { "id": "N10", "label": "通知申请人", "kind": "terminal", "x": 530, "y": 1250, "width": 220, "height": 60 }
+  ],
+  "edges": [
+    { "id": "N01-N02", "from": "N01", "fromPort": "bottom", "to": "N02", "toPort": "top", "kind": "directed", "points": [[640, 100], [640, 150]] },
+    { "id": "N02-N03", "from": "N02", "fromPort": "bottom", "to": "N03", "toPort": "top", "kind": "directed", "points": [[640, 210], [640, 270]] },
+    { "id": "N03-N04", "from": "N03", "fromPort": "left", "to": "N04", "toPort": "top", "kind": "directed", "label": { "text": "否", "x": 455, "y": 358 }, "points": [[525, 330], [420, 330], [420, 390], [235, 390], [235, 430]] },
+    { "id": "N03-N05", "from": "N03", "fromPort": "right", "to": "N05", "toPort": "top", "kind": "directed", "label": { "text": "是", "x": 885, "y": 400 }, "points": [[755, 330], [860, 330], [860, 520], [640, 520], [640, 570]] },
+    { "id": "N04-N05", "from": "N04", "fromPort": "bottom", "to": "N05", "toPort": "top", "kind": "directed", "points": [[235, 490], [235, 540], [520, 540], [520, 570], [640, 570]] },
+    { "id": "N05-N06", "from": "N05", "fromPort": "right", "to": "N06", "toPort": "left", "kind": "directed", "label": { "text": "送人工复核", "x": 842, "y": 590 }, "points": [[755, 630], [930, 630]] },
+    { "id": "N06-N05", "from": "N06", "fromPort": "right", "to": "N05", "toPort": "top", "kind": "directed", "label": { "text": "返回复核结果", "x": 930, "y": 550 }, "points": [[1150, 630], [1200, 630], [1200, 570], [640, 570]] },
+    { "id": "N05-N07", "from": "N05", "fromPort": "left", "to": "N07", "toPort": "top", "kind": "directed", "label": { "text": "风险可接受", "x": 355, "y": 700 }, "points": [[525, 630], [410, 630], [410, 750], [640, 750], [640, 810]] },
+    { "id": "N07-N08", "from": "N07", "fromPort": "left", "to": "N08", "toPort": "top", "kind": "directed", "label": { "text": "通过", "x": 400, "y": 920 }, "points": [[525, 870], [440, 870], [440, 980], [310, 980], [310, 1030]] },
+    { "id": "N07-N09", "from": "N07", "fromPort": "right", "to": "N09", "toPort": "top", "kind": "directed", "label": { "text": "不通过", "x": 880, "y": 920 }, "points": [[755, 870], [840, 870], [840, 980], [970, 980], [970, 1030]] },
+    { "id": "N08-N10", "from": "N08", "fromPort": "bottom", "to": "N10", "toPort": "top", "kind": "directed", "points": [[310, 1090], [310, 1140], [570, 1140], [570, 1250], [640, 1250]] },
+    { "id": "N09-N10", "from": "N09", "fromPort": "bottom", "to": "N10", "toPort": "top", "kind": "directed", "points": [[970, 1090], [970, 1180], [640, 1180], [640, 1250]] }
+  ]
+}

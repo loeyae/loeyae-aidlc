@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1020 500" width="1020" height="500" role="img" aria-labelledby="syntax-c4-deployment-title syntax-c4-deployment-desc">
+<title id="syntax-c4-deployment-title">部署 SVG 模板</title>
+<desc id="syntax-c4-deployment-desc">生产环境中 Kubernetes API 服务与数据库服务器的部署关系示例。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="1020" height="500" fill="#ffffff"/>
+<text x="510" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">部署 SVG 模板</text>
+<g id="groups">
+<g id="group-production">
+<rect x="70" y="55" width="880" height="370" rx="12" fill="#f1f5f9" fill-opacity="0.52" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="86" y="79" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#334155">生产环境 · Linux</text>
+</g>
+<g id="group-k8s">
+<rect x="135" y="130" width="350" height="230" rx="12" fill="#e0f2fe" fill-opacity="0.52" stroke="#0369a1" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="151" y="154" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#0c4a6e">Kubernetes Cluster</text>
+</g>
+<g id="group-db-server">
+<rect x="590" y="130" width="290" height="230" rx="12" fill="#f1f5f9" fill-opacity="0.52" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="606" y="154" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#334155">数据库服务器</text>
+</g>
+</g>
+<g id="connectors">
+<polyline data-edge="api-db" data-from="api" data-from-port="right" data-to="db" data-to-port="left" data-kind="directed" points="400,265 670,262.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="api-db">
+<rect x="533" y="198" width="64" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="565" y="215">JDBC</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-api">
+<rect data-node="api" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="220" y="220" width="180" height="90" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="310" y="246">API 服务</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="310" y="272">Spring Boot</tspan></text>
+</g>
+<g id="node-db">
+<path data-node="db" fill="#f8fafc" stroke="#334155" stroke-width="2" d="M 670 231 C 670 207, 810 207, 810 231 V 294 C 810 318, 670 318, 670 294 Z M 670 231 C 670 255, 810 255, 810 231"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="740" y="241">数据库</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="740" y="267">PostgreSQL</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 560" width="920" height="560" role="img" aria-labelledby="power-interest-title power-interest-desc">
+<title id="power-interest-title">Power-Interest 矩阵</title>
+<desc id="power-interest-desc">按权力和利益将利益相关者划分为四种参与策略。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="920" height="560" fill="#ffffff"/>
+<text x="460" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">Power-Interest 矩阵</text>
+<g id="groups">
+<g id="group-matrix">
+<rect x="145" y="70" width="620" height="360" rx="12" fill="#f1f5f9" fill-opacity="0.52" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="161" y="94" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#334155">利益相关者参与策略</text>
+</g>
+</g>
+<g id="connectors">
+</g>
+<g id="edge-labels">
+</g>
+<g id="nodes">
+<g id="node-manage">
+<rect data-node="manage" fill="#fef3c7" stroke="#b45309" stroke-width="2" x="175" y="115" width="265" height="125" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#78350f"><tspan x="307.5" y="182.5">密切管理</tspan></text>
+</g>
+<g id="node-engage">
+<rect data-node="engage" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="470" y="115" width="265" height="125" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="602.5" y="182.5">深度参与</tspan></text>
+</g>
+<g id="node-monitor">
+<rect data-node="monitor" fill="#f1f5f9" stroke="#64748b" stroke-width="2" x="175" y="260" width="265" height="125" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#334155"><tspan x="307.5" y="327.5">监控</tspan></text>
+</g>
+<g id="node-inform">
+<rect data-node="inform" fill="#dcfce7" stroke="#15803d" stroke-width="2" x="470" y="260" width="265" height="125" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="602.5" y="327.5">保持知情</tspan></text>
+</g>
+</g>
+<g id="annotations">
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="400" fill="#334155"><tspan x="455" y="55">高利益</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="400" fill="#334155"><tspan x="455" y="480">低利益</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="400" fill="#334155"><tspan x="110" y="260">低权力</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="400" fill="#334155"><tspan x="805" y="260">高权力</tspan></text>
+</g>
+</svg>

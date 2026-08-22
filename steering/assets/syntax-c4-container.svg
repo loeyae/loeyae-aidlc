@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 480" width="1040" height="480" role="img" aria-labelledby="syntax-c4-container-title syntax-c4-container-desc">
+<title id="syntax-c4-container-title">容器 SVG 模板</title>
+<desc id="syntax-c4-container-desc">Web 应用、API 服务和数据库组成的容器架构示例。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="1040" height="480" fill="#ffffff"/>
+<text x="520" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">容器 SVG 模板</text>
+<g id="groups">
+<g id="group-boundary">
+<rect x="235" y="65" width="720" height="330" rx="12" fill="#e0f2fe" fill-opacity="0.52" stroke="#0369a1" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="251" y="89" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#0c4a6e">目标系统</text>
+</g>
+</g>
+<g id="connectors">
+<polyline data-edge="user-web" data-from="user" data-from-port="right" data-to="web" data-to-port="left" data-kind="directed" points="185,232.5 290,232.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="web-api" data-from="web" data-from-port="right" data-to="api" data-to-port="left" data-kind="directed" points="460,232.5 565,232.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="api-db" data-from="api" data-from-port="right" data-to="db" data-to-port="left" data-kind="directed" points="735,232.5 790,232.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="user-web">
+<rect x="218" y="166" width="40" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="238" y="183">访问</tspan></text>
+</g>
+<g data-edge-label="web-api">
+<rect x="445" y="166" width="136" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="513" y="183">JSON/HTTPS</tspan></text>
+</g>
+<g data-edge-label="api-db">
+<rect x="732" y="166" width="64" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="764" y="183">JDBC</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-user">
+<g data-node="user" fill="#f1f5f9" stroke="#64748b" stroke-width="2"><circle cx="115" cy="208" r="14"/><rect x="45" y="226" width="140" height="49" rx="8"/></g>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#334155"><tspan x="115" y="237.5">用户</tspan></text>
+</g>
+<g id="node-web">
+<rect data-node="web" fill="#f8fafc" stroke="#334155" stroke-width="2" x="290" y="185" width="170" height="95" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="375" y="211">Web 应用</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="375" y="237">React</tspan></text>
+</g>
+<g id="node-api">
+<rect data-node="api" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="565" y="185" width="170" height="95" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="650" y="211">API 服务</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="650" y="237">Spring Boot</tspan></text>
+</g>
+<g id="node-db">
+<path data-node="db" fill="#f1f5f9" stroke="#64748b" stroke-width="2" d="M 790 201 C 790 177, 910 177, 910 201 V 264 C 910 288, 790 288, 790 264 Z M 790 201 C 790 225, 910 225, 910 201"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#334155"><tspan x="850" y="211">数据库</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#334155"><tspan x="850" y="237">PostgreSQL</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1360" width="1280" height="1360" role="img" aria-labelledby="delivery-business-flow-test-10-nodes-3-branches-title delivery-business-flow-test-10-nodes-3-branches-desc">
+<title id="delivery-business-flow-test-10-nodes-3-branches-title">申请审批流程</title>
+<desc id="delivery-business-flow-test-10-nodes-3-branches-desc">展示申请提交、材料补充、风险复核、审批结果与通知申请人的交付型业务流程。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+</marker>
+</defs>
+<rect width="1280" height="1360" fill="#ffffff"/>
+<text x="640" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#111827">申请审批流程</text>
+<g id="connectors">
+<polyline data-edge="N01-N02" data-from="N01" data-from-port="bottom" data-to="N02" data-to-port="top" data-kind="directed" points="640,100 640,150" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="N02-N03" data-from="N02" data-from-port="bottom" data-to="N03" data-to-port="top" data-kind="directed" points="640,210 640,270" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="N03-N04" data-from="N03" data-from-port="left" data-to="N04" data-to-port="top" data-kind="directed" points="525,330 420,330 420,390 235,390 235,430" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="N03-N05" data-from="N03" data-from-port="right" data-to="N05" data-to-port="top" data-kind="directed" points="755,330 860,330 860,520 640,520 640,570" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="N04-N05" data-from="N04" data-from-port="bottom" data-to="N05" data-to-port="top" data-kind="directed" points="235,490 235,540 520,540 520,570 640,570" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="N05-N06" data-from="N05" data-from-port="right" data-to="N06" data-to-port="left" data-kind="directed" points="755,630 930,630" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="N06-N05" data-from="N06" data-from-port="right" data-to="N05" data-to-port="top" data-kind="directed" points="1150,630 1200,630 1200,570 640,570" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="N05-N07" data-from="N05" data-from-port="left" data-to="N07" data-to-port="top" data-kind="directed" points="525,630 410,630 410,750 640,750 640,810" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="N07-N08" data-from="N07" data-from-port="left" data-to="N08" data-to-port="top" data-kind="directed" points="525,870 440,870 440,980 310,980 310,1030" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="N07-N09" data-from="N07" data-from-port="right" data-to="N09" data-to-port="top" data-kind="directed" points="755,870 840,870 840,980 970,980 970,1030" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="N08-N10" data-from="N08" data-from-port="bottom" data-to="N10" data-to-port="top" data-kind="directed" points="310,1090 310,1140 570,1140 570,1250 640,1250" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="N09-N10" data-from="N09" data-from-port="bottom" data-to="N10" data-to-port="top" data-kind="directed" points="970,1090 970,1180 640,1180 640,1250" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="N03-N04">
+<rect x="439" y="342" width="32" height="20" rx="2" fill="#ffffff"/>
+<text x="455" y="358" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#334155">否</text>
+</g>
+<g data-edge-label="N03-N05">
+<rect x="869" y="384" width="32" height="20" rx="2" fill="#ffffff"/>
+<text x="885" y="400" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#334155">是</text>
+</g>
+<g data-edge-label="N05-N06">
+<rect x="802" y="574" width="80" height="20" rx="2" fill="#ffffff"/>
+<text x="842" y="590" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#334155">送人工复核</text>
+</g>
+<g data-edge-label="N06-N05">
+<rect x="884" y="534" width="92" height="20" rx="2" fill="#ffffff"/>
+<text x="930" y="550" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#334155">返回复核结果</text>
+</g>
+<g data-edge-label="N05-N07">
+<rect x="315" y="684" width="80" height="20" rx="2" fill="#ffffff"/>
+<text x="355" y="700" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#334155">风险可接受</text>
+</g>
+<g data-edge-label="N07-N08">
+<rect x="378" y="904" width="44" height="20" rx="2" fill="#ffffff"/>
+<text x="400" y="920" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#334155">通过</text>
+</g>
+<g data-edge-label="N07-N09">
+<rect x="852" y="904" width="56" height="20" rx="2" fill="#ffffff"/>
+<text x="880" y="920" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#334155">不通过</text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-N01">
+<rect data-node="N01" fill="#f8fafc" stroke="#1f2937" stroke-width="2" x="530" y="40" width="220" height="60" rx="24"/>
+<text x="640" y="76" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#111827">开始</text>
+</g>
+<g id="node-N02">
+<rect data-node="N02" fill="#f8fafc" stroke="#1f2937" stroke-width="2" x="530" y="150" width="220" height="60" rx="4"/>
+<text x="640" y="186" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#111827">提交申请</text>
+</g>
+<g id="node-N03">
+<polygon data-node="N03" fill="#f8fafc" stroke="#1f2937" stroke-width="2" points="640,270 755,330 640,390 525,330"/>
+<text x="640" y="336" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#111827">材料是否完整</text>
+</g>
+<g id="node-N04">
+<rect data-node="N04" fill="#f8fafc" stroke="#1f2937" stroke-width="2" x="110" y="430" width="250" height="60" rx="4"/>
+<text x="235" y="466" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#111827">补充材料</text>
+</g>
+<g id="node-N05">
+<polygon data-node="N05" fill="#f8fafc" stroke="#1f2937" stroke-width="2" points="640,570 755,630 640,690 525,630"/>
+<text x="640" y="636" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#111827">风险是否可接受</text>
+</g>
+<g id="node-N06">
+<rect data-node="N06" fill="#f8fafc" stroke="#1f2937" stroke-width="2" x="930" y="600" width="220" height="60" rx="4"/>
+<text x="1040" y="636" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#111827">人工复核</text>
+</g>
+<g id="node-N07">
+<polygon data-node="N07" fill="#f8fafc" stroke="#1f2937" stroke-width="2" points="640,810 755,870 640,930 525,870"/>
+<text x="640" y="876" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#111827">审批是否通过</text>
+</g>
+<g id="node-N08">
+<rect data-node="N08" fill="#f8fafc" stroke="#1f2937" stroke-width="2" x="180" y="1030" width="260" height="60" rx="4"/>
+<text x="310" y="1066" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#111827">生成审批结果</text>
+</g>
+<g id="node-N09">
+<rect data-node="N09" fill="#f8fafc" stroke="#1f2937" stroke-width="2" x="840" y="1030" width="260" height="60" rx="4"/>
+<text x="970" y="1066" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#111827">生成拒绝结果</text>
+</g>
+<g id="node-N10">
+<rect data-node="N10" fill="#f8fafc" stroke="#1f2937" stroke-width="2" x="530" y="1250" width="220" height="60" rx="24"/>
+<text x="640" y="1286" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#111827">通知申请人</text>
+</g>
+</g>
+</svg>

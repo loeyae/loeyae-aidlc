@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 640" width="1180" height="640" role="img" aria-labelledby="workflow-plan-template-title workflow-plan-template-desc">
+<title id="workflow-plan-template-title">执行计划 SVG 模板</title>
+<desc id="workflow-plan-template-desc">Inception 与 Construction 阶段的执行计划和依赖关系模板。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="1180" height="640" fill="#ffffff"/>
+<text x="590" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">执行计划 SVG 模板</text>
+<g id="groups">
+<g id="group-inception">
+<rect x="90" y="115" width="1000" height="200" rx="12" fill="#e0f2fe" fill-opacity="0.52" stroke="#0369a1" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="106" y="139" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#0c4a6e">Inception 阶段</text>
+</g>
+<g id="group-construction">
+<rect x="320" y="395" width="560" height="150" rx="12" fill="#f1f5f9" fill-opacity="0.52" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="336" y="419" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#334155">Construction 阶段</text>
+</g>
+</g>
+<g id="connectors">
+<polyline data-edge="start-workspace" data-from="start" data-from-port="bottom" data-to="workspace" data-to-port="top" data-kind="directed" points="550,95 205,190" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="workspace-reverse" data-from="workspace" data-from-port="right" data-to="reverse" data-to-port="left" data-kind="directed" points="280,222.5 300,222.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="reverse-requirements" data-from="reverse" data-from-port="right" data-to="requirements" data-to-port="left" data-kind="directed" points="430,222.5 470,222.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="requirements-stories" data-from="requirements" data-from-port="right" data-to="stories" data-to-port="left" data-kind="directed" points="600,222.5 640,222.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="stories-planning" data-from="stories" data-from-port="right" data-to="planning" data-to-port="left" data-kind="directed" points="770,222.5 810,222.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="planning-application" data-from="planning" data-from-port="right" data-to="application" data-to-port="left" data-kind="directed" points="940,222.5 960,222.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="application-functional" data-from="application" data-from-port="bottom" data-to="functional" data-to-port="top" data-kind="directed" points="1010,255 460,450" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="functional-tdd" data-from="functional" data-from-port="right" data-to="tdd" data-to-port="left" data-kind="directed" points="530,482.5 570,482.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="tdd-build" data-from="tdd" data-from-port="right" data-to="build" data-to-port="left" data-kind="directed" points="730,482.5 765,482.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+</g>
+<g id="nodes">
+<g id="node-start">
+<rect data-node="start" fill="#f8fafc" stroke="#334155" stroke-width="2" x="465" y="45" width="170" height="50" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="550" y="75">用户请求</tspan></text>
+</g>
+<g id="node-workspace">
+<rect data-node="workspace" fill="#f8fafc" stroke="#334155" stroke-width="2" x="130" y="190" width="150" height="65" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="205" y="218">工作区检测</tspan><tspan x="205" y="237">已完成</tspan></text>
+</g>
+<g id="node-reverse">
+<rect data-node="reverse" fill="#f8fafc" stroke="#334155" stroke-width="2" x="300" y="190" width="130" height="65" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="365" y="227.5">逆向工程</tspan></text>
+</g>
+<g id="node-requirements">
+<rect data-node="requirements" fill="#f8fafc" stroke="#334155" stroke-width="2" x="470" y="190" width="130" height="65" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="535" y="227.5">需求分析</tspan></text>
+</g>
+<g id="node-stories">
+<rect data-node="stories" fill="#f8fafc" stroke="#334155" stroke-width="2" x="640" y="190" width="130" height="65" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="705" y="227.5">用户故事</tspan></text>
+</g>
+<g id="node-planning">
+<rect data-node="planning" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="810" y="190" width="130" height="65" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="875" y="227.5">工作流规划</tspan></text>
+</g>
+<g id="node-application">
+<rect data-node="application" fill="#f8fafc" stroke="#334155" stroke-width="2" x="960" y="190" width="100" height="65" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="1010" y="227.5">应用设计</tspan></text>
+</g>
+<g id="node-functional">
+<rect data-node="functional" fill="#f8fafc" stroke="#334155" stroke-width="2" x="390" y="450" width="140" height="65" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="460" y="487.5">功能设计</tspan></text>
+</g>
+<g id="node-tdd">
+<rect data-node="tdd" fill="#f8fafc" stroke="#334155" stroke-width="2" x="570" y="450" width="160" height="65" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="650" y="487.5">TDD 实现与审查</tspan></text>
+</g>
+<g id="node-build">
+<rect data-node="build" fill="#f8fafc" stroke="#334155" stroke-width="2" x="765" y="450" width="145" height="65" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="837.5" y="487.5">实际构建和测试</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

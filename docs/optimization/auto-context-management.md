@@ -16,27 +16,9 @@
 
 ## 方案架构
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              steering/common-context-optimization.md         │
-│              （分段规则、state.md 格式、进度提示）              │
-└─────────────────────────────┬───────────────────────────────┘
-                              │ 引用
-              ┌───────────────┼───────────────┐
-              ▼               ▼               ▼
-┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐
-│   Claude Code    │ │      Kiro        │ │    OpenCode      │
-│                  │ │                  │ │                  │
-│ .claude/         │ │ Sub-Agent +      │ │ AI 自律执行      │
-│ workflows/       │ │ Spec 任务 +      │ │ steering 规则    │
-│ aidlc-           │ │ PostTaskExec     │ │                  │
-│ orchestrator.js  │ │ Hook             │ │ 无自动化机制     │
-│                  │ │                  │ │ state.md 手动    │
-│ → agents/        │ │ → agents/        │ │ 恢复             │
-│   orchestrator   │ │   batch-executor │ │                  │
-│   .md            │ │   .md            │ │                  │
-└──────────────────┘ └──────────────────┘ └──────────────────┘
-```
+![自动上下文管理的三平台适配（历史方案）](assets/auto-context-platform-adaptation.svg)
+
+可审阅源：`assets/auto-context-management.diagram.json`。该图仅迁移本文件记录的 2026-07-03 方案语义，不表示其中的历史平台能力均已在当前运行时重新验证。
 
 ---
 

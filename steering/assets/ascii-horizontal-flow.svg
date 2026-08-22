@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 300" width="920" height="300" role="img" aria-labelledby="ascii-horizontal-flow-title ascii-horizontal-flow-desc">
+<title id="ascii-horizontal-flow-title">水平流程示例</title>
+<desc id="ascii-horizontal-flow-desc">Step1、Step2 和 Step3 的水平顺序流程。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="920" height="300" fill="#ffffff"/>
+<text x="460" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">水平流程示例</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="step1-step2" data-from="step1" data-from-port="right" data-to="step2" data-to-port="left" data-kind="directed" points="265,150 380,150" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="step2-step3" data-from="step2" data-from-port="right" data-to="step3" data-to-port="left" data-kind="directed" points="540,150 655,150" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+</g>
+<g id="nodes">
+<g id="node-step1">
+<rect data-node="step1" fill="#f8fafc" stroke="#334155" stroke-width="2" x="105" y="120" width="160" height="60" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="185" y="155">Step 1</tspan></text>
+</g>
+<g id="node-step2">
+<rect data-node="step2" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="380" y="120" width="160" height="60" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="460" y="155">Step 2</tspan></text>
+</g>
+<g id="node-step3">
+<rect data-node="step3" fill="#dcfce7" stroke="#15803d" stroke-width="2" x="655" y="120" width="160" height="60" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="735" y="155">Step 3</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

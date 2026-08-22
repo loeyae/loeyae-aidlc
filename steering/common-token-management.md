@@ -125,7 +125,7 @@ docs/aidlc/
 **第四层：执行特定任务时加载（按需）**
 - `common-quality-gates.md` — 仅加载当前阶段的检查清单片段（见下方）
 - 编码规范文件 — 仅在代码生成阶段加载
-- `common-ascii-diagram-standards.md` — 仅在需要创建图表时加载
+- `common-diagram-design-standards.md` 与 `common-svg-diagram-standards.md` — 仅在需要创建或调整正式图表时加载
 
 ### 质量门禁按需加载
 

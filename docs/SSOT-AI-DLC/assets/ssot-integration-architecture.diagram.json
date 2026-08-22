@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "document": "docs/SSOT-AI-DLC/02-改造设计.md",
+  "diagrams": [
+    {
+      "id": "ssot-integration-architecture",
+      "output": "ssot-integration-architecture.svg",
+      "title": "AI-DLC 与 SSOT 的集成架构（历史设计）",
+      "description": "Kiro、Claude Code 和 OpenCode 通过 AI-DLC Core 使用本地文档与可选的 SSOT MCP 客户端；SSOT 作为文档平台提供版本与检索。",
+      "canvas": { "width": 1250, "height": 700 },
+      "nodes": [
+        { "id": "platforms", "shape": "round", "label": "Kiro / Claude Code / OpenCode", "details": ["平台入口 / MCP 客户端配置"], "x": 350, "y": 45, "width": 550, "height": 80, "tone": "neutral" },
+        { "id": "core", "shape": "round", "label": "AI-DLC Core", "details": ["core-workflow / state / session / step-completion / CR", "Inception / Construction / Operations"], "x": 310, "y": 190, "width": 630, "height": 115, "tone": "accent" },
+        { "id": "local", "shape": "rect", "label": "docs/aidlc/", "details": ["state.md(v2) / audit / 产物", "本地文件 / Git"], "x": 85, "y": 420, "width": 370, "height": 115, "tone": "muted" },
+        { "id": "mcp", "shape": "rect", "label": "MCP 客户端（直连 ssot-api）", "details": ["Authorization: Bearer Key", "SSOT 消费（可选）"], "x": 790, "y": 420, "width": 370, "height": 115, "tone": "accent" },
+        { "id": "ssot", "shape": "database", "label": "SSOT（文档平台，单仓）", "details": ["文档正文 / 版本 / 向量检索"], "x": 795, "y": 590, "width": 360, "height": 80, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "platforms-core", "from": "platforms", "to": "core", "fromPort": "bottom", "toPort": "top" },
+        { "id": "core-local", "from": "core", "to": "local", "fromPort": "bottom", "toPort": "top", "points": [[625, 305], [625, 365], [270, 365], [270, 420]], "label": { "text": "本地文件 / Git", "x": 445, "y": 350 } },
+        { "id": "core-mcp", "from": "core", "to": "mcp", "fromPort": "bottom", "toPort": "top", "points": [[625, 305], [625, 365], [975, 365], [975, 420]], "label": { "text": "SSOT 消费（可选）", "x": 800, "y": 350 } },
+        { "id": "mcp-ssot", "from": "mcp", "to": "ssot", "fromPort": "bottom", "toPort": "top" }
+      ]
+    }
+  ]
+}

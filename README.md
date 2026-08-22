@@ -112,6 +112,20 @@ Inception（规划） → Construction（实现与验证） → Operations（部
 
 阶段路由、执行条件、审批级别和完成标准统一以 [`steering/core-workflow.md`](steering/core-workflow.md) 为准。
 
+## 图表设计
+
+正式图表遵循 Blueprinter 的 SVG 设计规则。AIDLC 默认生成可审阅的 SVG 源，并可选生成 `.diagram.json` 语义伴随清单和 Provider Request；外部 Provider 负责实际文字测量、最终布局、预览、渲染、PNG/PDF 导出和目标环境视觉检查。`.diagram.json` 不再是必须文件或默认本地渲染输入，静态 SVG 也不再是三平台默认生成能力。Markdown 只有在目标环境需要时才引用源或 Provider 生成的目标 SVG；引用不代表渲染已验证。不得新增 Mermaid 或二维 ASCII 正式图块。
+
+在本仓库工作树中，以下命令仅是可选的源码仓维护/回归工具，不是 Kiro、Claude Code 或 OpenCode 的默认 Provider 路径：
+
+```bash
+npm run render:svg-diagrams
+npm run render:delivery-business-flow-svg
+npm run validate:svg-diagrams
+```
+
+各平台和目标环境的预览、渲染、导出能力须单独验证；无 Provider 时可以交付 SVG 源并将目标几何/视觉标为 `UNVERIFIED`，只有用户明确要求目标操作但能力不可验证时才返回 `NEEDS_CAPABILITY`。Kiro Power 的图表能力边界见 [POWER.md](POWER.md)。
+
 ## 平台能力
 
 - **MCP 编码规范**：Java + Loeyae Boot Framework 项目可通过 `loeyae-skills` 按需加载框架规范。

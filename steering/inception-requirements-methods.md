@@ -26,7 +26,7 @@
 - `target artifact`：`<inception-root>/requirements/business-flows.md`；
 - `constraints`：`delivery-business-flow`。
 
-Kiro Power 形态降级为直接加载 `common-diagram-design-standards.md` 执行。Phase 不重复定义图类型选择、Mermaid 语法或布局规则。
+Kiro Power 形态降级为直接加载 `common-diagram-design-standards.md` 与 `common-svg-diagram-standards.md` 执行。Phase 不重复定义图类型选择、SVG 源格式或布局规则；没有已验证 Provider 时返回 `NEEDS_CAPABILITY` 或经用户同意使用文字/表格。
 
 内容约束：
 
@@ -47,20 +47,9 @@ Kiro Power 形态降级为直接加载 `common-diagram-design-standards.md` 执�
 
 **Power-Interest 矩阵**：
 
-```
-            高利益
-              │
-  ┌───────────┼───────────┐
-  │  密切管理  │  深度参与  │  ← 关键角色（高优先级）
-  │           │           │
-──┼───────────┼───────────┼──
-  │  监控     │  保持知情  │  ← 次要角色（低优先级）
-  │           │           │
-  └───────────┼───────────┘
-              │
-            低利益
-     低权力        高权力
-```
+![Power-Interest 矩阵](assets/power-interest.svg)
+
+可审阅源：`assets/diagram-library.diagram.json`。矩阵中的角色、利益与权力判断必须基于已确认的利益相关者信息。
 
 **产出**：利益相关者列表 + 每个角色的关注点
 

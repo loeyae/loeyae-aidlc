@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 670" width="960" height="670" role="img" aria-labelledby="session-recovery-title session-recovery-desc">
+<title id="session-recovery-title">会话恢复流程</title>
+<desc id="session-recovery-desc">读取状态、激活能力、宣布状态和按场景继续的四步恢复流程。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="960" height="670" fill="#ffffff"/>
+<text x="480" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">会话恢复流程</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="read-activate" data-from="read" data-from-port="bottom" data-to="activate" data-to-port="top" data-kind="directed" points="480,180 480,220" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="activate-announce" data-from="activate" data-from-port="bottom" data-to="announce" data-to-port="top" data-kind="directed" points="480,325 480,365" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="announce-continue" data-from="announce" data-from-port="bottom" data-to="continue" data-to-port="top" data-kind="directed" points="480,470 480,510" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+</g>
+<g id="nodes">
+<g id="node-read">
+<path data-node="read" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" d="M 180 65 H 760 L 780 85 V 180 H 180 Z M 760 65 V 85 H 780"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="480" y="91">Step 1：读取 state.md</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="480" y="117">阶段、步骤、活跃模块和单元</tspan><tspan x="480" y="133">基线与活跃变更请求</tspan></text>
+</g>
+<g id="node-activate">
+<path data-node="activate" fill="#f8fafc" stroke="#334155" stroke-width="2" d="M 180 220 H 760 L 780 240 V 325 H 180 Z M 760 220 V 240 H 780"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="480" y="246">Step 2：激活对应能力</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="480" y="272">按阶段加载需要的 Skill 或 steering</tspan></text>
+</g>
+<g id="node-announce">
+<path data-node="announce" fill="#f8fafc" stroke="#334155" stroke-width="2" d="M 180 365 H 760 L 780 385 V 470 H 180 Z M 760 365 V 385 H 780"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="480" y="391">Step 3：宣布恢复状态</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="480" y="417">明确当前阶段、步骤和下一步</tspan></text>
+</g>
+<g id="node-continue">
+<path data-node="continue" fill="#dcfce7" stroke="#15803d" stroke-width="2" d="M 180 510 H 760 L 780 530 V 615 H 180 Z M 760 510 V 530 H 780"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="480" y="536">Step 4：按场景继续</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#14532d"><tspan x="480" y="562">正常、Compact、交接、协作或模块恢复</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 690" width="1080" height="690" role="img" aria-labelledby="subagent-orchestration-title subagent-orchestration-desc">
+<title id="subagent-orchestration-title">子 Agent 编排流程</title>
+<desc id="subagent-orchestration-desc">主 Agent 对任务依次派发实现者、调用双轴审查并进入构建测试的流程。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="1080" height="690" fill="#ffffff"/>
+<text x="540" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">子 Agent 编排流程</text>
+<g id="groups">
+<g id="group-orchestrator">
+<rect x="120" y="55" width="840" height="540" rx="12" fill="#e0f2fe" fill-opacity="0.52" stroke="#0369a1" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="136" y="79" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#0c4a6e">主 Agent（协调者）</text>
+</g>
+</g>
+<g id="connectors">
+<polyline data-edge="plan-implementer" data-from="plan" data-from-port="bottom" data-to="implementer" data-to-port="top" data-kind="directed" points="540,195 540,240" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="implementer-review" data-from="implementer" data-from-port="bottom" data-to="review" data-to-port="top" data-kind="directed" points="540,350 540,400" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="review-build" data-from="review" data-from-port="bottom" data-to="build" data-to-port="top" data-kind="directed" points="540,510 540,545" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+</g>
+<g id="nodes">
+<g id="node-plan">
+<path data-node="plan" fill="#f8fafc" stroke="#334155" stroke-width="2" d="M 330 120 H 731.25 L 750 138.75 V 195 H 330 Z M 731.25 120 V 138.75 H 750"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="540" y="146">读取代码生成计划</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="540" y="172">提取所有任务</tspan></text>
+</g>
+<g id="node-implementer">
+<rect data-node="implementer" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="330" y="240" width="420" height="110" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="540" y="266">派发实现者子 Agent</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="540" y="292">任务 + 上下文 + TDD</tspan><tspan x="540" y="308">TDD 循环 → 自审 → 提交</tspan></text>
+</g>
+<g id="node-review">
+<rect data-node="review" fill="#fef3c7" stroke="#b45309" stroke-width="2" x="330" y="400" width="420" height="110" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#78350f"><tspan x="540" y="426">调用 aidlc-code-review</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#78350f"><tspan x="540" y="452">Spec 与 Standards 双轴审查</tspan><tspan x="540" y="468">问题修复后重新审查</tspan></text>
+</g>
+<g id="node-build">
+<rect data-node="build" fill="#dcfce7" stroke="#15803d" stroke-width="2" x="390" y="545" width="300" height="55" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="540" y="577.5">进入构建和测试</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 570" width="980" height="570" role="img" aria-labelledby="ui-restoration-guardrails-title ui-restoration-guardrails-desc">
+<title id="ui-restoration-guardrails-title">UI 还原三层保障（历史分析）</title>
+<desc id="ui-restoration-guardrails-desc">认知纠偏、生成约束和审查兜底顺序配合，确保 html-mock 模式的视觉对齐不被跳过。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="980" height="570" fill="#ffffff"/>
+<text x="490" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">UI 还原三层保障（历史分析）</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="cognitive-generation" data-from="cognitive" data-from-port="bottom" data-to="generation" data-to-port="top" data-kind="directed" points="490,170 490,225" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="generation-review" data-from="generation" data-from-port="bottom" data-to="review" data-to-port="top" data-kind="directed" points="490,335 490,390" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+</g>
+<g id="nodes">
+<g id="node-cognitive">
+<path data-node="cognitive" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" d="M 170 60 H 790 L 810 80 V 170 H 170 Z M 790 60 V 80 H 810"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="490" y="86">修改 A：认知纠偏</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="490" y="112">construction-ui-implementation-bridge.md</tspan><tspan x="490" y="128">纯 Web 跳过跨端翻译，但仍需视觉对齐</tspan></text>
+</g>
+<g id="node-generation">
+<path data-node="generation" fill="#fef3c7" stroke="#b45309" stroke-width="2" d="M 170 225 H 790 L 810 245 V 335 H 170 Z M 790 225 V 245 H 810"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#78350f"><tspan x="490" y="251">修改 B：生成约束</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#78350f"><tspan x="490" y="277">construction-code-generation.md 步骤 12</tspan><tspan x="490" y="293">token 引用 + class 复刻 + 品牌色守护</tspan></text>
+</g>
+<g id="node-review">
+<path data-node="review" fill="#dcfce7" stroke="#15803d" stroke-width="2" d="M 170 390 H 790 L 810 410 V 500 H 170 Z M 790 390 V 410 H 810"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="490" y="416">修改 C：审查兜底</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#14532d"><tspan x="490" y="442">construction-code-review.md Spec Axis</tspan><tspan x="490" y="458">html-mock 样式 token 合规检查</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

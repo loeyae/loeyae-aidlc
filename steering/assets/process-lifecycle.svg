@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 470" width="1180" height="470" role="img" aria-labelledby="process-lifecycle-title process-lifecycle-desc">
+<title id="process-lifecycle-title">AI-DLC 生命周期</title>
+<desc id="process-lifecycle-desc">从用户请求到 Inception、Construction、可选 Operations 和变更请求的流程。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="1180" height="470" fill="#ffffff"/>
+<text x="590" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">AI-DLC 生命周期</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="start-inception" data-from="start" data-from-port="right" data-to="inception" data-to-port="left" data-kind="directed" points="175,197.5 225,197.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="inception-construction" data-from="inception" data-from-port="right" data-to="construction" data-to-port="left" data-kind="directed" points="405,197.5 480,197.5" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="construction-deploy" data-from="construction" data-from-port="right" data-to="deploy" data-to-port="left" data-kind="directed" points="660,197.5 745,197" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="deploy-operations" data-from="deploy" data-from-port="right" data-to="operations" data-to-port="left" data-kind="directed" points="915,197 970,105" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="deploy-done" data-from="deploy" data-from-port="right" data-to="done" data-to-port="left" data-kind="directed" points="915,197 970,295" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="operations-done" data-from="operations" data-from-port="bottom" data-to="done" data-to-port="top" data-kind="directed" points="1055,135 1055,265" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="done-change" data-from="done" data-from-port="left" data-to="change" data-to-port="right" data-kind="directed" points="970,295 660,365" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="change-cr" data-from="change" data-from-port="left" data-to="cr" data-to-port="right" data-kind="directed" points="490,365 395,360" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="cr-inception" data-from="cr" data-from-port="top" data-to="inception" data-to-port="bottom" data-kind="dashed" points="310,330 315,245" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="deploy-operations">
+<rect x="916" y="118" width="38" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="935" y="135">是</tspan></text>
+</g>
+<g data-edge-label="deploy-done">
+<rect x="916" y="233" width="38" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="935" y="250">否</tspan></text>
+</g>
+<g data-edge-label="change-cr">
+<rect x="386" y="328" width="38" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="405" y="345">是</tspan></text>
+</g>
+<g data-edge-label="cr-inception">
+<rect x="173" y="263" width="64" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="205" y="280">重新规划</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-start">
+<rect data-node="start" fill="#f8fafc" stroke="#334155" stroke-width="2" x="45" y="170" width="130" height="55" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="110" y="202.5">用户请求</tspan></text>
+</g>
+<g id="node-inception">
+<rect data-node="inception" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="225" y="150" width="180" height="95" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="315" y="193">Inception</tspan><tspan x="315" y="212">场景、需求与设计</tspan></text>
+</g>
+<g id="node-construction">
+<rect data-node="construction" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="480" y="150" width="180" height="95" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="570" y="193">Construction</tspan><tspan x="570" y="212">实现与验证</tspan></text>
+</g>
+<g id="node-deploy">
+<polygon data-node="deploy" fill="#f8fafc" stroke="#334155" stroke-width="2" points="830,152 915,197 830,242 745,197"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="830" y="202">需要部署准备</tspan></text>
+</g>
+<g id="node-operations">
+<rect data-node="operations" fill="#f8fafc" stroke="#334155" stroke-width="2" x="970" y="75" width="170" height="60" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="1055" y="110">Operations 部署准备</tspan></text>
+</g>
+<g id="node-done">
+<rect data-node="done" fill="#dcfce7" stroke="#15803d" stroke-width="2" x="970" y="265" width="170" height="60" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="1055" y="300">开发完成</tspan></text>
+</g>
+<g id="node-change">
+<polygon data-node="change" fill="#fef3c7" stroke="#b45309" stroke-width="2" points="575,325 660,365 575,405 490,365"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#78350f"><tspan x="575" y="370">发生需求变更</tspan></text>
+</g>
+<g id="node-cr">
+<rect data-node="cr" fill="#fef3c7" stroke="#b45309" stroke-width="2" x="225" y="330" width="170" height="60" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#78350f"><tspan x="310" y="365">Change Request</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

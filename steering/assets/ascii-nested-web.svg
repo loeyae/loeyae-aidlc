@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500" role="img" aria-labelledby="ascii-nested-web-title ascii-nested-web-desc">
+<title id="ascii-nested-web-title">嵌套边界示例</title>
+<desc id="ascii-nested-web-desc">Web Server、单体应用与 View Layer 的嵌套结构。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="900" height="500" fill="#ffffff"/>
+<text x="450" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">嵌套边界示例</text>
+<g id="groups">
+<g id="group-server">
+<rect x="90" y="65" width="700" height="340" rx="12" fill="#e0f2fe" fill-opacity="0.52" stroke="#0369a1" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="106" y="89" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#0c4a6e">Web Server · PHP Runtime</text>
+</g>
+<g id="group-application">
+<rect x="155" y="145" width="570" height="205" rx="12" fill="#f1f5f9" fill-opacity="0.52" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="171" y="169" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#334155">index.php · Monolithic Application</text>
+</g>
+</g>
+<g id="connectors">
+</g>
+<g id="edge-labels">
+</g>
+<g id="nodes">
+<g id="node-view">
+<rect data-node="view" fill="#f8fafc" stroke="#334155" stroke-width="2" x="235" y="220" width="410" height="100" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="440" y="246">HTML Template · View Layer</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="440" y="272">Form rendering</tspan><tspan x="440" y="288">Result display</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1250 700" width="1250" height="700" role="img" aria-labelledby="ssot-integration-architecture-title ssot-integration-architecture-desc">
+<title id="ssot-integration-architecture-title">AI-DLC 与 SSOT 的集成架构（历史设计）</title>
+<desc id="ssot-integration-architecture-desc">Kiro、Claude Code 和 OpenCode 通过 AI-DLC Core 使用本地文档与可选的 SSOT MCP 客户端；SSOT 作为文档平台提供版本与检索。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="1250" height="700" fill="#ffffff"/>
+<text x="625" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">AI-DLC 与 SSOT 的集成架构（历史设计）</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="platforms-core" data-from="platforms" data-from-port="bottom" data-to="core" data-to-port="top" data-kind="directed" points="625,125 625,190" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="core-local" data-from="core" data-from-port="bottom" data-to="local" data-to-port="top" data-kind="directed" points="625,305 625,365 270,365 270,420" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="core-mcp" data-from="core" data-from-port="bottom" data-to="mcp" data-to-port="top" data-kind="directed" points="625,305 625,365 975,365 975,420" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="mcp-ssot" data-from="mcp" data-from-port="bottom" data-to="ssot" data-to-port="top" data-kind="directed" points="975,535 975,590" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="core-local">
+<rect x="377" y="338" width="136" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="445" y="355">本地文件 / Git</tspan></text>
+</g>
+<g data-edge-label="core-mcp">
+<rect x="726" y="338" width="148" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="800" y="355">SSOT 消费（可选）</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-platforms">
+<rect data-node="platforms" fill="#f8fafc" stroke="#334155" stroke-width="2" x="350" y="45" width="550" height="80" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="625" y="71">Kiro / Claude Code / OpenCode</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="625" y="97">平台入口 / MCP 客户端配置</tspan></text>
+</g>
+<g id="node-core">
+<rect data-node="core" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="310" y="190" width="630" height="115" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="625" y="216">AI-DLC Core</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="625" y="242">core-workflow / state / session / step-completion / CR</tspan><tspan x="625" y="258">Inception / Construction / Operations</tspan></text>
+</g>
+<g id="node-local">
+<rect data-node="local" fill="#f1f5f9" stroke="#64748b" stroke-width="2" x="85" y="420" width="370" height="115" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#334155"><tspan x="270" y="446">docs/aidlc/</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#334155"><tspan x="270" y="472">state.md(v2) / audit / 产物</tspan><tspan x="270" y="488">本地文件 / Git</tspan></text>
+</g>
+<g id="node-mcp">
+<rect data-node="mcp" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="790" y="420" width="370" height="115" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="975" y="446">MCP 客户端（直连 ssot-api）</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="975" y="472">Authorization: Bearer Key</tspan><tspan x="975" y="488">SSOT 消费（可选）</tspan></text>
+</g>
+<g id="node-ssot">
+<path data-node="ssot" fill="#dcfce7" stroke="#15803d" stroke-width="2" d="M 795 606 C 795 582, 1155 582, 1155 606 V 654 C 1155 678, 795 678, 795 654 Z M 795 606 C 795 630, 1155 630, 1155 606"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="975" y="616">SSOT（文档平台，单仓）</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#14532d"><tspan x="975" y="642">文档正文 / 版本 / 向量检索</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

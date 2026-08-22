@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "document": "docs/ 下已迁移的历史图表：模块化提案、UI 修复分析、优化实施说明和最佳实践",
+  "diagrams": [
+    {
+      "id": "proposal-modular-inception",
+      "output": "proposal-modular-inception.svg",
+      "title": "两层 Inception 模块协作（历史提案）",
+      "description": "产品级轻量 Inception 为基础模块和两个业务模块提供接口契约；基础模块优先完成，业务模块可并行推进。",
+      "canvas": { "width": 1200, "height": 570 },
+      "nodes": [
+        { "id": "product", "shape": "round", "label": "产品级 Inception（轻量）", "details": ["工作区检测 → 产品需求概览", "模块划分 → 模块间接口契约", "产出：modules.md + contracts.md"], "x": 350, "y": 55, "width": 500, "height": 130, "tone": "accent" },
+        { "id": "base", "shape": "rect", "label": "基础模块", "details": ["共享资源", "模块级 Inception + Construction", "必须先完成"], "x": 75, "y": 345, "width": 270, "height": 145, "tone": "warning" },
+        { "id": "business-a", "shape": "rect", "label": "业务模块 A", "details": ["模块级 Inception + Construction", "可并行"], "x": 465, "y": 345, "width": 270, "height": 145, "tone": "success" },
+        { "id": "business-b", "shape": "rect", "label": "业务模块 B", "details": ["模块级 Inception + Construction", "可并行"], "x": 855, "y": 345, "width": 270, "height": 145, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "product-base", "from": "product", "to": "base", "fromPort": "bottom", "toPort": "top", "points": [[600, 185], [600, 265], [210, 265], [210, 345]], "label": { "text": "共享契约", "x": 405, "y": 250 } },
+        { "id": "product-business-a", "from": "product", "to": "business-a", "fromPort": "bottom", "toPort": "top", "points": [[600, 185], [600, 345]], "label": { "text": "模块边界", "x": 665, "y": 265 } },
+        { "id": "product-business-b", "from": "product", "to": "business-b", "fromPort": "bottom", "toPort": "top", "points": [[600, 185], [600, 265], [990, 265], [990, 345]], "label": { "text": "共享契约", "x": 795, "y": 250 } }
+      ]
+    },
+    {
+      "id": "ui-restoration-guardrails",
+      "output": "ui-restoration-guardrails.svg",
+      "title": "UI 还原三层保障（历史分析）",
+      "description": "认知纠偏、生成约束和审查兜底顺序配合，确保 html-mock 模式的视觉对齐不被跳过。",
+      "canvas": { "width": 980, "height": 570 },
+      "nodes": [
+        { "id": "cognitive", "shape": "note", "label": "修改 A：认知纠偏", "details": ["construction-ui-implementation-bridge.md", "纯 Web 跳过跨端翻译，但仍需视觉对齐"], "x": 170, "y": 60, "width": 640, "height": 110, "tone": "accent" },
+        { "id": "generation", "shape": "note", "label": "修改 B：生成约束", "details": ["construction-code-generation.md 步骤 12", "token 引用 + class 复刻 + 品牌色守护"], "x": 170, "y": 225, "width": 640, "height": 110, "tone": "warning" },
+        { "id": "review", "shape": "note", "label": "修改 C：审查兜底", "details": ["construction-code-review.md Spec Axis", "html-mock 样式 token 合规检查"], "x": 170, "y": 390, "width": 640, "height": 110, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "cognitive-generation", "from": "cognitive", "to": "generation", "fromPort": "bottom", "toPort": "top" },
+        { "id": "generation-review", "from": "generation", "to": "review", "fromPort": "bottom", "toPort": "top" }
+      ]
+    },
+    {
+      "id": "optimization-review-comparison",
+      "output": "optimization-review-comparison.svg",
+      "title": "串行与双轴审查对比（历史说明）",
+      "description": "优化前按规格和质量串行审查；优化后由 Standards Axis 与 Spec Axis 分别报告并合并问题。",
+      "canvas": { "width": 1220, "height": 560 },
+      "groups": [
+        { "id": "before", "label": "优化前：串行审查", "x": 65, "y": 65, "width": 470, "height": 405, "tone": "muted" },
+        { "id": "after", "label": "优化后：双轴审查", "x": 685, "y": 65, "width": 470, "height": 405, "tone": "accent" }
+      ],
+      "nodes": [
+        { "id": "serial-spec", "shape": "rect", "label": "规格合规审查", "x": 205, "y": 145, "width": 190, "height": 58 },
+        { "id": "serial-standards", "shape": "rect", "label": "代码质量审查", "x": 205, "y": 255, "width": 190, "height": 58 },
+        { "id": "serial-repair", "shape": "round", "label": "修复并重新审查", "x": 185, "y": 365, "width": 230, "height": 58, "tone": "warning" },
+        { "id": "parallel-standards", "shape": "rect", "label": "Standards Axis", "details": ["质量与规范报告"], "x": 735, "y": 155, "width": 155, "height": 85, "tone": "accent" },
+        { "id": "parallel-spec", "shape": "rect", "label": "Spec Axis", "details": ["规格合规报告"], "x": 950, "y": 155, "width": 155, "height": 85, "tone": "accent" },
+        { "id": "merge", "shape": "rect", "label": "合并报告（不重排序）", "x": 805, "y": 305, "width": 230, "height": 65 },
+        { "id": "parallel-repair", "shape": "round", "label": "修复并重新审查", "x": 805, "y": 405, "width": 230, "height": 58, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "serial-spec-standards", "from": "serial-spec", "to": "serial-standards", "fromPort": "bottom", "toPort": "top" },
+        { "id": "serial-standards-repair", "from": "serial-standards", "to": "serial-repair", "fromPort": "bottom", "toPort": "top" },
+        { "id": "standards-merge", "from": "parallel-standards", "to": "merge", "fromPort": "bottom", "toPort": "top", "points": [[812.5, 240], [812.5, 275], [920, 275], [920, 305]] },
+        { "id": "spec-merge", "from": "parallel-spec", "to": "merge", "fromPort": "bottom", "toPort": "top", "points": [[1027.5, 240], [1027.5, 275], [920, 275], [920, 305]] },
+        { "id": "merge-repair", "from": "merge", "to": "parallel-repair", "fromPort": "bottom", "toPort": "top" }
+      ]
+    },
+    {
+      "id": "clarification-decision-tree",
+      "output": "clarification-decision-tree.svg",
+      "title": "需求澄清依赖树（历史示例）",
+      "description": "先回答核心问题 Q1，再根据答案回答 Q2 和 Q3，形成依赖式澄清链。",
+      "canvas": { "width": 1080, "height": 560 },
+      "nodes": [
+        { "id": "request", "shape": "round", "label": "用户需求：原始描述", "x": 390, "y": 50, "width": 300, "height": 58, "tone": "accent" },
+        { "id": "q1", "shape": "diamond", "label": "Q1：核心问题 1", "x": 410, "y": 165, "width": 260, "height": 90 },
+        { "id": "q2", "shape": "diamond", "label": "Q2：依赖 Q1 答案", "x": 410, "y": 315, "width": 260, "height": 90 },
+        { "id": "q3", "shape": "diamond", "label": "Q3：依赖 Q2 答案", "x": 410, "y": 465, "width": 260, "height": 70, "tone": "success" },
+        { "id": "answers", "shape": "note", "label": "每题提供推荐选项", "details": ["A：选项 1 / 选项 2 / 选项 3", "后续问题只依赖已确认答案"], "x": 755, "y": 285, "width": 250, "height": 125, "tone": "muted" }
+      ],
+      "edges": [
+        { "id": "request-q1", "from": "request", "to": "q1", "fromPort": "bottom", "toPort": "top" },
+        { "id": "q1-q2", "from": "q1", "to": "q2", "fromPort": "bottom", "toPort": "top", "label": { "text": "确认 Q1", "x": 540, "y": 285 } },
+        { "id": "q2-q3", "from": "q2", "to": "q3", "fromPort": "bottom", "toPort": "top", "label": { "text": "确认 Q2", "x": 540, "y": 435 } },
+        { "id": "q2-answers", "from": "q2", "to": "answers", "fromPort": "right", "toPort": "left", "kind": "dashed", "label": { "text": "提问格式", "x": 735, "y": 350 } }
+      ]
+    },
+    {
+      "id": "optimization-dual-axis-review",
+      "output": "optimization-dual-axis-review.svg",
+      "title": "双轴审查闭环（历史实施说明）",
+      "description": "Standards Axis 与 Spec Axis 独立审查后合并报告；存在关键问题则修复并仅复审修复部分。",
+      "canvas": { "width": 1160, "height": 690 },
+      "groups": [
+        { "id": "agents", "label": "并行启动两个审查 Agent", "x": 85, "y": 65, "width": 990, "height": 295, "tone": "accent" }
+      ],
+      "nodes": [
+        { "id": "standards", "shape": "rect", "label": "Standards Axis", "details": ["编码规范、Fowler Smells", "质量：关键 / 重要 / 建议", "输出 Standards 报告"], "x": 155, "y": 155, "width": 320, "height": 145, "tone": "accent" },
+        { "id": "spec", "shape": "rect", "label": "Spec Axis", "details": ["需求、功能设计、故事、UI", "数据流完整性", "输出 Spec 报告"], "x": 685, "y": 155, "width": 320, "height": 145, "tone": "accent" },
+        { "id": "merge", "shape": "rect", "label": "合并两轴报告（不重排序）", "details": ["Standards：X 个问题；Spec：Y 个问题"], "x": 360, "y": 420, "width": 440, "height": 95 },
+        { "id": "critical", "shape": "diamond", "label": "是否有关键问题？", "x": 460, "y": 555, "width": 240, "height": 85, "tone": "warning" },
+        { "id": "repair", "shape": "rect", "label": "修复循环", "details": ["仅审查修复部分"], "x": 95, "y": 610, "width": 230, "height": 65, "tone": "warning" },
+        { "id": "pass", "shape": "round", "label": "审查通过", "x": 835, "y": 610, "width": 230, "height": 65, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "standards-merge", "from": "standards", "to": "merge", "fromPort": "bottom", "toPort": "top", "points": [[315, 300], [315, 385], [580, 385], [580, 420]] },
+        { "id": "spec-merge", "from": "spec", "to": "merge", "fromPort": "bottom", "toPort": "top", "points": [[845, 300], [845, 385], [580, 385], [580, 420]] },
+        { "id": "merge-critical", "from": "merge", "to": "critical", "fromPort": "bottom", "toPort": "top" },
+        { "id": "critical-repair", "from": "critical", "to": "repair", "fromPort": "left", "toPort": "top", "label": { "text": "是", "x": 370, "y": 625 } },
+        { "id": "critical-pass", "from": "critical", "to": "pass", "fromPort": "right", "toPort": "top", "label": { "text": "否", "x": 790, "y": 625 } }
+      ]
+    },
+    {
+      "id": "best-practices-single-module-team",
+      "output": "best-practices-single-module-team.svg",
+      "title": "单模块团队协作工作流（历史最佳实践）",
+      "description": "PM 与 Architect 在集中 Inception 中接力，随后多个开发者在 Construction 中按单元独立工作并合并 PR。",
+      "canvas": { "width": 1240, "height": 610 },
+      "groups": [
+        { "id": "inception", "label": "Inception（集中）", "x": 75, "y": 55, "width": 1090, "height": 220, "tone": "accent" },
+        { "id": "construction", "label": "Construction（分布）", "x": 75, "y": 355, "width": 1090, "height": 180, "tone": "muted" }
+      ],
+      "nodes": [
+        { "id": "pm", "shape": "actor", "label": "PM 会话", "details": ["工作区检测、需求分析、用户故事", "提交主分支"], "x": 150, "y": 135, "width": 260, "height": 100, "tone": "accent" },
+        { "id": "architect", "shape": "actor", "label": "Architect 会话", "details": ["拉取产出物、应用设计", "单元生成、工作流规划", "提交主分支"], "x": 780, "y": 125, "width": 280, "height": 120, "tone": "accent" },
+        { "id": "dev-a", "shape": "actor", "label": "Developer A", "details": ["认领 unit-1", "feat/unit-1"], "x": 150, "y": 410, "width": 190, "height": 95 },
+        { "id": "dev-b", "shape": "actor", "label": "Developer B", "details": ["认领 unit-2", "feat/unit-2"], "x": 525, "y": 410, "width": 190, "height": 95 },
+        { "id": "dev-c", "shape": "actor", "label": "Developer C", "details": ["认领 unit-3", "feat/unit-3"], "x": 900, "y": 410, "width": 190, "height": 95 },
+        { "id": "merge", "shape": "round", "label": "PR 合并到主分支", "x": 470, "y": 550, "width": 300, "height": 50, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "pm-architect", "from": "pm", "to": "architect", "fromPort": "right", "toPort": "left", "label": { "text": "拉取产出物", "x": 595, "y": 150 } },
+        { "id": "architect-dev-a", "from": "architect", "to": "dev-a", "fromPort": "bottom", "toPort": "top", "points": [[920, 245], [920, 320], [245, 320], [245, 410]] },
+        { "id": "architect-dev-b", "from": "architect", "to": "dev-b", "fromPort": "bottom", "toPort": "top", "points": [[920, 245], [920, 320], [620, 320], [620, 410]] },
+        { "id": "architect-dev-c", "from": "architect", "to": "dev-c", "fromPort": "bottom", "toPort": "top", "points": [[920, 245], [995, 320], [995, 410]] },
+        { "id": "dev-a-merge", "from": "dev-a", "to": "merge", "fromPort": "bottom", "toPort": "top", "points": [[245, 505], [245, 535], [620, 535], [620, 550]] },
+        { "id": "dev-b-merge", "from": "dev-b", "to": "merge", "fromPort": "bottom", "toPort": "top", "points": [[620, 505], [620, 550]] },
+        { "id": "dev-c-merge", "from": "dev-c", "to": "merge", "fromPort": "bottom", "toPort": "top", "points": [[995, 505], [995, 535], [620, 535], [620, 550]] }
+      ]
+    },
+    {
+      "id": "best-practices-multi-module-team",
+      "output": "best-practices-multi-module-team.svg",
+      "title": "多模块团队协作工作流（历史最佳实践）",
+      "description": "团队先完成轻量产品级 Inception，再让基础模块优先完成，两个业务模块从模块级 Inception 并行进入 Construction。",
+      "canvas": { "width": 1240, "height": 600 },
+      "nodes": [
+        { "id": "product", "shape": "round", "label": "产品级 Inception（团队一起，轻量）", "details": ["工作区检测 → 产品需求概览", "模块划分 → 模块间接口契约", "产出：product-overview.md + modules.md + contracts.md"], "x": 340, "y": 55, "width": 560, "height": 140, "tone": "accent" },
+        { "id": "base", "shape": "rect", "label": "基础模块", "details": ["Developer A 独立会话", "模块级 Inception → Construction", "优先完成"], "x": 75, "y": 340, "width": 270, "height": 155, "tone": "warning" },
+        { "id": "business-a", "shape": "rect", "label": "业务模块 A", "details": ["Developer B 独立会话", "模块级 Inception → Construction", "单元认领"], "x": 485, "y": 340, "width": 270, "height": 155, "tone": "success" },
+        { "id": "business-b", "shape": "rect", "label": "业务模块 B", "details": ["Developer C 独立会话", "模块级 Inception → Construction", "单元认领"], "x": 895, "y": 340, "width": 270, "height": 155, "tone": "success" },
+        { "id": "merge", "shape": "round", "label": "PR 合并到主分支", "x": 470, "y": 535, "width": 300, "height": 50, "tone": "muted" }
+      ],
+      "edges": [
+        { "id": "product-base", "from": "product", "to": "base", "fromPort": "bottom", "toPort": "top", "points": [[620, 195], [620, 265], [210, 265], [210, 340]], "label": { "text": "共享资源", "x": 415, "y": 250 } },
+        { "id": "product-business-a", "from": "product", "to": "business-a", "fromPort": "bottom", "toPort": "top", "points": [[620, 195], [620, 340]] },
+        { "id": "product-business-b", "from": "product", "to": "business-b", "fromPort": "bottom", "toPort": "top", "points": [[620, 195], [620, 265], [1030, 265], [1030, 340]], "label": { "text": "可并行", "x": 825, "y": 250 } },
+        { "id": "base-merge", "from": "base", "to": "merge", "fromPort": "bottom", "toPort": "top", "points": [[210, 495], [210, 520], [620, 520], [620, 535]] },
+        { "id": "business-a-merge", "from": "business-a", "to": "merge", "fromPort": "bottom", "toPort": "top", "points": [[620, 495], [620, 535]] },
+        { "id": "business-b-merge", "from": "business-b", "to": "merge", "fromPort": "bottom", "toPort": "top", "points": [[1030, 495], [1030, 520], [620, 520], [620, 535]] }
+      ]
+    }
+  ]
+}

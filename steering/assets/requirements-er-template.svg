@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420" role="img" aria-labelledby="requirements-er-template-title requirements-er-template-desc">
+<title id="requirements-er-template-title">需求 ER 图模板</title>
+<desc id="requirements-er-template-desc">实体 A 与实体 B 的关系和关键字段模板。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="960" height="420" fill="#ffffff"/>
+<text x="480" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">需求 ER 图模板</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="entity-relation" data-from="entity-a" data-from-port="right" data-to="entity-b" data-to-port="left" data-kind="undirected" points="370,190 590,190" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="entity-relation">
+<rect x="406" y="133" width="148" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="480" y="150">关系描述 · 1 对多</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-entity-a">
+<rect data-node="entity-a" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="120" y="105" width="250" height="170" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="245" y="131">ENTITY_A</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="245" y="157">id · PK</tspan><tspan x="245" y="173">name</tspan><tspan x="245" y="189">status</tspan></text>
+</g>
+<g id="node-entity-b">
+<rect data-node="entity-b" fill="#f8fafc" stroke="#334155" stroke-width="2" x="590" y="105" width="250" height="170" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="715" y="131">ENTITY_B</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="715" y="157">id · PK</tspan><tspan x="715" y="173">entity_a_id · FK</tspan><tspan x="715" y="189">created_at</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

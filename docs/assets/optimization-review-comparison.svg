@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1220 560" width="1220" height="560" role="img" aria-labelledby="optimization-review-comparison-title optimization-review-comparison-desc">
+<title id="optimization-review-comparison-title">串行与双轴审查对比（历史说明）</title>
+<desc id="optimization-review-comparison-desc">优化前按规格和质量串行审查；优化后由 Standards Axis 与 Spec Axis 分别报告并合并问题。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="1220" height="560" fill="#ffffff"/>
+<text x="610" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">串行与双轴审查对比（历史说明）</text>
+<g id="groups">
+<g id="group-before">
+<rect x="65" y="65" width="470" height="405" rx="12" fill="#f1f5f9" fill-opacity="0.52" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="81" y="89" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#334155">优化前：串行审查</text>
+</g>
+<g id="group-after">
+<rect x="685" y="65" width="470" height="405" rx="12" fill="#e0f2fe" fill-opacity="0.52" stroke="#0369a1" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="701" y="89" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#0c4a6e">优化后：双轴审查</text>
+</g>
+</g>
+<g id="connectors">
+<polyline data-edge="serial-spec-standards" data-from="serial-spec" data-from-port="bottom" data-to="serial-standards" data-to-port="top" data-kind="directed" points="300,203 300,255" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="serial-standards-repair" data-from="serial-standards" data-from-port="bottom" data-to="serial-repair" data-to-port="top" data-kind="directed" points="300,313 300,365" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="standards-merge" data-from="parallel-standards" data-from-port="bottom" data-to="merge" data-to-port="top" data-kind="directed" points="812.5,240 812.5,275 920,275 920,305" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="spec-merge" data-from="parallel-spec" data-from-port="bottom" data-to="merge" data-to-port="top" data-kind="directed" points="1027.5,240 1027.5,275 920,275 920,305" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="merge-repair" data-from="merge" data-from-port="bottom" data-to="parallel-repair" data-to-port="top" data-kind="directed" points="920,370 920,405" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+</g>
+<g id="nodes">
+<g id="node-serial-spec">
+<rect data-node="serial-spec" fill="#f8fafc" stroke="#334155" stroke-width="2" x="205" y="145" width="190" height="58" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="300" y="179">规格合规审查</tspan></text>
+</g>
+<g id="node-serial-standards">
+<rect data-node="serial-standards" fill="#f8fafc" stroke="#334155" stroke-width="2" x="205" y="255" width="190" height="58" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="300" y="289">代码质量审查</tspan></text>
+</g>
+<g id="node-serial-repair">
+<rect data-node="serial-repair" fill="#fef3c7" stroke="#b45309" stroke-width="2" x="185" y="365" width="230" height="58" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#78350f"><tspan x="300" y="399">修复并重新审查</tspan></text>
+</g>
+<g id="node-parallel-standards">
+<rect data-node="parallel-standards" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="735" y="155" width="155" height="85" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="812.5" y="181">Standards Axis</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="812.5" y="207">质量与规范报告</tspan></text>
+</g>
+<g id="node-parallel-spec">
+<rect data-node="parallel-spec" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="950" y="155" width="155" height="85" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="1027.5" y="181">Spec Axis</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="1027.5" y="207">规格合规报告</tspan></text>
+</g>
+<g id="node-merge">
+<rect data-node="merge" fill="#f8fafc" stroke="#334155" stroke-width="2" x="805" y="305" width="230" height="65" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="920" y="342.5">合并报告（不重排序）</tspan></text>
+</g>
+<g id="node-parallel-repair">
+<rect data-node="parallel-repair" fill="#dcfce7" stroke="#15803d" stroke-width="2" x="805" y="405" width="230" height="58" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="920" y="439">修复并重新审查</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

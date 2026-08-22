@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 570" width="1200" height="570" role="img" aria-labelledby="proposal-modular-inception-title proposal-modular-inception-desc">
+<title id="proposal-modular-inception-title">两层 Inception 模块协作（历史提案）</title>
+<desc id="proposal-modular-inception-desc">产品级轻量 Inception 为基础模块和两个业务模块提供接口契约；基础模块优先完成，业务模块可并行推进。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="1200" height="570" fill="#ffffff"/>
+<text x="600" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">两层 Inception 模块协作（历史提案）</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="product-base" data-from="product" data-from-port="bottom" data-to="base" data-to-port="top" data-kind="directed" points="600,185 600,265 210,265 210,345" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="product-business-a" data-from="product" data-from-port="bottom" data-to="business-a" data-to-port="top" data-kind="directed" points="600,185 600,345" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="product-business-b" data-from="product" data-from-port="bottom" data-to="business-b" data-to-port="top" data-kind="directed" points="600,185 600,265 990,265 990,345" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="product-base">
+<rect x="373" y="238" width="64" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="405" y="255">共享契约</tspan></text>
+</g>
+<g data-edge-label="product-business-a">
+<rect x="633" y="253" width="64" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="665" y="270">模块边界</tspan></text>
+</g>
+<g data-edge-label="product-business-b">
+<rect x="763" y="238" width="64" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="795" y="255">共享契约</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-product">
+<rect data-node="product" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="350" y="55" width="500" height="130" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="600" y="81">产品级 Inception（轻量）</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="600" y="107">工作区检测 → 产品需求概览</tspan><tspan x="600" y="123">模块划分 → 模块间接口契约</tspan><tspan x="600" y="139">产出：modules.md + contracts.md</tspan></text>
+</g>
+<g id="node-base">
+<rect data-node="base" fill="#fef3c7" stroke="#b45309" stroke-width="2" x="75" y="345" width="270" height="145" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#78350f"><tspan x="210" y="371">基础模块</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#78350f"><tspan x="210" y="397">共享资源</tspan><tspan x="210" y="413">模块级 Inception + Construction</tspan><tspan x="210" y="429">必须先完成</tspan></text>
+</g>
+<g id="node-business-a">
+<rect data-node="business-a" fill="#dcfce7" stroke="#15803d" stroke-width="2" x="465" y="345" width="270" height="145" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="600" y="371">业务模块 A</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#14532d"><tspan x="600" y="397">模块级 Inception + Construction</tspan><tspan x="600" y="413">可并行</tspan></text>
+</g>
+<g id="node-business-b">
+<rect data-node="business-b" fill="#dcfce7" stroke="#15803d" stroke-width="2" x="855" y="345" width="270" height="145" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="990" y="371">业务模块 B</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#14532d"><tspan x="990" y="397">模块级 Inception + Construction</tspan><tspan x="990" y="413">可并行</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

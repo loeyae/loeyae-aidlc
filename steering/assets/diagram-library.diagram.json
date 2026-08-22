@@ -1,0 +1,563 @@
+{
+  "version": 1,
+  "document": "steering/ SVG 图表资产库",
+  "diagrams": [
+    {
+      "id": "mermaid-delivery-flow",
+      "output": "mermaid-delivery-flow.svg",
+      "title": "交付型业务流程示例",
+      "description": "开始、步骤和判断组成的 SVG 业务流程示例。",
+      "canvas": { "width": 920, "height": 410 },
+      "nodes": [
+        { "id": "start", "shape": "round", "label": "开始", "x": 345, "y": 55, "width": 140, "height": 52 },
+        { "id": "step", "shape": "rect", "label": "步骤", "x": 345, "y": 165, "width": 140, "height": 52 },
+        { "id": "done", "shape": "round", "label": "完成", "x": 345, "y": 300, "width": 140, "height": 52 },
+        { "id": "check", "shape": "diamond", "label": "是否通过", "x": 650, "y": 150, "width": 180, "height": 80, "tone": "accent" }
+      ],
+      "edges": [
+        { "id": "start-step", "from": "start", "to": "step", "fromPort": "bottom", "toPort": "top" },
+        { "id": "step-check", "from": "step", "to": "check", "fromPort": "right", "toPort": "left" },
+        { "id": "check-done", "from": "check", "to": "done", "fromPort": "bottom", "toPort": "right", "label": { "text": "通过", "x": 635, "y": 287 } }
+      ]
+    },
+    {
+      "id": "syntax-flowchart",
+      "output": "syntax-flowchart.svg",
+      "title": "流程图 SVG 模板",
+      "description": "开始、审核、完成和修改分支的 SVG 流程图模板。",
+      "canvas": { "width": 960, "height": 440 },
+      "nodes": [
+        { "id": "start", "shape": "round", "label": "开始", "x": 410, "y": 45, "width": 140, "height": 50 },
+        { "id": "review", "shape": "diamond", "label": "是否通过", "x": 390, "y": 145, "width": 180, "height": 80 },
+        { "id": "done", "shape": "round", "label": "完成", "x": 130, "y": 300, "width": 140, "height": 50, "tone": "success" },
+        { "id": "revise", "shape": "rect", "label": "修改", "x": 650, "y": 300, "width": 140, "height": 50, "tone": "warning" }
+      ],
+      "edges": [
+        { "id": "start-review", "from": "start", "to": "review", "fromPort": "bottom", "toPort": "top" },
+        { "id": "review-done", "from": "review", "to": "done", "fromPort": "left", "toPort": "top", "label": { "text": "是", "x": 320, "y": 264 } },
+        { "id": "review-revise", "from": "review", "to": "revise", "fromPort": "right", "toPort": "top", "label": { "text": "否", "x": 640, "y": 264 } },
+        { "id": "revise-review", "from": "revise", "to": "review", "fromPort": "left", "toPort": "bottom", "kind": "dashed", "label": { "text": "重新提交", "x": 520, "y": 370 } }
+      ]
+    },
+    {
+      "id": "syntax-delivery-flow",
+      "output": "syntax-delivery-flow.svg",
+      "title": "交付流程 SVG 模板",
+      "description": "展示判断、通过、修改和回退关系的交付型业务流程模板。",
+      "canvas": { "width": 960, "height": 440 },
+      "nodes": [
+        { "id": "start", "shape": "round", "label": "开始", "x": 410, "y": 45, "width": 140, "height": 50 },
+        { "id": "review", "shape": "diamond", "label": "是否通过", "x": 390, "y": 145, "width": 180, "height": 80, "tone": "accent" },
+        { "id": "done", "shape": "round", "label": "完成", "x": 130, "y": 300, "width": 140, "height": 50, "tone": "success" },
+        { "id": "revise", "shape": "rect", "label": "修改", "x": 650, "y": 300, "width": 140, "height": 50, "tone": "warning" }
+      ],
+      "edges": [
+        { "id": "start-review", "from": "start", "to": "review", "fromPort": "bottom", "toPort": "top" },
+        { "id": "review-done", "from": "review", "to": "done", "fromPort": "left", "toPort": "top", "label": { "text": "是", "x": 320, "y": 264 } },
+        { "id": "review-revise", "from": "review", "to": "revise", "fromPort": "right", "toPort": "top", "label": { "text": "否", "x": 640, "y": 264 } },
+        { "id": "revise-review", "from": "revise", "to": "review", "fromPort": "left", "toPort": "bottom", "kind": "dashed", "label": { "text": "回退", "x": 535, "y": 370 } }
+      ]
+    },
+    {
+      "id": "syntax-sequence",
+      "output": "syntax-sequence.svg",
+      "title": "时序图 SVG 模板",
+      "description": "客户端与服务端之间的请求和响应时序示例。",
+      "canvas": { "width": 900, "height": 400 },
+      "nodes": [
+        { "id": "client", "shape": "actor", "label": "客户端", "x": 130, "y": 55, "width": 150, "height": 70, "tone": "accent" },
+        { "id": "service", "shape": "rect", "label": "服务端", "x": 610, "y": 55, "width": 150, "height": 70, "tone": "neutral" }
+      ],
+      "edges": [
+        { "id": "request", "from": "client", "to": "service", "fromPort": "right", "toPort": "left", "points": [[280, 150], [610, 150]], "label": { "text": "请求", "x": 445, "y": 136 } },
+        { "id": "response", "from": "service", "to": "client", "fromPort": "left", "toPort": "right", "points": [[610, 250], [280, 250]], "kind": "dashed", "label": { "text": "响应", "x": 445, "y": 236 } }
+      ],
+      "annotations": [
+        { "text": "│", "x": 205, "y": 215, "fontSize": 140, "tone": "muted" },
+        { "text": "│", "x": 685, "y": 215, "fontSize": 140, "tone": "muted" }
+      ]
+    },
+    {
+      "id": "syntax-state",
+      "output": "syntax-state.svg",
+      "title": "状态图 SVG 模板",
+      "description": "草稿、已提交和完成的状态迁移示例。",
+      "canvas": { "width": 940, "height": 360 },
+      "nodes": [
+        { "id": "start", "shape": "ellipse", "label": "开始", "x": 55, "y": 145, "width": 100, "height": 48, "tone": "muted" },
+        { "id": "draft", "shape": "round", "label": "草稿", "x": 255, "y": 140, "width": 150, "height": 58 },
+        { "id": "submitted", "shape": "round", "label": "已提交", "x": 505, "y": 140, "width": 150, "height": 58, "tone": "accent" },
+        { "id": "end", "shape": "ellipse", "label": "完成", "x": 760, "y": 145, "width": 110, "height": 48, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "start-draft", "from": "start", "to": "draft", "fromPort": "right", "toPort": "left" },
+        { "id": "draft-submitted", "from": "draft", "to": "submitted", "fromPort": "right", "toPort": "left", "label": { "text": "提交", "x": 455, "y": 128 } },
+        { "id": "submitted-end", "from": "submitted", "to": "end", "fromPort": "right", "toPort": "left", "label": { "text": "完成", "x": 705, "y": 128 } }
+      ]
+    },
+    {
+      "id": "syntax-er",
+      "output": "syntax-er.svg",
+      "title": "ER 图 SVG 模板",
+      "description": "订单与订单明细的一对多关系示例。",
+      "canvas": { "width": 960, "height": 420 },
+      "nodes": [
+        { "id": "order", "shape": "rect", "label": "ORDER", "details": ["id · PK", "status"], "x": 130, "y": 110, "width": 240, "height": 150, "tone": "accent" },
+        { "id": "item", "shape": "rect", "label": "ORDER_ITEM", "details": ["id · PK", "order_id · FK"], "x": 590, "y": 110, "width": 240, "height": 150, "tone": "neutral" }
+      ],
+      "edges": [
+        { "id": "order-items", "from": "order", "to": "item", "fromPort": "right", "toPort": "left", "kind": "undirected", "label": { "text": "1 对多 · contains", "x": 480, "y": 160 } }
+      ]
+    },
+    {
+      "id": "syntax-class",
+      "output": "syntax-class.svg",
+      "title": "类图 SVG 模板",
+      "description": "订单服务依赖订单仓储的类关系示例。",
+      "canvas": { "width": 960, "height": 400 },
+      "nodes": [
+        { "id": "service", "shape": "rect", "label": "OrderService", "details": ["+ createOrder()"], "x": 135, "y": 110, "width": 260, "height": 130, "tone": "accent" },
+        { "id": "repository", "shape": "rect", "label": "OrderRepository", "x": 590, "y": 110, "width": 240, "height": 90, "tone": "neutral" }
+      ],
+      "edges": [
+        { "id": "service-repository", "from": "service", "to": "repository", "fromPort": "right", "toPort": "left", "label": { "text": "依赖", "x": 495, "y": 150 } }
+      ]
+    },
+    {
+      "id": "syntax-c4-context",
+      "output": "syntax-c4-context.svg",
+      "title": "系统上下文 SVG 模板",
+      "description": "用户、目标系统和外部系统的系统上下文示例。",
+      "canvas": { "width": 980, "height": 430 },
+      "nodes": [
+        { "id": "user", "shape": "actor", "label": "用户", "details": ["最终使用者"], "x": 75, "y": 165, "width": 180, "height": 100, "tone": "muted" },
+        { "id": "system", "shape": "round", "label": "目标系统", "details": ["核心业务系统"], "x": 390, "y": 150, "width": 220, "height": 115, "tone": "accent" },
+        { "id": "external", "shape": "rect", "label": "外部系统", "details": ["第三方服务"], "x": 735, "y": 165, "width": 180, "height": 100, "tone": "muted" }
+      ],
+      "edges": [
+        { "id": "user-system", "from": "user", "to": "system", "fromPort": "right", "toPort": "left", "label": { "text": "使用", "x": 320, "y": 175 } },
+        { "id": "system-external", "from": "system", "to": "external", "fromPort": "right", "toPort": "left", "label": { "text": "调用", "x": 675, "y": 175 } }
+      ]
+    },
+    {
+      "id": "syntax-c4-container",
+      "output": "syntax-c4-container.svg",
+      "title": "容器 SVG 模板",
+      "description": "Web 应用、API 服务和数据库组成的容器架构示例。",
+      "canvas": { "width": 1040, "height": 480 },
+      "groups": [
+        { "id": "boundary", "label": "目标系统", "x": 235, "y": 65, "width": 720, "height": 330, "tone": "accent" }
+      ],
+      "nodes": [
+        { "id": "user", "shape": "actor", "label": "用户", "x": 45, "y": 190, "width": 140, "height": 85, "tone": "muted" },
+        { "id": "web", "shape": "rect", "label": "Web 应用", "details": ["React"], "x": 290, "y": 185, "width": 170, "height": 95 },
+        { "id": "api", "shape": "rect", "label": "API 服务", "details": ["Spring Boot"], "x": 565, "y": 185, "width": 170, "height": 95, "tone": "accent" },
+        { "id": "db", "shape": "database", "label": "数据库", "details": ["PostgreSQL"], "x": 790, "y": 185, "width": 120, "height": 95, "tone": "muted" }
+      ],
+      "edges": [
+        { "id": "user-web", "from": "user", "to": "web", "fromPort": "right", "toPort": "left", "label": { "text": "访问", "x": 238, "y": 178 } },
+        { "id": "web-api", "from": "web", "to": "api", "fromPort": "right", "toPort": "left", "label": { "text": "JSON/HTTPS", "x": 513, "y": 178 } },
+        { "id": "api-db", "from": "api", "to": "db", "fromPort": "right", "toPort": "left", "label": { "text": "JDBC", "x": 764, "y": 178 } }
+      ]
+    },
+    {
+      "id": "syntax-c4-component",
+      "output": "syntax-c4-component.svg",
+      "title": "组件 SVG 模板",
+      "description": "Controller、Service 和 Repository 的组件关系示例。",
+      "canvas": { "width": 980, "height": 420 },
+      "groups": [
+        { "id": "api-boundary", "label": "API 服务", "x": 90, "y": 55, "width": 800, "height": 300, "tone": "accent" }
+      ],
+      "nodes": [
+        { "id": "controller", "shape": "rect", "label": "Controller", "details": ["Spring MVC"], "x": 145, "y": 170, "width": 190, "height": 100 },
+        { "id": "service", "shape": "rect", "label": "Service", "details": ["业务逻辑"], "x": 405, "y": 170, "width": 190, "height": 100, "tone": "accent" },
+        { "id": "repository", "shape": "rect", "label": "Repository", "details": ["数据访问"], "x": 665, "y": 170, "width": 170, "height": 100 }
+      ],
+      "edges": [
+        { "id": "controller-service", "from": "controller", "to": "service", "fromPort": "right", "toPort": "left", "label": { "text": "调用", "x": 370, "y": 156 } },
+        { "id": "service-repository", "from": "service", "to": "repository", "fromPort": "right", "toPort": "left", "label": { "text": "调用", "x": 630, "y": 156 } }
+      ]
+    },
+    {
+      "id": "syntax-c4-deployment",
+      "output": "syntax-c4-deployment.svg",
+      "title": "部署 SVG 模板",
+      "description": "生产环境中 Kubernetes API 服务与数据库服务器的部署关系示例。",
+      "canvas": { "width": 1020, "height": 500 },
+      "groups": [
+        { "id": "production", "label": "生产环境 · Linux", "x": 70, "y": 55, "width": 880, "height": 370, "tone": "muted" },
+        { "id": "k8s", "label": "Kubernetes Cluster", "x": 135, "y": 130, "width": 350, "height": 230, "tone": "accent" },
+        { "id": "db-server", "label": "数据库服务器", "x": 590, "y": 130, "width": 290, "height": 230, "tone": "muted" }
+      ],
+      "nodes": [
+        { "id": "api", "shape": "rect", "label": "API 服务", "details": ["Spring Boot"], "x": 220, "y": 220, "width": 180, "height": 90, "tone": "accent" },
+        { "id": "db", "shape": "database", "label": "数据库", "details": ["PostgreSQL"], "x": 670, "y": 215, "width": 140, "height": 95 }
+      ],
+      "edges": [
+        { "id": "api-db", "from": "api", "to": "db", "fromPort": "right", "toPort": "left", "label": { "text": "JDBC", "x": 565, "y": 210 } }
+      ]
+    },
+    {
+      "id": "syntax-architecture",
+      "output": "syntax-architecture.svg",
+      "title": "基础设施 SVG 模板",
+      "description": "API 分组内数据库和服务器的基础设施关系示例。",
+      "canvas": { "width": 860, "height": 400 },
+      "groups": [
+        { "id": "api", "label": "API", "x": 100, "y": 60, "width": 660, "height": 270, "tone": "accent" }
+      ],
+      "nodes": [
+        { "id": "database", "shape": "database", "label": "Database", "x": 190, "y": 165, "width": 170, "height": 100, "tone": "muted" },
+        { "id": "server", "shape": "rect", "label": "Server", "x": 500, "y": 165, "width": 170, "height": 100, "tone": "accent" }
+      ],
+      "edges": [
+        { "id": "database-server", "from": "database", "to": "server", "fromPort": "right", "toPort": "left", "kind": "undirected", "label": { "text": "连接", "x": 430, "y": 150 } }
+      ]
+    },
+    {
+      "id": "requirements-er-template",
+      "output": "requirements-er-template.svg",
+      "title": "需求 ER 图模板",
+      "description": "实体 A 与实体 B 的关系和关键字段模板。",
+      "canvas": { "width": 960, "height": 420 },
+      "nodes": [
+        { "id": "entity-a", "shape": "rect", "label": "ENTITY_A", "details": ["id · PK", "name", "status"], "x": 120, "y": 105, "width": 250, "height": 170, "tone": "accent" },
+        { "id": "entity-b", "shape": "rect", "label": "ENTITY_B", "details": ["id · PK", "entity_a_id · FK", "created_at"], "x": 590, "y": 105, "width": 250, "height": 170 }
+      ],
+      "edges": [
+        { "id": "entity-relation", "from": "entity-a", "to": "entity-b", "fromPort": "right", "toPort": "left", "kind": "undirected", "label": { "text": "关系描述 · 1 对多", "x": 480, "y": 145 } }
+      ]
+    },
+    {
+      "id": "requirements-state-template",
+      "output": "requirements-state-template.svg",
+      "title": "需求状态图模板",
+      "description": "草稿、已提交、已审批和已拒绝之间的状态迁移模板。",
+      "canvas": { "width": 1000, "height": 470 },
+      "nodes": [
+        { "id": "start", "shape": "ellipse", "label": "开始", "x": 45, "y": 195, "width": 95, "height": 45, "tone": "muted" },
+        { "id": "draft", "shape": "round", "label": "草稿", "x": 205, "y": 185, "width": 140, "height": 55 },
+        { "id": "submitted", "shape": "round", "label": "已提交", "x": 425, "y": 185, "width": 140, "height": 55, "tone": "accent" },
+        { "id": "approved", "shape": "round", "label": "已审批", "x": 680, "y": 95, "width": 140, "height": 55, "tone": "success" },
+        { "id": "rejected", "shape": "round", "label": "已拒绝", "x": 680, "y": 285, "width": 140, "height": 55, "tone": "danger" },
+        { "id": "end", "shape": "ellipse", "label": "完成", "x": 875, "y": 100, "width": 90, "height": 45, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "start-draft", "from": "start", "to": "draft", "fromPort": "right", "toPort": "left", "label": { "text": "创建", "x": 175, "y": 175 } },
+        { "id": "draft-submitted", "from": "draft", "to": "submitted", "fromPort": "right", "toPort": "left", "label": { "text": "提交", "x": 385, "y": 175 } },
+        { "id": "submitted-approved", "from": "submitted", "to": "approved", "fromPort": "right", "toPort": "left", "label": { "text": "审批通过", "x": 620, "y": 155 } },
+        { "id": "submitted-rejected", "from": "submitted", "to": "rejected", "fromPort": "right", "toPort": "left", "label": { "text": "审批拒绝", "x": 620, "y": 270 } },
+        { "id": "rejected-draft", "from": "rejected", "to": "draft", "fromPort": "left", "toPort": "bottom", "kind": "dashed", "label": { "text": "修改", "x": 435, "y": 365 } },
+        { "id": "approved-end", "from": "approved", "to": "end", "fromPort": "right", "toPort": "left", "label": { "text": "完成", "x": 850, "y": 85 } }
+      ]
+    },
+    {
+      "id": "workflow-plan-template",
+      "output": "workflow-plan-template.svg",
+      "title": "执行计划 SVG 模板",
+      "description": "Inception 与 Construction 阶段的执行计划和依赖关系模板。",
+      "canvas": { "width": 1180, "height": 640 },
+      "groups": [
+        { "id": "inception", "label": "Inception 阶段", "x": 90, "y": 115, "width": 1000, "height": 200, "tone": "accent" },
+        { "id": "construction", "label": "Construction 阶段", "x": 320, "y": 395, "width": 560, "height": 150, "tone": "muted" }
+      ],
+      "nodes": [
+        { "id": "start", "shape": "round", "label": "用户请求", "x": 465, "y": 45, "width": 170, "height": 50 },
+        { "id": "workspace", "shape": "rect", "label": ["工作区检测", "已完成"], "x": 130, "y": 190, "width": 150, "height": 65 },
+        { "id": "reverse", "shape": "rect", "label": "逆向工程", "x": 300, "y": 190, "width": 130, "height": 65 },
+        { "id": "requirements", "shape": "rect", "label": "需求分析", "x": 470, "y": 190, "width": 130, "height": 65 },
+        { "id": "stories", "shape": "rect", "label": "用户故事", "x": 640, "y": 190, "width": 130, "height": 65 },
+        { "id": "planning", "shape": "rect", "label": "工作流规划", "x": 810, "y": 190, "width": 130, "height": 65, "tone": "accent" },
+        { "id": "application", "shape": "rect", "label": "应用设计", "x": 960, "y": 190, "width": 100, "height": 65 },
+        { "id": "functional", "shape": "rect", "label": "功能设计", "x": 390, "y": 450, "width": 140, "height": 65 },
+        { "id": "tdd", "shape": "rect", "label": "TDD 实现与审查", "x": 570, "y": 450, "width": 160, "height": 65 },
+        { "id": "build", "shape": "round", "label": "实际构建和测试", "x": 765, "y": 450, "width": 145, "height": 65 }
+      ],
+      "edges": [
+        { "id": "start-workspace", "from": "start", "to": "workspace", "fromPort": "bottom", "toPort": "top" },
+        { "id": "workspace-reverse", "from": "workspace", "to": "reverse" },
+        { "id": "reverse-requirements", "from": "reverse", "to": "requirements" },
+        { "id": "requirements-stories", "from": "requirements", "to": "stories" },
+        { "id": "stories-planning", "from": "stories", "to": "planning" },
+        { "id": "planning-application", "from": "planning", "to": "application" },
+        { "id": "application-functional", "from": "application", "to": "functional", "fromPort": "bottom", "toPort": "top" },
+        { "id": "functional-tdd", "from": "functional", "to": "tdd" },
+        { "id": "tdd-build", "from": "tdd", "to": "build" }
+      ]
+    },
+    {
+      "id": "process-lifecycle",
+      "output": "process-lifecycle.svg",
+      "title": "AI-DLC 生命周期",
+      "description": "从用户请求到 Inception、Construction、可选 Operations 和变更请求的流程。",
+      "canvas": { "width": 1180, "height": 470 },
+      "nodes": [
+        { "id": "start", "shape": "round", "label": "用户请求", "x": 45, "y": 170, "width": 130, "height": 55 },
+        { "id": "inception", "shape": "rect", "label": ["Inception", "场景、需求与设计"], "x": 225, "y": 150, "width": 180, "height": 95, "tone": "accent" },
+        { "id": "construction", "shape": "rect", "label": ["Construction", "实现与验证"], "x": 480, "y": 150, "width": 180, "height": 95, "tone": "accent" },
+        { "id": "deploy", "shape": "diamond", "label": "需要部署准备", "x": 745, "y": 152, "width": 170, "height": 90 },
+        { "id": "operations", "shape": "rect", "label": "Operations 部署准备", "x": 970, "y": 75, "width": 170, "height": 60 },
+        { "id": "done", "shape": "round", "label": "开发完成", "x": 970, "y": 265, "width": 170, "height": 60, "tone": "success" },
+        { "id": "change", "shape": "diamond", "label": "发生需求变更", "x": 490, "y": 325, "width": 170, "height": 80, "tone": "warning" },
+        { "id": "cr", "shape": "rect", "label": "Change Request", "x": 225, "y": 330, "width": 170, "height": 60, "tone": "warning" }
+      ],
+      "edges": [
+        { "id": "start-inception", "from": "start", "to": "inception" },
+        { "id": "inception-construction", "from": "inception", "to": "construction" },
+        { "id": "construction-deploy", "from": "construction", "to": "deploy" },
+        { "id": "deploy-operations", "from": "deploy", "to": "operations", "fromPort": "right", "toPort": "left", "label": { "text": "是", "x": 935, "y": 130 } },
+        { "id": "deploy-done", "from": "deploy", "to": "done", "fromPort": "right", "toPort": "left", "label": { "text": "否", "x": 935, "y": 245 } },
+        { "id": "operations-done", "from": "operations", "to": "done", "fromPort": "bottom", "toPort": "top" },
+        { "id": "done-change", "from": "done", "to": "change", "fromPort": "left", "toPort": "right" },
+        { "id": "change-cr", "from": "change", "to": "cr", "fromPort": "left", "toPort": "right", "label": { "text": "是", "x": 405, "y": 340 } },
+        { "id": "cr-inception", "from": "cr", "to": "inception", "fromPort": "top", "toPort": "bottom", "kind": "dashed", "label": { "text": "重新规划", "x": 205, "y": 275 } }
+      ]
+    },
+    {
+      "id": "ascii-valid-box",
+      "output": "ascii-valid-box.svg",
+      "title": "一致宽度方框示例",
+      "description": "所有内容行保持一致宽度的正确方框示例。",
+      "canvas": { "width": 720, "height": 310 },
+      "nodes": [
+        { "id": "component", "shape": "rect", "label": "Component Name", "details": ["Description text here", "所有内容行具有一致宽度"], "x": 130, "y": 90, "width": 460, "height": 140, "tone": "success" }
+      ],
+      "annotations": [
+        { "text": "正确：稳定的矩形边界", "x": 360, "y": 270, "fontSize": 14, "tone": "success" }
+      ]
+    },
+    {
+      "id": "ascii-invalid-box",
+      "output": "ascii-invalid-box.svg",
+      "title": "不一致宽度反例",
+      "description": "内容行宽度不一致导致边界无法对齐的反例。",
+      "canvas": { "width": 720, "height": 310 },
+      "nodes": [
+        { "id": "component", "shape": "note", "label": "Component Name", "details": ["Description text here", "内容宽度不一致"], "x": 150, "y": 85, "width": 410, "height": 145, "tone": "danger" }
+      ],
+      "annotations": [
+        { "text": "错误：边界与内容宽度不一致", "x": 360, "y": 270, "fontSize": 14, "tone": "danger" }
+      ]
+    },
+    {
+      "id": "ascii-calculator",
+      "output": "ascii-calculator.svg",
+      "title": "应用方框示例",
+      "description": "计算器应用职责说明的方框示例。",
+      "canvas": { "width": 780, "height": 360 },
+      "nodes": [
+        { "id": "calculator", "shape": "round", "label": "Calculator Application", "details": ["Provides basic arithmetic operations", "through a web-based interface"], "x": 125, "y": 90, "width": 530, "height": 175, "tone": "accent" }
+      ]
+    },
+    {
+      "id": "ascii-nested-web",
+      "output": "ascii-nested-web.svg",
+      "title": "嵌套边界示例",
+      "description": "Web Server、单体应用与 View Layer 的嵌套结构。",
+      "canvas": { "width": 900, "height": 500 },
+      "groups": [
+        { "id": "server", "label": "Web Server · PHP Runtime", "x": 90, "y": 65, "width": 700, "height": 340, "tone": "accent" },
+        { "id": "application", "label": "index.php · Monolithic Application", "x": 155, "y": 145, "width": 570, "height": 205, "tone": "muted" }
+      ],
+      "nodes": [
+        { "id": "view", "shape": "rect", "label": "HTML Template · View Layer", "details": ["Form rendering", "Result display"], "x": 235, "y": 220, "width": 410, "height": 100 }
+      ]
+    },
+    {
+      "id": "ascii-source-target",
+      "output": "ascii-source-target.svg",
+      "title": "带标签连接示例",
+      "description": "Source 通过 HTTP POST 连接 Target 的流程示例。",
+      "canvas": { "width": 640, "height": 470 },
+      "nodes": [
+        { "id": "source", "shape": "rect", "label": "Source", "x": 240, "y": 65, "width": 160, "height": 55 },
+        { "id": "target", "shape": "rect", "label": "Target", "x": 240, "y": 315, "width": 160, "height": 55, "tone": "accent" }
+      ],
+      "edges": [
+        { "id": "http-post", "from": "source", "to": "target", "fromPort": "bottom", "toPort": "top", "label": { "text": "HTTP POST", "x": 320, "y": 240 } }
+      ]
+    },
+    {
+      "id": "ascii-horizontal-flow",
+      "output": "ascii-horizontal-flow.svg",
+      "title": "水平流程示例",
+      "description": "Step1、Step2 和 Step3 的水平顺序流程。",
+      "canvas": { "width": 920, "height": 300 },
+      "nodes": [
+        { "id": "step1", "shape": "rect", "label": "Step 1", "x": 105, "y": 120, "width": 160, "height": 60 },
+        { "id": "step2", "shape": "rect", "label": "Step 2", "x": 380, "y": 120, "width": 160, "height": 60, "tone": "accent" },
+        { "id": "step3", "shape": "rect", "label": "Step 3", "x": 655, "y": 120, "width": 160, "height": 60, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "step1-step2", "from": "step1", "to": "step2" },
+        { "id": "step2-step3", "from": "step2", "to": "step3" }
+      ]
+    },
+    {
+      "id": "ascii-input-process-output",
+      "output": "ascii-input-process-output.svg",
+      "title": "带标签垂直流程示例",
+      "description": "输入经过处理后返回输出的垂直流程。",
+      "canvas": { "width": 700, "height": 590 },
+      "nodes": [
+        { "id": "input", "shape": "rect", "label": "Input", "x": 255, "y": 100, "width": 190, "height": 60 },
+        { "id": "process", "shape": "rect", "label": "Process", "x": 255, "y": 265, "width": 190, "height": 60, "tone": "accent" },
+        { "id": "output", "shape": "round", "label": "Output", "x": 255, "y": 430, "width": 190, "height": 60, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "input-process", "from": "input", "to": "process", "fromPort": "bottom", "toPort": "top", "label": { "text": "validates", "x": 350, "y": 220 } },
+        { "id": "process-output", "from": "process", "to": "output", "fromPort": "bottom", "toPort": "top", "label": { "text": "returns", "x": 350, "y": 385 } }
+      ]
+    },
+    {
+      "id": "session-recovery",
+      "output": "session-recovery.svg",
+      "title": "会话恢复流程",
+      "description": "读取状态、激活能力、宣布状态和按场景继续的四步恢复流程。",
+      "canvas": { "width": 960, "height": 670 },
+      "nodes": [
+        { "id": "read", "shape": "note", "label": "Step 1：读取 state.md", "details": ["阶段、步骤、活跃模块和单元", "基线与活跃变更请求"], "x": 180, "y": 65, "width": 600, "height": 115, "tone": "accent" },
+        { "id": "activate", "shape": "note", "label": "Step 2：激活对应能力", "details": ["按阶段加载需要的 Skill 或 steering"], "x": 180, "y": 220, "width": 600, "height": 105 },
+        { "id": "announce", "shape": "note", "label": "Step 3：宣布恢复状态", "details": ["明确当前阶段、步骤和下一步"], "x": 180, "y": 365, "width": 600, "height": 105 },
+        { "id": "continue", "shape": "note", "label": "Step 4：按场景继续", "details": ["正常、Compact、交接、协作或模块恢复"], "x": 180, "y": 510, "width": 600, "height": 105, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "read-activate", "from": "read", "to": "activate", "fromPort": "bottom", "toPort": "top" },
+        { "id": "activate-announce", "from": "activate", "to": "announce", "fromPort": "bottom", "toPort": "top" },
+        { "id": "announce-continue", "from": "announce", "to": "continue", "fromPort": "bottom", "toPort": "top" }
+      ]
+    },
+    {
+      "id": "compact-recovery",
+      "output": "compact-recovery.svg",
+      "title": "Compact 恢复决策树",
+      "description": "Compact 恢复时根据协调状态和交接提示决定下一步的流程。",
+      "canvas": { "width": 1120, "height": 570 },
+      "nodes": [
+        { "id": "compact", "shape": "round", "label": "Compact 恢复", "x": 450, "y": 50, "width": 190, "height": 55, "tone": "accent" },
+        { "id": "state", "shape": "rect", "label": "读取 state.md", "x": 450, "y": 155, "width": 190, "height": 55 },
+        { "id": "coordination", "shape": "diamond", "label": "有活跃协调状态？", "x": 430, "y": 265, "width": 230, "height": 95, "tone": "warning" },
+        { "id": "restore", "shape": "rect", "label": "恢复协调", "x": 100, "y": 420, "width": 180, "height": 60, "tone": "warning" },
+        { "id": "handoff", "shape": "diamond", "label": "有下一步交接提示？", "x": 440, "y": 405, "width": 210, "height": 90 },
+        { "id": "prompt", "shape": "rect", "label": "按提示恢复", "x": 765, "y": 345, "width": 180, "height": 60, "tone": "accent" },
+        { "id": "current", "shape": "rect", "label": "按当前步骤恢复", "x": 765, "y": 480, "width": 180, "height": 60 },
+        { "id": "continue", "shape": "round", "label": "激活能力并继续", "x": 440, "y": 510, "width": 210, "height": 55, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "compact-state", "from": "compact", "to": "state", "fromPort": "bottom", "toPort": "top" },
+        { "id": "state-coordination", "from": "state", "to": "coordination", "fromPort": "bottom", "toPort": "top" },
+        { "id": "coordination-restore", "from": "coordination", "to": "restore", "fromPort": "left", "toPort": "top", "label": { "text": "是", "x": 335, "y": 390 } },
+        { "id": "coordination-handoff", "from": "coordination", "to": "handoff", "fromPort": "bottom", "toPort": "top", "label": { "text": "否", "x": 545, "y": 375 } },
+        { "id": "handoff-prompt", "from": "handoff", "to": "prompt", "fromPort": "right", "toPort": "left", "label": { "text": "是", "x": 730, "y": 375 } },
+        { "id": "handoff-current", "from": "handoff", "to": "current", "fromPort": "right", "toPort": "left", "label": { "text": "否", "x": 730, "y": 465 } },
+        { "id": "restore-continue", "from": "restore", "to": "continue", "fromPort": "right", "toPort": "left" },
+        { "id": "prompt-continue", "from": "prompt", "to": "continue", "fromPort": "bottom", "toPort": "right" },
+        { "id": "current-continue", "from": "current", "to": "continue", "fromPort": "left", "toPort": "right" }
+      ]
+    },
+    {
+      "id": "subagent-orchestration",
+      "output": "subagent-orchestration.svg",
+      "title": "子 Agent 编排流程",
+      "description": "主 Agent 对任务依次派发实现者、调用双轴审查并进入构建测试的流程。",
+      "canvas": { "width": 1080, "height": 690 },
+      "groups": [
+        { "id": "orchestrator", "label": "主 Agent（协调者）", "x": 120, "y": 55, "width": 840, "height": 540, "tone": "accent" }
+      ],
+      "nodes": [
+        { "id": "plan", "shape": "note", "label": "读取代码生成计划", "details": ["提取所有任务"], "x": 330, "y": 120, "width": 420, "height": 75 },
+        { "id": "implementer", "shape": "rect", "label": "派发实现者子 Agent", "details": ["任务 + 上下文 + TDD", "TDD 循环 → 自审 → 提交"], "x": 330, "y": 240, "width": 420, "height": 110, "tone": "accent" },
+        { "id": "review", "shape": "rect", "label": "调用 aidlc-code-review", "details": ["Spec 与 Standards 双轴审查", "问题修复后重新审查"], "x": 330, "y": 400, "width": 420, "height": 110, "tone": "warning" },
+        { "id": "build", "shape": "round", "label": "进入构建和测试", "x": 390, "y": 545, "width": 300, "height": 55, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "plan-implementer", "from": "plan", "to": "implementer", "fromPort": "bottom", "toPort": "top" },
+        { "id": "implementer-review", "from": "implementer", "to": "review", "fromPort": "bottom", "toPort": "top" },
+        { "id": "review-build", "from": "review", "to": "build", "fromPort": "bottom", "toPort": "top" }
+      ]
+    },
+    {
+      "id": "tdd-cycle",
+      "output": "tdd-cycle.svg",
+      "title": "RED-GREEN-REFACTOR 循环",
+      "description": "失败测试、最小实现、重构和下一测试组成的 TDD 循环。",
+      "canvas": { "width": 1040, "height": 470 },
+      "nodes": [
+        { "id": "red", "shape": "round", "label": "RED", "details": ["验证失败"], "x": 95, "y": 180, "width": 160, "height": 85, "tone": "danger" },
+        { "id": "green", "shape": "round", "label": "GREEN", "details": ["验证通过"], "x": 390, "y": 180, "width": 160, "height": 85, "tone": "success" },
+        { "id": "refactor", "shape": "round", "label": "REFACTOR", "details": ["保持测试绿色"], "x": 685, "y": 180, "width": 180, "height": 85, "tone": "accent" },
+        { "id": "next", "shape": "note", "label": "下一个测试", "x": 410, "y": 340, "width": 170, "height": 60, "tone": "muted" }
+      ],
+      "edges": [
+        { "id": "red-green", "from": "red", "to": "green", "fromPort": "right", "toPort": "left", "label": { "text": "修正代码", "x": 320, "y": 160 } },
+        { "id": "green-refactor", "from": "green", "to": "refactor", "fromPort": "right", "toPort": "left" },
+        { "id": "refactor-next", "from": "refactor", "to": "next", "fromPort": "bottom", "toPort": "right" },
+        { "id": "next-red", "from": "next", "to": "red", "fromPort": "left", "toPort": "bottom", "kind": "dashed" }
+      ]
+    },
+    {
+      "id": "test-levels",
+      "output": "test-levels.svg",
+      "title": "分层测试执行模型",
+      "description": "从焦点测试到全量测试的四层递进验证模型。",
+      "canvas": { "width": 980, "height": 560 },
+      "nodes": [
+        { "id": "l1", "shape": "rect", "label": "L1：焦点测试", "details": ["当前修改的类或文件", "TDD RED/GREEN"], "x": 170, "y": 70, "width": 640, "height": 75, "tone": "accent" },
+        { "id": "l2", "shape": "rect", "label": "L2：模块测试", "details": ["当前模块的全部测试", "无回归验证"], "x": 170, "y": 180, "width": 640, "height": 75 },
+        { "id": "l3", "shape": "rect", "label": "L3：影响域测试", "details": ["当前模块与直接依赖方", "单元完成后验证"], "x": 170, "y": 290, "width": 640, "height": 75, "tone": "warning" },
+        { "id": "l4", "shape": "rect", "label": "L4：全量测试", "details": ["所有模块", "构建、测试或 CI"], "x": 170, "y": 400, "width": 640, "height": 75, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "l1-l2", "from": "l1", "to": "l2", "fromPort": "bottom", "toPort": "top" },
+        { "id": "l2-l3", "from": "l2", "to": "l3", "fromPort": "bottom", "toPort": "top" },
+        { "id": "l3-l4", "from": "l3", "to": "l4", "fromPort": "bottom", "toPort": "top" }
+      ]
+    },
+    {
+      "id": "review-dual-axis",
+      "output": "review-dual-axis.svg",
+      "title": "双轴审查流程",
+      "description": "Standards Axis 与 Spec Axis 独立审查后合并、修复和重新审查的流程。",
+      "canvas": { "width": 1060, "height": 550 },
+      "nodes": [
+        { "id": "standards", "shape": "rect", "label": "Standards Axis", "details": ["质量与规范报告"], "x": 150, "y": 90, "width": 240, "height": 85, "tone": "accent" },
+        { "id": "spec", "shape": "rect", "label": "Spec Axis", "details": ["规格合规报告"], "x": 670, "y": 90, "width": 240, "height": 85, "tone": "accent" },
+        { "id": "merge", "shape": "rect", "label": "合并报告", "details": ["不重排序，两轴独立保留"], "x": 410, "y": 245, "width": 240, "height": 90 },
+        { "id": "issues", "shape": "diamond", "label": "有关键问题？", "x": 430, "y": 390, "width": 200, "height": 80, "tone": "warning" },
+        { "id": "fix", "shape": "rect", "label": "修复循环", "x": 115, "y": 460, "width": 180, "height": 55, "tone": "warning" },
+        { "id": "pass", "shape": "round", "label": "审查通过", "x": 760, "y": 460, "width": 180, "height": 55, "tone": "success" }
+      ],
+      "edges": [
+        { "id": "standards-merge", "from": "standards", "to": "merge", "fromPort": "bottom", "toPort": "left" },
+        { "id": "spec-merge", "from": "spec", "to": "merge", "fromPort": "bottom", "toPort": "right" },
+        { "id": "merge-issues", "from": "merge", "to": "issues", "fromPort": "bottom", "toPort": "top" },
+        { "id": "issues-fix", "from": "issues", "to": "fix", "fromPort": "left", "toPort": "top", "label": { "text": "是", "x": 360, "y": 470 } },
+        { "id": "issues-pass", "from": "issues", "to": "pass", "fromPort": "right", "toPort": "top", "label": { "text": "否", "x": 700, "y": 470 } },
+        { "id": "fix-merge", "from": "fix", "to": "merge", "fromPort": "top", "toPort": "bottom", "kind": "dashed", "label": { "text": "重新审查", "x": 355, "y": 360 } }
+      ]
+    },
+    {
+      "id": "power-interest",
+      "output": "power-interest.svg",
+      "title": "Power-Interest 矩阵",
+      "description": "按权力和利益将利益相关者划分为四种参与策略。",
+      "canvas": { "width": 920, "height": 560 },
+      "groups": [
+        { "id": "matrix", "label": "利益相关者参与策略", "x": 145, "y": 70, "width": 620, "height": 360, "tone": "muted" }
+      ],
+      "nodes": [
+        { "id": "manage", "shape": "rect", "label": "密切管理", "x": 175, "y": 115, "width": 265, "height": 125, "tone": "warning" },
+        { "id": "engage", "shape": "rect", "label": "深度参与", "x": 470, "y": 115, "width": 265, "height": 125, "tone": "accent" },
+        { "id": "monitor", "shape": "rect", "label": "监控", "x": 175, "y": 260, "width": 265, "height": 125, "tone": "muted" },
+        { "id": "inform", "shape": "rect", "label": "保持知情", "x": 470, "y": 260, "width": 265, "height": 125, "tone": "success" }
+      ],
+      "annotations": [
+        { "text": "高利益", "x": 455, "y": 55, "fontSize": 14, "tone": "muted" },
+        { "text": "低利益", "x": 455, "y": 480, "fontSize": 14, "tone": "muted" },
+        { "text": "低权力", "x": 110, "y": 260, "fontSize": 14, "tone": "muted" },
+        { "text": "高权力", "x": 805, "y": 260, "fontSize": 14, "tone": "muted" }
+      ]
+    }
+  ]
+}

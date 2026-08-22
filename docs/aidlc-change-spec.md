@@ -270,7 +270,7 @@ I5-I10 产物**仍按模块归档**于 `docs/aidlc/modules/<module>/inception/`�
 
 步骤 5 含利益相关者分析、用户画像、**用户旅程图（核心业务流程）**、竞品分析四项，整体仅全面深度执行。
 
-同文件已有「可视化标准」表规定 UML(Mermaid) 优先级最高、纯文本标记为 ❌ 避免，但该规定无强制产物承载。
+同文件已有「可视化标准」表规定结构化 SVG 优先，纯文本/表格仅在图表不适用、事实不足或能力不可用时使用；该规定由共享图表规范和质量门禁承载。
 
 #### 改造内容
 
@@ -293,7 +293,7 @@ I5-I10 产物**仍按模块归档**于 `docs/aidlc/modules/<module>/inception/`�
 | C端/最终用户流程图 | 存在最终用户交互 | 同上 |
 | 跨系统端到端流程图 | 涉及外部系统对接 | 标注系统边界与数据流向 |
 
-**C2-3 格式约束**：全部使用 Mermaid，禁止 ASCII 图、外部图片链接。遵循 `common-ascii-diagram-standards.md` 中对例外情形的规定。
+**C2-3 格式约束**：全部使用可审阅的结构化 SVG 源、静态 SVG 和 Markdown 相对引用；禁止新建 Mermaid fenced block、二维 ASCII 图或未经允许的外部图片链接。遵循 `common-diagram-design-standards.md` 与 `common-svg-diagram-standards.md`。
 
 **C2-4 内容约束**（防止画出无用图）：
 
@@ -314,7 +314,7 @@ I5-I10 产物**仍按模块归档**于 `docs/aidlc/modules/<module>/inception/`�
 
 - [ ] 最小/标准/全面三个深度下，`business-flows.md` 均被产出
 - [ ] 流程图节点与 FR 双向可映射，无孤立节点、无无图 FR
-- [ ] 所有图为 Mermaid 格式
+- [ ] 所有正式图表均为结构化 SVG 源 + 静态 SVG，并具备对应的 Markdown 相对引用
 
 ---
 
@@ -356,7 +356,7 @@ I5-I10 产物**仍按模块归档**于 `docs/aidlc/modules/<module>/inception/`�
 
 **C3-3 状态图内容约束**：
 
-- 使用 Mermaid `stateDiagram-v2`
+- 使用 State SVG 场景；生成可审阅的 SVG 源，按需创建 `.diagram.json` 语义伴随清单和 Provider Request；静态 SVG、预览或导出仅在外部 Provider 实际生成并完成相应目标验收后作为目标产物记录
 - 必须标注每个迁移的触发事件与前置条件
 - 必须标注终态
 - **存量项目强制**：若逆向工程产物中已存在该对象的状态机，必须在状态图下方给出「新需求状态 ↔ 基座既有状态」对照表，并显式列出冲突项

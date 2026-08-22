@@ -13,20 +13,11 @@ AI-DLC 覆盖完整开发流程：需求与验收定义、设计与拆分、TDD 
 3. Operations（条件）：部署目标确认 → 目标相关配置 → 配置验证 → 部署/回滚说明。
 4. Change Request：定位 → 影响评估 → 计划 → 逐层回写与实现 → 一致性验证。
 
-## Mermaid 视图
+## SVG 视图
 
-```mermaid
-flowchart LR
-    Start["用户请求"] --> Inception["Inception 场景、需求与设计"]
-    Inception --> Construction["Construction 实现与验证"]
-    Construction --> NeedDeploy{"需要部署准备"}
-    NeedDeploy -->|"是"| Operations["Operations 部署准备"]
-    NeedDeploy -->|"否"| Done["开发完成"]
-    Operations --> Done
-    Done --> Change{"发生需求变更"}
-    Change -->|"是"| ChangeRequest["Change Request"]
-    ChangeRequest --> Inception
-```
+![AI-DLC 生命周期 SVG](assets/process-lifecycle.svg)
+
+可审阅源：`assets/diagram-library.diagram.json`。本图仅展示生命周期全貌；步骤条件和权威路由仍以 `core-workflow.md` 为准。
 
 ## 自适应原则
 

@@ -3,7 +3,7 @@ name: "loeyae-aidlc"
 displayName: "Loeyae AI-DLC"
 version: "1.36.2"
 description: "基于 AI-DLC 方法论的完整开发流程闭环。当用户消息中出现 AI-DLC 或 aidlc 时必须激活。覆盖 Inception 规划、Construction 实现与验证，以及按条件执行的 Operations 部署准备；不覆盖部署后的生产运维。"
-keywords: ["aidlc", "AI-DLC", "继续上次的工作", "认领单元", "团队协作模式", "loeyae", "功能设计", "用户故事", "架构设计", "单元生成", "代码审查", "逆向工程", "根因分析", "修改功能", "变更需求", "调整功能", "改动需求", "需求变更", "diagram", "图表设计", "架构图", "流程图", "时序图", "mermaid"]
+keywords: ["aidlc", "AI-DLC", "继续上次的工作", "认领单元", "团队协作模式", "loeyae", "功能设计", "用户故事", "架构设计", "单元生成", "代码审查", "逆向工程", "根因分析", "修改功能", "变更需求", "调整功能", "改动需求", "需求变更", "diagram", "图表设计", "架构图", "流程图", "时序图", "svg"]
 author: "Loeyae Team"
 ---
 
@@ -29,8 +29,11 @@ Power 安装产物只包含 `POWER.md`、`mcp.json` 和 `steering/`，不包含 
 
 - **工作流加载**：首先加载 `steering/core-workflow.md`，随后按其中路由按需读取规则，禁止预加载全部 steering。
 - **会话延续**：工作流状态记录在业务项目的 `docs/aidlc/state.md`。
+- **图表设计**：正式图表按 `steering/common-diagram-design-standards.md` 的 Blueprinter SVG 设计规则生成可审阅的 SVG 源，可选生成 `common-svg-diagram-standards.md` 定义的 `.diagram.json` 语义伴随清单和 Provider Request；Power 不默认调用或绑定 SVG 渲染器，只有外部 Provider 实际返回目标产物后才记录静态 SVG、预览或导出结果。Power 可以引用安装包中已有的静态 SVG，但引用不等于目标环境渲染已验证。
 - **子 Agent**：读取 `agents/` 中的平台无关指令，通过 Kiro `invoke_sub_agent` 能力执行；不可用时按共享规则降级。
 - **MCP**：`mcp.json` 声明 `loeyae-skills`、`awesome-design`、`figma` 和 `ssot` 服务。该声明仅代表已配置；Figma 是否已认证、可读取、可写入必须分别通过 `whoami`、`get_metadata`、`create_new_file` + `use_figma` 运行时验证。
+
+Power 安装产物不含 `scripts/`，且 `mcp.json` 未声明已验证的 SVG Provider，因此不得宣称安装后可完成目标环境预览、渲染或导出。需要目标 `preview`、`render` 或 `export` 时，必须使用已验证 Provider 或用户提供的目标工具；源码仓可选回归命令只能检查源结构/语义，不能替代目标 Provider，也不能据此避免 `NEEDS_CAPABILITY`。无 Provider 时仍可交付 SVG 源和语义检查，并将目标几何/视觉标为 `UNVERIFIED`；只有用户明确要求目标操作而能力不可验证时才返回 `NEEDS_CAPABILITY`，或经用户同意降级为文字/表格。`.drawio → SVG` 和 Kiro Markdown SVG Preview 均未验证。
 
 ## MCP 使用边界
 

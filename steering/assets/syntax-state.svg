@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 360" width="940" height="360" role="img" aria-labelledby="syntax-state-title syntax-state-desc">
+<title id="syntax-state-title">状态图 SVG 模板</title>
+<desc id="syntax-state-desc">草稿、已提交和完成的状态迁移示例。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="940" height="360" fill="#ffffff"/>
+<text x="470" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">状态图 SVG 模板</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="start-draft" data-from="start" data-from-port="right" data-to="draft" data-to-port="left" data-kind="directed" points="155,169 255,169" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="draft-submitted" data-from="draft" data-from-port="right" data-to="submitted" data-to-port="left" data-kind="directed" points="405,169 505,169" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="submitted-end" data-from="submitted" data-from-port="right" data-to="end" data-to-port="left" data-kind="directed" points="655,169 760,169" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="draft-submitted">
+<rect x="435" y="116" width="40" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="455" y="133">提交</tspan></text>
+</g>
+<g data-edge-label="submitted-end">
+<rect x="685" y="116" width="40" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="705" y="133">完成</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-start">
+<ellipse data-node="start" fill="#f1f5f9" stroke="#64748b" stroke-width="2" cx="105" cy="169" rx="50" ry="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#334155"><tspan x="105" y="174">开始</tspan></text>
+</g>
+<g id="node-draft">
+<rect data-node="draft" fill="#f8fafc" stroke="#334155" stroke-width="2" x="255" y="140" width="150" height="58" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="330" y="174">草稿</tspan></text>
+</g>
+<g id="node-submitted">
+<rect data-node="submitted" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="505" y="140" width="150" height="58" rx="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="580" y="174">已提交</tspan></text>
+</g>
+<g id="node-end">
+<ellipse data-node="end" fill="#dcfce7" stroke="#15803d" stroke-width="2" cx="815" cy="169" rx="55" ry="24"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="815" y="174">完成</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

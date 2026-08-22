@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 560" width="980" height="560" role="img" aria-labelledby="test-levels-title test-levels-desc">
+<title id="test-levels-title">分层测试执行模型</title>
+<desc id="test-levels-desc">从焦点测试到全量测试的四层递进验证模型。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="980" height="560" fill="#ffffff"/>
+<text x="490" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">分层测试执行模型</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="l1-l2" data-from="l1" data-from-port="bottom" data-to="l2" data-to-port="top" data-kind="directed" points="490,145 490,180" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="l2-l3" data-from="l2" data-from-port="bottom" data-to="l3" data-to-port="top" data-kind="directed" points="490,255 490,290" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="l3-l4" data-from="l3" data-from-port="bottom" data-to="l4" data-to-port="top" data-kind="directed" points="490,365 490,400" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+</g>
+<g id="nodes">
+<g id="node-l1">
+<rect data-node="l1" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" x="170" y="70" width="640" height="75" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="490" y="96">L1：焦点测试</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0c4a6e"><tspan x="490" y="122">当前修改的类或文件</tspan><tspan x="490" y="138">TDD RED/GREEN</tspan></text>
+</g>
+<g id="node-l2">
+<rect data-node="l2" fill="#f8fafc" stroke="#334155" stroke-width="2" x="170" y="180" width="640" height="75" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="490" y="206">L2：模块测试</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#0f172a"><tspan x="490" y="232">当前模块的全部测试</tspan><tspan x="490" y="248">无回归验证</tspan></text>
+</g>
+<g id="node-l3">
+<rect data-node="l3" fill="#fef3c7" stroke="#b45309" stroke-width="2" x="170" y="290" width="640" height="75" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#78350f"><tspan x="490" y="316">L3：影响域测试</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#78350f"><tspan x="490" y="342">当前模块与直接依赖方</tspan><tspan x="490" y="358">单元完成后验证</tspan></text>
+</g>
+<g id="node-l4">
+<rect data-node="l4" fill="#dcfce7" stroke="#15803d" stroke-width="2" x="170" y="400" width="640" height="75" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#14532d"><tspan x="490" y="426">L4：全量测试</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="400" fill="#14532d"><tspan x="490" y="452">所有模块</tspan><tspan x="490" y="468">构建、测试或 CI</tspan></text>
+</g>
+</g>
+<g id="annotations">
+</g>
+</svg>

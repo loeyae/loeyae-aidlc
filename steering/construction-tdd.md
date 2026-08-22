@@ -91,20 +91,9 @@ describe('UC-D-003 超出配额拒绝请求', () => {
 
 ## RED-GREEN-REFACTOR 循环
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                                                         │
-│   RED ──→ 验证失败 ──→ GREEN ──→ 验证通过 ──→ REFACTOR │
-│    ↑         │            ↑         │            │      │
-│    │     错误失败          │     未通过           │      │
-│    │         │            │         │            │      │
-│    │         ↓            │         ↓            │      │
-│    │      修正测试         │      修正代码         │      │
-│    │                      │                      │      │
-│    └──────────────────────┴──────────────────────┘      │
-│                      下一个测试                          │
-└─────────────────────────────────────────────────────────┘
-```
+![TDD RED-GREEN-REFACTOR 循环](assets/tdd-cycle.svg)
+
+可审阅源：`assets/diagram-library.diagram.json`。后续 RED、GREEN 与 REFACTOR 小节定义本图各阶段的实际执行与验证要求。
 
 ### RED — 写失败测试
 
@@ -122,7 +111,7 @@ void shouldRejectEmptyEmail() {
     var request = new CreateUserRequest("", "password123");
 
     var result = userService.createUser(request);
-    
+
     assertThat(result.getErrors()).contains("邮箱不能为空");
 }
 ```

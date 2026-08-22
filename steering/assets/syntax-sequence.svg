@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400" role="img" aria-labelledby="syntax-sequence-title syntax-sequence-desc">
+<title id="syntax-sequence-title">时序图 SVG 模板</title>
+<desc id="syntax-sequence-desc">客户端与服务端之间的请求和响应时序示例。</desc>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+</marker>
+</defs>
+<rect width="900" height="400" fill="#ffffff"/>
+<text x="450" y="28" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700" fill="#0f172a">时序图 SVG 模板</text>
+<g id="groups">
+</g>
+<g id="connectors">
+<polyline data-edge="request" data-from="client" data-from-port="right" data-to="service" data-to-port="left" data-kind="directed" points="280,150 610,150" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<polyline data-edge="response" data-from="service" data-from-port="left" data-to="client" data-to-port="right" data-kind="dashed" points="610,250 280,250" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+</g>
+<g id="edge-labels">
+<g data-edge-label="request">
+<rect x="425" y="124" width="40" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="445" y="141">请求</tspan></text>
+</g>
+<g data-edge-label="response">
+<rect x="425" y="224" width="40" height="24" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#334155"><tspan x="445" y="241">响应</tspan></text>
+</g>
+</g>
+<g id="nodes">
+<g id="node-client">
+<g data-node="client" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"><circle cx="205" cy="72.5" r="14"/><rect x="130" y="90" width="150" height="35" rx="8"/></g>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0c4a6e"><tspan x="205" y="95">客户端</tspan></text>
+</g>
+<g id="node-service">
+<rect data-node="service" fill="#f8fafc" stroke="#334155" stroke-width="2" x="610" y="55" width="150" height="70" rx="6"/>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#0f172a"><tspan x="685" y="95">服务端</tspan></text>
+</g>
+</g>
+<g id="annotations">
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="140" font-weight="400" fill="#334155"><tspan x="205" y="215">│</tspan></text>
+<text text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="140" font-weight="400" fill="#334155"><tspan x="685" y="215">│</tspan></text>
+</g>
+</svg>
