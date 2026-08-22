@@ -23,7 +23,8 @@
 - `diagram intent`：明确希望读者理解的业务行为（如"展示运营端从入口到完成的操作流程"）；
 - `approved facts`：已确认的角色、步骤、系统、判定条件和异常路径；
 - `diagram_type`：Flowchart（默认）或 Sequence（跨系统时序场景）；
-- `target artifact`：`<inception-root>/requirements/business-flows.md`。
+- `target artifact`：`<inception-root>/requirements/business-flows.md`；
+- `constraints`：`delivery-business-flow`。
 
 Kiro Power 形态降级为直接加载 `common-diagram-design-standards.md` 执行。Phase 不重复定义图类型选择、Mermaid 语法或布局规则。
 

@@ -60,7 +60,7 @@ OpenCode 不使用根目录 `plugin.json`；`package.json` 及其 `main` 指向�
 
 ```json
 {
-  "plugin": ["loeyae-aidlc@git+https://github.com/loeyae/loeyae-aidlc.git#v1.36.1"]
+  "plugin": ["loeyae-aidlc@git+https://github.com/loeyae/loeyae-aidlc.git#v1.36.2"]
 }
 ```
 
