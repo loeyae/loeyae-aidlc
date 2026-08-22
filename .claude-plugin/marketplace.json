@@ -10,7 +10,7 @@
     {
       "name": "loeyae-aidlc",
       "description": "Complete AI-DLC lifecycle with planning, implementation, validation, and conditional deployment preparation; excludes post-deployment production operations.",
-      "version": "1.36.2",
+      "version": "1.37.0",
       "source": {
         "source": "url",
         "url": "https://github.com/loeyae/loeyae-aidlc.git"

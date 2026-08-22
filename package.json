@@ -1,6 +1,6 @@
 {
   "name": "loeyae-aidlc",
-  "version": "1.36.2",
+  "version": "1.37.0",
   "description": "Loeyae AI-DLC 完整开发流程闭环：Inception 规划、Construction 实现与验证、Operations 部署准备；统一支持 Kiro、Claude Code 和 OpenCode，不覆盖部署后的生产运维。",
   "type": "module",
   "main": ".opencode/plugins/loeyae-aidlc.js",
