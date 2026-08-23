@@ -1,7 +1,7 @@
 ---
 name: "loeyae-aidlc"
 displayName: "Loeyae AI-DLC"
-version: "1.37.0"
+version: "1.37.1"
 description: "基于 AI-DLC 方法论的完整开发流程闭环。当用户消息中出现 AI-DLC 或 aidlc 时必须激活。覆盖 Inception 规划、Construction 实现与验证，以及按条件执行的 Operations 部署准备；不覆盖部署后的生产运维。"
 keywords: ["aidlc", "AI-DLC", "继续上次的工作", "认领单元", "团队协作模式", "loeyae", "功能设计", "用户故事", "架构设计", "单元生成", "代码审查", "逆向工程", "根因分析", "修改功能", "变更需求", "调整功能", "改动需求", "需求变更", "diagram", "图表设计", "架构图", "流程图", "时序图", "svg"]
 author: "Loeyae Team"

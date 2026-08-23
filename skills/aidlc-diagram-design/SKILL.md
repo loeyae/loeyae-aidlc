@@ -34,10 +34,10 @@ Independent Capability — not an AIDLC phase.
 ## 执行
 
 1. 明确图的单一目的，区分系统结构与处理流程，并仅提取已批准的最小节点、关系、边界、状态和标签；
-2. 选择 SVG 场景语义，按节点/边密度、同方向层级、长文本、回边和画布比例作出拆分决策；需要拆图时按语义边界连接“上一图继续/下一图继续”，不得截断决策链；
-3. 按 Blueprinter 设计规则生成可审阅的 SVG 源：保持稳定的视觉层级、文字可读性、图标语义、留白和连线避让；可选生成 `.diagram.json` 语义伴随清单，记录稳定 ID、节点/边/端口、方向、连通性和事实映射；该清单不是默认本地渲染输入；
+2. 选择 SVG 场景语义，按节点/边密度、同方向层级、长文本、回边和画布比例作出拆分决策；Architecture/Context 与 Flowchart/Pipeline 同时出现时默认拆图；需要保留单图时，必须记录单一理解目标、静态/过程语义区分和常规/适合窗口/放大三种阅读证据；需要拆图时按语义边界连接“上一图继续/下一图继续”，不得截断决策链；
+3. 按 Blueprinter 设计规则生成可审阅的 SVG 源：保持稳定的视觉层级、文字可读性、图标语义、留白和连线避让；出现两种或以上语义化连线、箭头、颜色、节点形状、边界或图标时生成结构化图例，只有 Design Notes 记录紧邻文字完整表达且无符号复用时才豁免；可选生成 `.diagram.json` 语义伴随清单，记录稳定 ID、节点/边/端口、方向、连通性、图例映射、分组类型/成员/层级和图型决策；该清单不是默认本地渲染输入；
 4. 根据同一份文本测量、换行、行高和内边距计算节点、菱形、标签背景、分组和源画布；不得通过缩小字体、整体缩放或手改源 SVG 解决空间问题；最终目标环境的文字测量和坐标调整由 Provider 负责；
-5. 生成 Provider Request，至少记录 SVG 源路径、可选清单路径、目标操作、目标阅读环境、需要的 Provider 能力和验收矩阵；AIDLC 不调用、安装或默认绑定本地渲染器、Kiro Preview、Claude runtime、OpenCode runtime、draw.io 或浏览器；
+5. 生成 Provider Request，至少记录 SVG 源路径、可选清单路径、目标操作、目标阅读环境、需要的 Provider 能力和验收矩阵；Provider 必须声明是否支持本地 `.diagram.json` 的图例、分组语义和 Design Notes 字段；不支持时返回 `NEEDS_CAPABILITY`，不得静默忽略关键语义；AIDLC 不调用、安装或默认绑定本地渲染器、Kiro Preview、Claude runtime、OpenCode runtime、draw.io 或浏览器；
 6. 对源和可选清单执行事实、结构、稳定 ID、方向、端口、连通性、静态安全和可表达几何检查；若目标操作要求外部 Provider，则将请求交给调用方/目标工具，而不是在本能力内假定已渲染；
 7. 对照 `approved facts`、正文和节点/连线映射检查语义一致性，重点检查方向、端口、分支标签、状态转换、系统边界、单一起始节点、流程单向连接和重复文本；
 8. 形成源/语义 Validation Matrix。只有在外部 Provider 返回目标产物并提供证据时，才补充目标结构、几何和视觉验收；未执行的目标环境标记 `UNVERIFIED`；
@@ -53,9 +53,9 @@ Kiro Power 不携带本仓 `scripts/`，因而没有已验证 SVG Provider 时�
 - **Diagram Type**：选择的 SVG 场景语义及理由；
 - **Purpose**：图的单一目的；
 - **Diagram Artifact**：SVG 源路径；可选 `.diagram.json` 语义伴随清单路径；Provider Request；只有 Provider 实际返回时才记录静态 SVG、PNG、PDF 或预览路径；
-- **Design Notes**：语义边界、拆分/衔接、画布、回边、分组、泳道、主流程方向和 Blueprinter 视觉决策；
+- **Design Notes**：单一意图与读者目标、`diagramType`、语义模式、图例触发/豁免及对象证据、分组类型/成员/父子层级/交叠说明、拆图或保留单图理由、语义衔接、画布、回边、泳道、主流程方向和 Blueprinter 视觉决策；结构化字段定义见 `steering/common-svg-diagram-standards.md`，不在能力入口复制字段规则；
 - **Constraints Applied**：实际应用的约束；
-- **Validation Matrix**：源结构、几何、语义、静态安全和（如有 Provider）目标视觉四类的 `PASS` / `FAIL` / `UNVERIFIED`，每项附实际证据或具体问题；
+- **Validation Matrix**：源结构、几何、语义、静态安全和（如有 Provider）目标视觉四类的 `PASS` / `FAIL` / `UNVERIFIED`，新增逐项记录图例映射、图例画布外置/不裁切、分组交叠/成员/层级、标题遮挡、图型混合与拆图证据；每项附实际证据或具体问题；
 - **Delivery Status**：`SOURCE_READY`、`DELIVERED`、`NEEDS_CAPABILITY` 或 `DEGRADED_TO_TEXT_TABLE`。`SOURCE_READY` 表示源和 Provider Request 已生成，不表示目标环境已渲染；`NEEDS_CAPABILITY` 只表示用户要求的目标预览/渲染/导出缺少可验证 Provider，不表示源不存在；
 - **Assumptions**：如有假设，明确列出。
 

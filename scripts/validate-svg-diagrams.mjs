@@ -4,7 +4,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs"
 import { relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { renderDeliveryBusinessFlowSvg } from "./render-delivery-business-flow-svg.mjs"
-import { renderDiagram } from "./render-svg-diagrams.mjs"
+import { getDiagramMigrationWarnings, renderDiagram } from "./render-svg-diagrams.mjs"
 import { GENERIC_SVG_MANIFESTS, STRICT_SVG_DIAGRAMS } from "./svg-diagram-catalog.mjs"
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)))
@@ -23,7 +23,7 @@ function countMatches(text, expression) {
   return [...text.matchAll(expression)].length
 }
 
-function validateSvg(svgPath, expectedNodes, expectedEdges, expectedSvg) {
+function validateSvg(svgPath, expectedNodes, expectedEdges, expectedSvg, expectedLegend = 0) {
   assert(existsSync(svgPath), `缺少 SVG 输出：${relative(root, svgPath)}`)
   const svg = readFileSync(svgPath, "utf8")
   assert(svg === expectedSvg, `${relative(root, svgPath)} 与结构化源不一致，请重新渲染`)
@@ -33,6 +33,7 @@ function validateSvg(svgPath, expectedNodes, expectedEdges, expectedSvg) {
   assert(!UNSAFE_SVG.test(svg), `${relative(root, svgPath)} 包含不允许的可执行或外部嵌入内容`)
   assert(countMatches(svg, /\bdata-node="/g) === expectedNodes, `${relative(root, svgPath)} 的节点数量与结构化源不一致`)
   assert(countMatches(svg, /\bdata-edge="/g) === expectedEdges, `${relative(root, svgPath)} 的连线数量与结构化源不一致`)
+  assert(countMatches(svg, /\bdata-legend-item="/g) === expectedLegend, `${relative(root, svgPath)} 的图例项数量与结构化源不一致`)
 }
 
 function escapeRegularExpression(value) {
@@ -79,6 +80,7 @@ function walkMarkdown(directory, results = []) {
 
 try {
   let diagramCount = 0
+  const migrationWarnings = []
   for (const entry of GENERIC_SVG_MANIFESTS) {
     const manifestPath = resolve(root, entry.input)
     assert(existsSync(manifestPath), `缺少结构化图表源：${entry.input}`)
@@ -88,7 +90,9 @@ try {
     for (const diagram of manifest.diagrams) {
       assert(!outputs.has(diagram.output), `${entry.input} 存在重复输出：${diagram.output}`)
       outputs.add(diagram.output)
-      validateSvg(resolve(root, entry.outputDirectory, diagram.output), diagram.nodes.length, (diagram.edges ?? []).length, renderDiagram(diagram))
+      const expectedSvg = renderDiagram(diagram)
+      validateSvg(resolve(root, entry.outputDirectory, diagram.output), diagram.nodes.length, (diagram.edges ?? []).length, expectedSvg, diagram.legend?.items?.length ?? 0)
+      migrationWarnings.push(...getDiagramMigrationWarnings(diagram).map(warning => `${entry.input}: ${warning}`))
       diagramCount += 1
     }
     validateReferences(entry.references)
@@ -98,13 +102,18 @@ try {
     const inputPath = resolve(root, entry.input)
     assert(existsSync(inputPath), `缺少严格端点结构化源：${entry.input}`)
     const diagram = readJson(inputPath)
-    validateSvg(resolve(root, entry.output), diagram.nodes.length, diagram.edges.length, renderDeliveryBusinessFlowSvg(diagram))
+    validateSvg(resolve(root, entry.output), diagram.nodes.length, diagram.edges.length, renderDeliveryBusinessFlowSvg(diagram), 0)
     validateReferences([{ document: entry.document, outputs: [entry.output.split("/").at(-1)] }])
   }
 
   const mermaidFiles = walkMarkdown(root).filter(path => MERMAID_FENCE.test(readFileSync(path, "utf8")))
   assert(mermaidFiles.length === 0, `仍存在 Mermaid 图块：${mermaidFiles.map(path => relative(root, path)).join(", ")}`)
-  console.log(`SVG 图表验证通过：${diagramCount} 个通用场景，${STRICT_SVG_DIAGRAMS.length} 个严格端点场景，且无 Mermaid 图块。`)
+  if (migrationWarnings.length > 0) {
+    console.warn(`SVG 图表静态验证完成：${diagramCount} 个通用场景，${STRICT_SVG_DIAGRAMS.length} 个严格端点场景；旧资产待迁移 ${migrationWarnings.length} 项：${migrationWarnings.join("；")}`)
+    process.exitCode = 2
+  } else {
+    console.log(`SVG 图表验证通过：${diagramCount} 个通用场景，${STRICT_SVG_DIAGRAMS.length} 个严格端点场景，且无 Mermaid 图块。`)
+  }
 } catch (error) {
   console.error(`SVG 图表验证失败：${error.message}`)
   process.exitCode = 1
