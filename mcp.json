@@ -46,6 +46,12 @@
         "list_projects", "get_project", "list_documents", "get_document",
         "search_documents", "retrieve_context", "get_revision_file"
       ]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@1.6.0"],
+      "disabled": false,
+      "autoApprove": []
     }
   }
 }

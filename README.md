@@ -60,7 +60,7 @@ OpenCode 不使用根目录 `plugin.json`；`package.json` 及其 `main` 指向�
 
 ```json
 {
-  "plugin": ["loeyae-aidlc@git+https://github.com/loeyae/loeyae-aidlc.git#v1.37.1"]
+  "plugin": ["loeyae-aidlc@git+https://github.com/loeyae/loeyae-aidlc.git#v1.37.2"]
 }
 ```
 
@@ -114,7 +114,7 @@ Inception（规划） → Construction（实现与验证） → Operations（部
 
 ## 图表设计
 
-正式图表遵循 Blueprinter 的 SVG 设计规则。AIDLC 默认生成可审阅的 SVG 源，并可选生成 `.diagram.json` 语义伴随清单和 Provider Request；外部 Provider 负责实际文字测量、最终布局、预览、渲染、PNG/PDF 导出和目标环境视觉检查。`.diagram.json` 不再是必须文件或默认本地渲染输入，静态 SVG 也不再是三平台默认生成能力。Markdown 只有在目标环境需要时才引用源或 Provider 生成的目标 SVG；引用不代表渲染已验证。不得新增 Mermaid 或二维 ASCII 正式图块。
+正式图表遵循 Blueprinter 的 SVG 设计规则。AIDLC 默认生成可审阅的 SVG 源，并可选生成 `.diagram.json` 语义伴随清单和 Provider Request；外部 Provider 负责实际文字测量、最终布局、预览、渲染、PNG/PDF 导出和目标环境视觉检查。Kiro Power 另外预置固定版本的 `chrome-devtools` MCP 作为浏览器验收 Provider，可直接加载独立 SVG 的 `file://` URL 或目标预览 URL，检查 DOM/几何并采集截图；它不生成 SVG 或 `.diagram.json`，也不替代源静态检查。`.diagram.json` 不再是必须文件或默认本地渲染输入，静态 SVG 也不再是三平台默认生成能力。Markdown 只有在目标环境需要时才引用源或 Provider 生成的目标 SVG；引用不代表渲染已验证。不得新增 Mermaid 或二维 ASCII 正式图块。
 
 在本仓库工作树中，以下命令仅是可选的源码仓维护/回归工具，不是 Kiro、Claude Code 或 OpenCode 的默认 Provider 路径：
 
@@ -130,6 +130,7 @@ npm run validate:svg-diagrams
 
 - **MCP 编码规范**：Java + Loeyae Boot Framework 项目可通过 `loeyae-skills` 按需加载框架规范。
 - **UI 设计**：HTML Mock 可选用 `awesome-design`；Figma 路径通过官方 `figma` MCP 创建、审查或读取设计，具体能力必须运行时验证。
+- **浏览器验收**：Kiro Power 的 `chrome-devtools` MCP 只承担 SVG 预览和浏览器视觉/几何证据采集；需要静态源检查、SVG 生成、重排或 PNG/PDF 导出时，仍使用对应的静态工具或已验证 Provider。
 - **子 Agent**：共享指令位于 `agents/`，各平台按自身能力适配执行。
 
 MCP 能力按以下四级状态判断，禁止把配置存在等同于可用：
