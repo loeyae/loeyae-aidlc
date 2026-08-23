@@ -34,6 +34,10 @@ Provider 生成的静态 SVG、PNG 或 PDF 是目标交付物，路径由目标�
 | 图型与设计记录 | `diagramType`、`designNotes` | 新建/调整图必填；记录单一意图、语义模式、视觉语义角色、图例决定、分组解释和拆图决定；详细字段见下文 |
 | 注释 | `annotations[].text`、`x`、`y` | 只承载辅助说明；可选 `fontSize`、`lineHeight`、`anchor`、`weight`、`tone`；独立业务事实应建模为节点、连线或分组，而不是无 ID 注释 |
 
+### 验收状态与 SVG 可见内容隔离
+
+`PASS`、`FAIL`、`UNVERIFIED`、`MIGRATION_REQUIRED`、`NEEDS_CAPABILITY` 以及“目标 Provider / 浏览器视觉验证状态”等验收状态只属于验收报告、清单、Provider Request/Result、与 `.diagram.json` 关联的状态元数据或交付说明。不得将类似“目标 Provider / 浏览器视觉验证状态：UNVERIFIED”的文字写入 SVG 画布、节点、连线、图例、`annotations[]`、`<text>`、`<title>`、`<desc>` 或其他供图片使用者阅读的注解，也不得以状态图例、水印或占位标签形式呈现。SVG 只表达图表事实和必要的可访问性描述；未执行目标 Provider/浏览器检查时，仍须在外部验收记录中标记 `UNVERIFIED`，不能因不把状态绘入图片而改标为 `PASS`。
+
 ### 端口偏移的 V1 兼容扩展
 
 本节只扩展 V1 的可选字段，不改变 `.diagram.json` 的 `version: 1`、`fromPort`/`toPort` 侧语义或既有业务含义：
