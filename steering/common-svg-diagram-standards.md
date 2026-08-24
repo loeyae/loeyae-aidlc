@@ -27,12 +27,24 @@ Provider 生成的静态 SVG、PNG 或 PDF 是目标交付物，路径由目标�
 | 清单 | `version`、`document`、`diagrams` | `version` 为 `1`；`document` 指向关联 Markdown；每个图只出现一次 |
 | 图 | `id`、`output`、`title`、`description`、`canvas`、`nodes` | `id` 和 `output` 在同一清单唯一；`canvas` 使用 `{ width, height }`；`output` 为同级 SVG 文件名；新建/调整图还必须提供 `diagramType` 和结构化 `designNotes`，旧 V1 资产可缺省但只能标记为迁移状态 |
 | 节点 | `id`、`shape`、`label`、`x`、`y`、`width`、`height` | `shape` 只能为 `round`、`rect`、`diamond`、`ellipse`、`database`、`actor`、`note`；`label` 为字符串或非空字符串数组；可选 `details`、`fontSize`、`tone` |
-| 连线 | `id`、`from`、`fromPort`、`to`、`toPort`、`kind` | `from`/`to` 引用节点 ID；端口只能为 `top`、`right`、`bottom`、`left`；`kind` 只能为 `directed`、`bidirectional`、`undirected`、`dashed`；可选 `fromPortOffset`/`toPortOffset`、`points` 与 `label`；新建/调整图的连线必须提供可审查的 `points` |
-| 连线标签 | `label.text`、`label.x`、`label.y` | 标签属于其 `edge.id`，其稳定身份为 `<edge.id>#label`；`text` 为字符串或非空字符串数组，坐标是标签中心 |
+| 连线 | `id`、`from`、`fromPort`、`to`、`toPort`、`kind` | `from`/`to` 引用节点 ID；端口只能为 `top`、`right`、`bottom`、`left`；`kind` 只能为 `directed`、`bidirectional`、`undirected`、`dashed`；可选 `fromPortOffset`/`toPortOffset`、`points`、`label`、`routing`、`interaction`；新建/调整图的连线必须提供可审查的 `points`；跨组、成对请求/返回和多入线避让必须使用对应结构化字段表达 |
+| 连线标签 | `label.text`、`label.x`、`label.y`、`label.segmentIndex`、`label.anchorDirection`、`label.avoidanceDirection`、`label.areaId` | 标签属于其父级 `edge.id`，稳定身份为 `<edge.id>#label`；`segmentIndex` 指向 `points[segmentIndex]` 到 `points[segmentIndex + 1]` 的实际线段；新建/调整图必须记录 segment、锚点方向、避让方向和所属标签区域；坐标是标签中心 |
 | 分组 | `groups[].id`、`groups[].label`、`x`、`y`、`width`、`height` | 表达系统、泳道、角色或信任边界；可选 `tone`；新建/调整图必须增加 `semanticType`、`members`，`nested` 分组还必须有 `parent`；范围必须包围其声明的内容与标题内边距 |
+| 标签区域 | `labelAreas[].id`、`kind`、`groupIds`、`x`、`y`、`width`、`height` | `kind` 为 `group`、`between-groups` 或 `outside`；标签通过 `areaId` 引用；区域必须是预留的实际几何范围，`between-groups` 必须声明两个分组，`outside` 不得声明业务分组 |
 | 图例 | `legend.items[]` | 可选；存在两种或以上语义化视觉编码时必填。每项必须有 `id`、`label`、`meaning`、`sample` 和 `targets`；`sample` 只引用实际节点、连线或分组，不接受 Provider 私有颜色/坐标字段 |
 | 图型与设计记录 | `diagramType`、`designNotes` | 新建/调整图必填；记录单一意图、语义模式、视觉语义角色、图例决定、分组解释、拆图决定和 `layout`；详细字段见下文 |
 | 注释 | `annotations[].id`、`text`、`x`、`y` | 新建/调整图每条注释必须有唯一稳定 ID；可选 `fontSize`、`lineHeight`、`anchor`、`weight`、`tone`；独立业务事实应建模为节点、连线或分组，而不是无 ID 注释 |
+
+### 标签、路由和成对关系的 V1 扩展
+
+本节只增加 V1 的可选结构化表达，不改变既有 `version: 1`、`from`/`to`、端口侧或 `label.text` 的含义；但新建/调整图在适用场景下必须填写，旧资产缺少适用字段时只能标记 `MIGRATION_REQUIRED`。
+
+- `labelAreas` 为可选数组，项为 `{ id, kind, groupIds, x, y, width, height, labelBoundaryClearance? }`。`kind: "group"` 只能有一个 `groupIds`，区域必须位于该分组内部；`kind: "between-groups"` 必须有两个分组 ID，区域必须完整位于两组之间的专用通道；`kind: "outside"` 不得有业务分组 ID，且必须位于业务主体外侧。`labelBoundaryClearance` 缺省按 `16` 解释，显式值不得小于 `16`。
+- 新建/调整图的每个 `edge.label` 必须通过 `areaId` 引用 `labelAreas`，并填写 `segmentIndex`、`anchorDirection`、`avoidanceDirection`。方向值限 `top`、`right`、`bottom`、`left`：`anchorDirection` 表示从标签中心指向所属路径线段的法向，`avoidanceDirection` 表示从标签中心指向远离最近障碍的预留空间；二者必须与实际线段方向和区域几何一致。标签归属由父级 `edge.id` 与 `<edge.id>#label` 共同确定，不另造无关联的标签 ID。
+- 标签背景框必须由实际字体、文本行数、行高和内边距测量；`labelLineHeight` 必须是同一份最终标签文本、字体和换行结果测得的单行高，不得借用节点或其他标签的行高；标签朝向所属 segment 的边界到该 segment 的正交距离必须满足既有可读间距，并且不超过 `maxLabelPathDistance = max(12, 1.5 * labelLineHeight)`。分组之间的通道宽度必须满足 `gap >= max(24, maxLabelWidth + 2 * labelBoundaryClearance)`。
+- `edge.routing` 为可选对象 `{ scope, groupId?, crossGroupReason?, allowedBoundaries? }`。`scope` 限 `intra-group`、`cross-group`；`intra-group` 的 `groupId` 可省略，但仅当验证器能从边的两个端点唯一推导共同所属分组时才可省略，否则新建/调整图必须显式填写；同组连线未声明时按 `intra-group` 处理，路径不得离开所属边界。声明 `cross-group` 时必须填写非空 `crossGroupReason` 和包含实际穿越边界的分组 ID 数组 `allowedBoundaries`；未声明的跨组逃逸和未定义的 `scope` 值不得通过。无业务分组归属的边可以省略 `routing`，但仍须遵守障碍、折点、长度和间距优先级。
+- `edge.interaction` 仅用于请求/返回、查询/结果、创建/确认等成对业务关系，结构为 `{ role, actionId, responseTo?, receivedBy, triggers }`。`role` 限 `request`、`response`、`query`、`result`、`create`、`confirmation`；成对边必须使用相同 `actionId`，返回/结果/确认必须通过 `responseTo` 指向请求边；`receivedBy` 必须是实际接收节点 ID；`triggers` 必须是后续业务动作边 ID 数组，没有触发时显式使用 `[]`。`edge.to` 仍表达连线目标；若它与 `receivedBy` 不同，必须在 Design Notes 中说明转发关系。只要图存在 `edge.interaction`，就必须提供与 SVG 配对的 `.diagram.json` 语义清单；SVG-only 交付不能标记为语义 `PASS`。不得用 `label.text` 或视觉路径替代这些关联。
+- `designNotes.splitDecision.status` 为 `kept-single` 时，除既有 `readabilityEvidence.normal/fit/zoom` 外，必须提供 `readabilityConclusions: { mainFlow, exceptionReturn, labelAssociation }`，三项均为非空结论文本；任一阅读状态为 `UNVERIFIED` 时不能生成完整 `PASS`。
 
 ### 验收状态与 SVG 可见内容隔离
 
@@ -58,7 +70,7 @@ Provider 生成的静态 SVG、PNG 或 PDF 是目标交付物，路径由目标�
 - `designNotes.intent`：一句话单一理解目标；`semanticModes` 为一个或多个 `static-boundary`、`static-relation`、`process-flow`、`data-flow`、`dependency-flow`、`constraint`；`visualSemantics` 为视觉通道声明数组，每项使用 `{ channel, role, reason }`，`channel` 限定为 `edge-kind`、`node-shape`、`tone`、`group-role`、`icon`，`role` 为 `semantic` 或 `decorative`。凡源中出现两个以上取值的可复用通道，必须声明其角色；`decorative` 必须说明不承载业务语义。
 - `designNotes.layout`：共享 V1 布局语义，使用 `{ direction, mainAxis, levels?, branchRules?, contentOrder? }`。`direction` 限 `TD`、`LR`；TD 的层级坐标为节点中心 `y`，LR 的层级坐标为节点中心 `x`。`mainAxis` 使用 `{ coordinate, value, tolerance?, symmetricNodePairs? }`，其中 `symmetricNodePairs` 的每项为两个节点 ID，验证器检查两节点中心到主轴的距离。`levels` 使用 `{ id, coordinate, nodeIds }`；`branchRules` 使用 `{ decisionNodeId, edgeIds, targetNodeIds, levelId?, targetPort, exception? }`，用于记录分支同层、默认目标端口和允许的跨组/换行/障碍避让例外。`contentOrder` 如提供必须为 `['business', 'legend', 'annotations']`。这些字段是共享语义，不是 Provider 坐标私有字段。
 - `designNotes.legendDecision`：使用 `{ status, reason, noReusedSymbol?, inlineSemanticEvidence? }`。`status` 为 `required`、`exempt` 或 `not-needed`；出现语义化视觉差异时只能是 `required` 或符合设计规则的 `exempt`；豁免必须有逐对象 `inlineSemanticEvidence` 和 `noReusedSymbol: true`。
-- `designNotes.splitDecision`：使用 `{ status, reason, relatedDiagramIds?, singleGoal?, staticBoundary?, processFlowDistinction?, readabilityEvidence? }`。`status` 为 `not-needed`、`split` 或 `kept-single`；Architecture/Context 与 Flowchart/Pipeline/数据流/过程依赖混合时不得为 `not-needed`。`kept-single` 必须填静态边界、过程区分和 `normal`、`fit`、`zoom` 三项阅读证据，每项为 `{ status: PASS|FAIL|UNVERIFIED, evidence }`。
+- `designNotes.splitDecision`：使用 `{ status, reason, relatedDiagramIds?, singleGoal?, staticBoundary?, processFlowDistinction?, readabilityEvidence?, readabilityConclusions? }`。`status` 为 `not-needed`、`split` 或 `kept-single`；Architecture/Context 与 Flowchart/Pipeline/数据流/过程依赖混合时不得为 `not-needed`。`kept-single` 必须填静态边界、过程区分、`normal`、`fit`、`zoom` 三项阅读证据，每项为 `{ status: PASS|FAIL|UNVERIFIED, evidence }`，并提供非空的 `readabilityConclusions.mainFlow`、`readabilityConclusions.exceptionReturn`、`readabilityConclusions.labelAssociation`。
 - `designNotes.groupExplanations`：对 `cross-cutting` 或 `overlay` 分组提供 `{ groupId, meaning }`；也可以由图例项通过 `targets` 解释，但不能省略语义说明。
 - `designNotes.sharedConvergences`：可选的共享汇合声明数组，项为 `{ nodeId, port, direction, edgeIds }`；`direction` 限 `incoming`、`outgoing`，`edgeIds` 必须完整列出同一汇合端点的成员关系。没有该结构化证据时，同侧独立关系不得共享精确端点；它不能替代显式汇合/关联节点，也不是 Provider 私有总线字段。
 - `annotations[].id`：新建/调整图的稳定注释 ID；同一图内不得重复，也不得与节点、连线或分组 ID 冲突。旧资产缺少该字段时可以兼容渲染，但必须返回 `MIGRATION_REQUIRED`，不能作为新注释映射通过证据。
@@ -75,15 +87,18 @@ Provider 生成的静态 SVG、PNG 或 PDF 是目标交付物，路径由目标�
 | 语义对象 | SVG 追溯标识 | 约束 |
 |---|---|---|
 | 图例 | `data-legend-item`、`data-legend-sample` | 每个结构化图例项都必须在 SVG 中有稳定可追溯标识；图例不计入业务节点/连线数量 |
+| 边标签 | `data-edge-label`、`data-label-segment-index`、`data-label-anchor-direction`、`data-label-avoidance-direction`、`data-label-area-ref` | `data-edge-label` 的值为所属 `edge.id`；`data-label-area-ref` 引用标签区域 ID；标签区域、路径 segment、锚点方向和避让方向必须可由 SVG 反查；稳定标签身份仍为 `<edge.id>#label` |
+| 成对业务关系 | `data-edge-interaction`、`data-edge-action-id`、`data-edge-role`、`data-edge-response-to`、`data-edge-received-by`、`data-edge-triggers` | 这些属性必须逐边反映 `.diagram.json` 的 `edge.interaction`；存在该结构时 `.diagram.json` 不得省略，SVG 与清单的 edge/action/response/receiver/trigger 关系必须一致；缺少伴随清单或映射时不能标记语义 `PASS` |
+| 标签区域 | `data-label-area`、`data-label-area-kind`、`data-label-area-groups` | 标签区域及其分组/外侧范围必须可由 SVG 反查；每个边标签必须引用一个有效区域 |
 | 分组 | `group-<id>`、`data-group-role`、`data-group-members` | 分组 ID、语义类型和直接成员必须可由 SVG 反查；缺少新字段的旧资产只可标记迁移状态 |
-| 箭头尖端 | `data-edge-arrow`、`data-arrow-target`、`data-edge` | 每个箭头尖端必须能反查所属边和目标节点/端口；双向边的两个尖端分别记录各自目标 |
+| 箭头尖端 | `data-edge-arrow`、`data-arrow-target`、`data-edge` | `data-edge-arrow` 的值必须是稳定的 `<edge.id>#from-arrow` 或 `<edge.id>#to-arrow` 形式；每个箭头尖端必须能反查所属边和目标节点/端口；双向边的两个尖端分别记录各自目标 |
 | 生命线 | `data-lifeline-for`、生命线几何 `x` | `sequence` 图每个参与者生命线必须能反查参与者 ID；消息端点不得落在标题矩形，首末 `x` 必须与生命线一致 |
 | 注释 | `data-note="<annotation.id>"` | 每条结构化注释恰好对应一个 SVG 注释容器；JSON 与 SVG 的注释 ID 集合和数量必须一致，不得把多条注释合并后丢失 ID |
 | Design Notes | 结果记录或清单中的 `designNotes` | 源结构、布局方向/主轴/层级/分支规则、图例决定、分组关系、图型混合和拆图证据必须能定位到同一图表 ID |
 
 ### 结构化语义的最小验证
 
-静态验证至少执行以下规则：图例样本和目标引用存在且样式一致；语义通道的每个取值都有图例覆盖或有合规豁免；分组类型、直接成员和 `parent` 引用有效；嵌套无环且深度不超过两层；互斥分组不共享节点；允许的交叠仅限声明的嵌套、覆盖或贯穿关注点；图例布局不与业务节点/分组相交且全部在 `viewBox` 内；图型与 `semanticModes` 的混合情况有拆图决策。Provider/浏览器无法执行的检查必须标为 `UNVERIFIED`，不能由本地脚本的源检查代替。
+静态验证至少执行以下规则：图例样本和目标引用存在且样式一致；语义通道的每个取值都有图例覆盖或有合规豁免；分组类型、直接成员和 `parent` 引用有效；标签区域的 `kind`、分组引用和 `areaId` 有效；标签的 `segmentIndex`、锚点方向、避让方向和所属 edge 可由实际路径验证；`edge.routing` 的组范围/跨组声明和 `edge.interaction` 的成对请求—返回关联、接收节点、后续触发边有效；嵌套无环且深度不超过两层；互斥分组不共享节点；允许的交叠仅限声明的嵌套、覆盖或贯穿关注点；图例布局不与业务节点/分组相交且全部在 `viewBox` 内；图型与 `semanticModes` 的混合情况有拆图决策。Provider/浏览器无法执行的检查必须标为 `UNVERIFIED`，不能由本地脚本的源检查代替。
 
 ID 规则：
 
@@ -134,9 +149,9 @@ SVG 必须是静态、独立和安全的：
 
 ### 画布与渲染层次
 
-- 布局完成后，以节点、分组、文字、标签背景、路径点和箭头尖端的联合边界计算 `canvas`；画布不能预先固定后再把内容强行塞入；
+- 布局完成后，以节点、分组、连线、文字、标签背景、图例、注释、路径点和箭头尖端的联合边界计算 `canvas`；画布不能预先固定后再把内容强行塞入；
 - 所有可见元素必须落在 `viewBox` 内，并保留 `common-diagram-design-standards.md` 所定义的稳定内边距；
-- 分组背景先于连线主体；业务主体随后按连线主体 → 节点及节点文字 → 边标签 → 箭头尖端 overlay 绘制，再按 `business → legend → annotations` 绘制图例和注释。箭头尖端不得依赖一个位于节点下方的 `marker-end` 保证可见；图例必须位于全部业务分组、泳道和系统边界之外，并与最外边界保留稳定间距；注释默认位于图例下方；分组边界与标题只能使用预留留白，不能覆盖内部节点、文字、标签或箭头。
+- SVG 必须按以下七层绘制，并保持存在层的相对顺序：`groups` 分组背景 → `connectors` 连线主体 → `nodes` 节点和节点文字 → `edge-labels` 边标签背景与文字 → `arrows` 箭头尖端覆盖层 → `legend` 图例 → `annotations` 注释。边标签不得位于 `nodes` 之前；箭头尖端不得只依赖位于节点下方的 `marker-end`，每个尖端必须有独立稳定 ID 并追溯到 edge 和目标端口；图例必须位于全部业务分组、泳道和系统边界之外，并与最外边界保留稳定间距；存在图例时注释位于图例下方，不存在图例时注释位于业务主体下方；分组边界与标题只能使用预留留白，不能覆盖内部节点、文字、标签或箭头。
 - 图例和注释的画布范围由实际图例项、样本、文字、换行结果和注释边界共同计算；图例超出 `viewBox`、被裁切、压入业务主体或没有最外边界间距均为几何失败。必要时扩展画布高度并允许页面纵向滚动；不得用整体缩放、缩小字体或压扁业务层级取消滚动。
 - 连接器必须位于背景之上；标签背景与文字完整包围所属标签；节点和其文字必须保持可读，不得被分组或无关标签遮挡；
 - 不得用整体缩放、负坐标裁切或把元素移出 `viewBox` 修复空间不足。应重算布局、扩展对象或拆图。
@@ -146,7 +161,7 @@ SVG 必须是静态、独立和安全的：
 - 箭头尖端必须作为可独立追溯的 overlay 绘制，并通过 `data-edge-arrow`、`data-edge` 和 `data-arrow-target="<node.id>:<port>"` 反查所属连线及目标端口；双向关系必须为两个方向分别追溯。
 - 箭头尖端必须落在目标端口的可连接边界方向上，与目标端口和 `points` 末点一致；箭头不得悬空、深入节点内部或因路径缩短产生方向误读。
 - 箭头尖端不得被节点填充、节点边框、标签或分组背景覆盖；静态源检查应验证绘制层，Provider/浏览器检查应验证实际可见性。
-- 如果 Provider 不支持独立箭头 overlay，必须通过缩短主体路径、调整 marker 参数或其他已验证方式保证箭头完整可见，并重新执行端点和碰撞检查；marker 只是绘制机制，不能取代 `data-edge-arrow` 追溯。Provider 必须将 marker 所属的连接器包在等价的 `data-edge-arrow` 追溯结构中，或返回 `NEEDS_CAPABILITY`；不得通过改变颜色或增加图例掩盖箭头遮挡。
+- `marker-start`/`marker-end` 可以作为箭头绘制辅助，但不得作为唯一箭头表示；每个箭头尖端必须在 `arrows` 层中有独立 overlay、稳定 ID 以及 `data-edge-arrow`、`data-edge`、`data-arrow-target` 追溯信息。Provider 不能提供独立 overlay 或稳定追溯时必须返回 `NEEDS_CAPABILITY`，不得用改变颜色或增加图例掩盖箭头遮挡。
 
 ### 节点与决策文字
 
@@ -158,9 +173,12 @@ SVG 必须是静态、独立和安全的：
 ### 连线、端口与标签
 
 - `from`、`to` 节点必须存在，`fromPort`、`toPort` 必须是有效的 `top`、`right`、`bottom` 或 `left`；新建/调整图必须显式声明端口和完整 `points`，旧资产缺失时只能进入 `MIGRATION_REQUIRED`。
-- 生成器必须先检测应用端口偏移后的源边界点到目标边界点的直线路径。对非交付型图，直线不穿越实际节点形状、文字、标签、图例、无关分组或其他连线时必须使用直线；对 `delivery-business-flow`，只有同时满足水平/垂直正交约束的合法直连才使用直线，否则使用最少拐角的 Manhattan 路径。
-- Manhattan 路径以最少拐角为目标；不改变方向、不绕过障碍、不完成端口连接的共线中间点必须删除。静态验证发现直线本可合法直连却使用冗余折线，或发现共线冗余点，必须 `FAIL`。
+- 请求/返回、查询/结果、创建/确认等成对关系必须使用 `edge.interaction` 表达请求边、返回边、同一业务动作、实际接收节点和后续触发边；仅有 `from`、`to` 和标签文本时，语义关联不完整，不能标记为语义通过。
+- 生成器必须先检测应用端口偏移后的源边界点到目标边界点的直线路径。对非交付型图，直线不穿越实际节点形状、文字、标签、图例、无关分组或其他连线时必须使用直线；对 `delivery-business-flow`，只有同时满足水平/垂直正交约束的合法直连才使用直线，否则使用下述五级优先级选择 Manhattan 路径。
+- 正交路径必须按以下优先级选择：第一，不穿越节点、边标签、无关边界或其他障碍；第二，不离开声明的所属分组；第三，最少折点；第四，最短路径；第五，与其他连线保持稳定间距。只有在更高优先级相同的候选中才比较下一项；不得以更短路径牺牲避障或组内约束。
+- 路径选择完成后，必须删除所有不改变方向、不避让障碍、不完成端口连接的冗余路径点；直线已经合法时增加拐角即为几何失败。
 - `points` 首点必须落在 `from` 节点声明端口和偏移对应的实际可连接边界，末点必须落在 `to` 节点对应边界；对 `sequence` 图，`from`/`to` 的语义节点仍是参与者，但首末点必须落在其 `data-lifeline-for` 对应的生命线，不得落在参与者标题矩形。实际落边、端口侧和偏移声明必须一致，端点误差不得超过 `1` 个 SVG 坐标单位。
+- 新建/调整图的标签必须记录所属路径 `segmentIndex`、`anchorDirection`、`avoidanceDirection` 和 `areaId`；生成器必须依据实际测量的标签边界定位标签，不能只使用固定手工坐标。标签与所属路径的正交距离必须不超过 `max(12, 1.5 * labelLineHeight)`，并通过实际标签边界检查节点、标签、无关连线、分组边界、图例和注释避让。
 - 端点间距、边界合法性和碰撞检查必须使用实际节点形状；不得只用节点外接矩形替代圆角、椭圆、菱形、数据库或其他已声明形状的边界。无法执行可靠形状检查时，几何项只能为 `UNVERIFIED`。
 - 单条线可以连接节点某一侧的中点；同侧多条独立关系必须使用可区分的边界偏移位置，端点间距默认不小于 `max(24, 1.5 × 最小正文行高)` 个源坐标单位。相反方向的关系不得共享同一端口坐标；只有显式 `junction`、`bus` 或共享汇合语义可以共享端点，且必须有成员关系和分支方向证据。当前通用 V1 不接受 Provider 私有总线字段。
 - 不同业务关系的非端点路径段不得共享、重叠、交叉或共线混淆；共享汇合语义必须通过已有通用结构的显式汇合/关联节点、Design Notes 或拆图表达，不能用多条重叠路径伪造总线。
@@ -221,7 +239,7 @@ AIDLC 负责：
 外部 Provider 负责：
 
 - 消费 SVG 源和可选语义伴随清单；
-- 实际文字测量、最终布局、SVG 预览/渲染、PNG/PDF 导出；
+- 在目标环境按源布局执行实际文字测量、预览/渲染和 PNG/PDF 导出，并报告最终可见边界；只有明确授权的目标字体适配才可重算布局，且必须回写源或适配记录后重新验证，不能静默改变业务事实或 V1 契约；
 - 在目标浏览器、编辑器或交付容器中执行视觉检查并返回证据。
 
 只有实际执行成功且范围明确的 Provider 才能被标为“已验证”。本仓可选回归脚本的通过结果不能代替 Kiro Preview、Claude Code、OpenCode、draw.io、浏览器或其他目标环境的验证。Provider 不可用时：若用户只要求源或设计，交付源并将目标几何/视觉状态标记为 `UNVERIFIED`；若用户明确要求目标渲染、预览或导出，返回 `NEEDS_CAPABILITY`，并保留已生成的源和检查结果；不得静默安装工具或回退为 Mermaid/ASCII 图。
@@ -230,7 +248,7 @@ Kiro Power 无内置 SVG Provider 时，只能引用安装包中已有的静态 
 
 ## 验收顺序与证据
 
-本文件定义源格式和 SVG 语义/结构证据；Semantic QA、Geometry QA、Render QA、Risk Assessment、Browser Routing 及状态汇总按 `common-diagram-validation-standards.md` 执行。这里保留源—SVG 契约和目标环境证据边界，不重复定义验证算法或风险分值。
+本文件定义源格式和 SVG 语义/结构证据；Semantic QA、Geometry QA、Render QA、Browser QA 及状态汇总按 `common-diagram-validation-standards.md` 执行，Risk Assessment 和 Browser Routing 只提供辅助路由元数据。这里保留源—SVG 契约和目标环境证据边界，不重复定义验证算法或风险分值。
 
 验收对象分为两种：
 
