@@ -1,7 +1,7 @@
 ---
 name: "loeyae-aidlc"
 displayName: "Loeyae AI-DLC"
-version: "1.37.3"
+version: "1.37.4"
 description: "基于 AI-DLC 方法论的完整开发流程闭环。当用户消息中出现 AI-DLC 或 aidlc 时必须激活。覆盖 Inception 规划、Construction 实现与验证，以及按条件执行的 Operations 部署准备；不覆盖部署后的生产运维。"
 keywords: ["aidlc", "AI-DLC", "继续上次的工作", "认领单元", "团队协作模式", "loeyae", "功能设计", "用户故事", "架构设计", "单元生成", "代码审查", "逆向工程", "根因分析", "修改功能", "变更需求", "调整功能", "改动需求", "需求变更", "diagram", "图表设计", "架构图", "流程图", "时序图", "svg"]
 author: "Loeyae Team"
@@ -29,11 +29,11 @@ Power 安装产物只包含 `POWER.md`、`mcp.json` 和 `steering/`，不包含 
 
 - **工作流加载**：首先加载 `steering/core-workflow.md`，随后按其中路由按需读取规则，禁止预加载全部 steering。
 - **会话延续**：工作流状态记录在业务项目的 `docs/aidlc/state.md`。
-- **图表设计**：正式图表按 `steering/common-diagram-design-standards.md` 的 Blueprinter SVG 设计规则生成可审阅的 SVG 源，可选生成 `common-svg-diagram-standards.md` 定义的 `.diagram.json` 语义伴随清单和 Provider Request；Power 不负责 SVG 生成、重排或通用导出。预置的 `chrome-devtools` MCP 仅作为浏览器验收 Provider，负责加载已生成的独立 SVG 或目标预览 URL，采集 DOM/属性、几何、viewport 截图和控制台等浏览器证据；它不生成 SVG 或 `.diagram.json`，也不替代源静态检查。独立 SVG 可直接尝试使用 `file://` URL，不要求业务项目先提供预览服务；本地文件访问失败时必须记录为 `NEEDS_CAPABILITY`。Power 可以引用安装包中已有的静态 SVG，但引用不等于目标环境渲染已验证。
+- **图表设计**：正式图表按 `steering/common-diagram-design-standards.md` 的 Blueprinter SVG 设计规则生成可审阅的 SVG 源，可选生成 `common-svg-diagram-standards.md` 定义的 `.diagram.json` 结构化清单和 Provider Request；分层验证、风险路由和证据状态按 `steering/common-diagram-validation-standards.md` 记录。Power 不负责 SVG 生成、重排或通用导出。预置的 `chrome-devtools` MCP 仅作为浏览器验收 Provider，负责加载已生成的独立 SVG 或目标预览 URL，采集 DOM/属性、几何、viewport 截图和控制台等浏览器证据；它不生成 SVG 或 `.diagram.json`，也不替代源静态检查。独立 SVG 可直接尝试使用 `file://` URL，不要求业务项目先提供预览服务；本地文件访问失败时必须记录为 `NEEDS_CAPABILITY`。Power 可以引用安装包中已有的静态 SVG，但引用不等于目标环境渲染已验证。
 - **子 Agent**：读取 `agents/` 中的平台无关指令，通过 Kiro `invoke_sub_agent` 能力执行；不可用时按共享规则降级。
 - **MCP**：`mcp.json` 声明 `loeyae-skills`、`awesome-design`、`figma`、`ssot` 和 `chrome-devtools` 服务。声明仅代表已配置；运行时可用性必须通过实际工具结果验证。Figma 是否已认证、可读取、可写入必须分别通过 `whoami`、`get_metadata`、`create_new_file` + `use_figma` 运行时验证。
 
-Power 安装产物不含 `scripts/`；`mcp.json` 声明的 `chrome-devtools` 是浏览器验收 Provider，不是 SVG 生成、布局或通用导出 Provider。因此，安装后可直接尝试加载独立 SVG 进行浏览器验收，但仍需运行时验证 MCP 服务、Chrome、目标文件和工具结果，不能据此宣称目标环境预览、渲染或导出已通过。需要目标 `preview` 或浏览器侧 `render` 验收时，优先调用 `chrome-devtools`；`export` 或 Provider 生成静态 SVG 仍必须使用具备对应能力的 Provider。源码仓可选回归命令只能检查源结构/语义，不能替代浏览器 Provider，也不能据此避免 `NEEDS_CAPABILITY`。无可用 Provider 时仍可交付 SVG 源和语义检查，并将目标几何/视觉标为 `UNVERIFIED`；只有用户明确要求目标操作而能力不可验证时才返回 `NEEDS_CAPABILITY`，或经用户同意降级为文字/表格。`.drawio → SVG` 和 Kiro Markdown SVG Preview 均未验证。
+Power 安装产物不含 `scripts/`；`mcp.json` 声明的 `chrome-devtools` 是浏览器验收 Provider，不是 SVG 生成、布局或通用导出 Provider。因此，安装后可直接尝试加载独立 SVG 进行浏览器验收，但仍需运行时验证 MCP 服务、Chrome、目标文件和工具结果，不能据此宣称目标环境预览、渲染或导出已通过。需要目标 `preview` 或浏览器侧 `render` 验收时，优先调用 `chrome-devtools`；`export` 或 Provider 生成静态 SVG 仍必须使用具备对应能力的 Provider。源码仓可选回归命令可以执行源级 Semantic/Geometry 检查并计算风险，但不能替代浏览器 Provider，也不能据此避免 `NEEDS_CAPABILITY`。无可用 Provider 时仍可交付 SVG 源和语义检查，并将目标几何/视觉标为 `UNVERIFIED`；只有用户明确要求目标操作而能力不可验证时才返回 `NEEDS_CAPABILITY`，或经用户同意降级为文字/表格。`.drawio → SVG` 和 Kiro Markdown SVG Preview 均未验证。
 
 ## MCP 使用边界
 

@@ -1,6 +1,6 @@
 {
   "name": "loeyae-aidlc",
-  "version": "1.37.3",
+  "version": "1.37.4",
   "description": "Loeyae AI-DLC 完整开发流程闭环：Inception 规划、Construction 实现与验证、Operations 部署准备；统一支持 Kiro、Claude Code 和 OpenCode，不覆盖部署后的生产运维。",
   "type": "module",
   "main": ".opencode/plugins/loeyae-aidlc.js",
@@ -19,6 +19,7 @@
     "setup": "node scripts/setup.mjs",
     "render:svg-diagrams": "node scripts/render-all-svg-diagrams.mjs",
     "validate:svg-diagrams": "node scripts/validate-svg-diagrams.mjs",
+    "test:diagrams": "node --test scripts/diagram-validation.test.mjs",
     "render:delivery-business-flow-svg": "node scripts/render-delivery-business-flow-svg.mjs docs/assets/delivery-business-flow-test-10-nodes-3-branches.diagram.json docs/assets/delivery-business-flow-test-10-nodes-3-branches.svg"
   },
   "keywords": [

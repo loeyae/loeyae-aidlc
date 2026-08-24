@@ -12,7 +12,7 @@
 6. state.md 保存结论和证据索引，详细结果留在阶段报告或外部平台。
 7. Hook 只可作为可选提醒，不能证明语义一致性、替代本文件检查或作为任何门禁通过证据；未安装或未触发不得降低门禁要求。
 8. 上游产品语义变化后，依赖旧语义的审查、设计、测试用例、代码和验证证据立即失效；完成受影响重审前不得继续使用旧通过结论。
-9. 生成或调整 SVG 源时，必须记录 `common-svg-diagram-standards.md` 要求的源结构、事实映射、语义契约和适用几何检查；若目标明确要求 Provider 生成静态 SVG、预览或导出，还必须逐项记录 Provider 目标产物的结构、几何、语义和视觉验收。没有 SVG Provider、目标操作未要求或图表不适用时，记录对应依据，不把目标环境 `UNVERIFIED` 误写为源设计通过，也不把 SVG 门禁强加给未要求的目标产物。
+9. 生成或调整 SVG 源时，必须记录 `common-svg-diagram-standards.md` 要求的源结构、事实映射和语义契约，并按 `common-diagram-validation-standards.md` 记录适用的 Semantic、Geometry、Render、Risk 和 Browser 状态。若目标明确要求 Provider 生成静态 SVG、预览或导出，还必须逐项记录 Provider 目标产物的结构、几何、语义和视觉验收。没有 SVG/Browser Provider、目标操作未要求或图表不适用时，记录对应依据，不把目标环境 `UNVERIFIED` 误写为源设计通过，也不把 SVG 门禁强加给未要求的目标产物。
 
 ## Inception 门禁
 
@@ -41,8 +41,8 @@
 | 门禁 | 触发时机 | 阻断条件 |
 |------|----------|----------|
 | 业务流程图完整性 | I5 完成 | `business-flows.md` 缺失，或 FR 未映射到流程节点、分支或经批准的文字/表格步骤；图表适用且已生成 SVG 源时，若源语义检查、事实映射、单一入口/出口、连通性或必要的泳道/拆分决策缺失则阻断；若目标明确要求 Provider 目标产物而缺少对应请求或验收记录也阻断 |
-| SVG 源设计契约 | 生成或调整 SVG 源 | 缺少 Blueprinter 设计约束、源结构、稳定 ID/端口、方向/连通性检查、图例/分组/图型决策或 Provider Request；仅有源时不因目标环境视觉 `UNVERIFIED` 单独阻断 |
-| Provider SVG 验收 | 目标明确要求 Provider 静态 SVG、预览或导出 | 缺少源—目标产物可追溯关系、Provider 能力证据或 `common-svg-diagram-standards.md` 要求的适用验收记录；常规查看、适合窗口查看或放大查看任一被要求的视觉状态未通过/未验证 |
+| SVG 源设计契约 | 生成或调整 SVG 源 | 缺少 Blueprinter 设计约束、源结构、稳定 ID/端口、方向/连通性检查、图例/分组/图型决策或 Provider Request；适用的 Semantic/Geometry 结果缺失或为 `FAIL`；仅有源时不因目标环境视觉 `UNVERIFIED` 单独阻断 |
+| Provider SVG 验收 | 目标明确要求 Provider 静态 SVG、预览或导出 | 缺少源—目标产物可追溯关系、Provider 能力证据或 `common-diagram-validation-standards.md` 要求的适用 Render/Browser 验收记录；常规查看、适合窗口查看或放大查看任一被要求的视觉状态未通过/未验证 |
 | 状态流转判定 | I5 完成 | 命中触发信号但无状态图，或无显式判定记录 |
 | 角色权限矩阵完整性 | I7 完成 | 矩阵缺失，或 `无权表现` 列存在空值，或角色无矩阵条目，或权限不适用 FR 缺少确认记录 |
 | PRD 自审清单 | I15 完成 | `product-prd-generation.md` 自审清单 6 项任一未通过 |

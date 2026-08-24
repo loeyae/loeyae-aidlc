@@ -2,7 +2,7 @@
 
 ## 目的与适用范围
 
-SVG 是本仓图表的目标源格式，但本标准不规定 AIDLC 必须生成静态交付物。AIDLC 负责按 Blueprinter 设计规则生成可审阅的 SVG 源，并可生成可选的 `.diagram.json` 语义伴随清单和 Provider Request；外部 Provider 负责实际预览、渲染、导出及目标环境视觉检查。业务语义、是否需要图以及粒度选择仍由 `common-diagram-design-standards.md` 决定。
+SVG 是本仓图表的目标源格式，但本标准不规定 AIDLC 必须生成静态交付物。AIDLC 负责按 Blueprinter 设计规则生成可审阅的 SVG 源，并可生成可选的 `.diagram.json` 结构化清单和 Provider Request；外部 Provider 负责实际预览、渲染、导出及目标环境视觉检查。业务语义、是否需要图以及粒度选择仍由 `common-diagram-design-standards.md` 决定，分层验证、风险路由和浏览器证据见 `common-diagram-validation-standards.md`。
 
 本标准不绑定 draw.io、MCP 或任一第三方 Provider，也不把本仓脚本设为默认运行路径；外部工具只是可能的 SVG Provider，不改变本仓的事实、几何和验收规则。
 
@@ -31,8 +31,8 @@ Provider 生成的静态 SVG、PNG 或 PDF 是目标交付物，路径由目标�
 | 连线标签 | `label.text`、`label.x`、`label.y` | 标签属于其 `edge.id`，其稳定身份为 `<edge.id>#label`；`text` 为字符串或非空字符串数组，坐标是标签中心 |
 | 分组 | `groups[].id`、`groups[].label`、`x`、`y`、`width`、`height` | 表达系统、泳道、角色或信任边界；可选 `tone`；新建/调整图必须增加 `semanticType`、`members`，`nested` 分组还必须有 `parent`；范围必须包围其声明的内容与标题内边距 |
 | 图例 | `legend.items[]` | 可选；存在两种或以上语义化视觉编码时必填。每项必须有 `id`、`label`、`meaning`、`sample` 和 `targets`；`sample` 只引用实际节点、连线或分组，不接受 Provider 私有颜色/坐标字段 |
-| 图型与设计记录 | `diagramType`、`designNotes` | 新建/调整图必填；记录单一意图、语义模式、视觉语义角色、图例决定、分组解释和拆图决定；详细字段见下文 |
-| 注释 | `annotations[].text`、`x`、`y` | 只承载辅助说明；可选 `fontSize`、`lineHeight`、`anchor`、`weight`、`tone`；独立业务事实应建模为节点、连线或分组，而不是无 ID 注释 |
+| 图型与设计记录 | `diagramType`、`designNotes` | 新建/调整图必填；记录单一意图、语义模式、视觉语义角色、图例决定、分组解释、拆图决定和 `layout`；详细字段见下文 |
+| 注释 | `annotations[].id`、`text`、`x`、`y` | 新建/调整图每条注释必须有唯一稳定 ID；可选 `fontSize`、`lineHeight`、`anchor`、`weight`、`tone`；独立业务事实应建模为节点、连线或分组，而不是无 ID 注释 |
 
 ### 验收状态与 SVG 可见内容隔离
 
@@ -56,10 +56,14 @@ Provider 生成的静态 SVG、PNG 或 PDF 是目标交付物，路径由目标�
 
 - `diagramType`：单个小写枚举值：`architecture`、`context`、`container`、`flowchart`、`pipeline`、`sequence`、`state`、`er`、`deployment`、`class`、`component`、`infrastructure`。它表达图型，不是节点 `shape`。
 - `designNotes.intent`：一句话单一理解目标；`semanticModes` 为一个或多个 `static-boundary`、`static-relation`、`process-flow`、`data-flow`、`dependency-flow`、`constraint`；`visualSemantics` 为视觉通道声明数组，每项使用 `{ channel, role, reason }`，`channel` 限定为 `edge-kind`、`node-shape`、`tone`、`group-role`、`icon`，`role` 为 `semantic` 或 `decorative`。凡源中出现两个以上取值的可复用通道，必须声明其角色；`decorative` 必须说明不承载业务语义。
+- `designNotes.layout`：共享 V1 布局语义，使用 `{ direction, mainAxis, levels?, branchRules?, contentOrder? }`。`direction` 限 `TD`、`LR`；TD 的层级坐标为节点中心 `y`，LR 的层级坐标为节点中心 `x`。`mainAxis` 使用 `{ coordinate, value, tolerance?, symmetricNodePairs? }`，其中 `symmetricNodePairs` 的每项为两个节点 ID，验证器检查两节点中心到主轴的距离。`levels` 使用 `{ id, coordinate, nodeIds }`；`branchRules` 使用 `{ decisionNodeId, edgeIds, targetNodeIds, levelId?, targetPort, exception? }`，用于记录分支同层、默认目标端口和允许的跨组/换行/障碍避让例外。`contentOrder` 如提供必须为 `['business', 'legend', 'annotations']`。这些字段是共享语义，不是 Provider 坐标私有字段。
 - `designNotes.legendDecision`：使用 `{ status, reason, noReusedSymbol?, inlineSemanticEvidence? }`。`status` 为 `required`、`exempt` 或 `not-needed`；出现语义化视觉差异时只能是 `required` 或符合设计规则的 `exempt`；豁免必须有逐对象 `inlineSemanticEvidence` 和 `noReusedSymbol: true`。
 - `designNotes.splitDecision`：使用 `{ status, reason, relatedDiagramIds?, singleGoal?, staticBoundary?, processFlowDistinction?, readabilityEvidence? }`。`status` 为 `not-needed`、`split` 或 `kept-single`；Architecture/Context 与 Flowchart/Pipeline/数据流/过程依赖混合时不得为 `not-needed`。`kept-single` 必须填静态边界、过程区分和 `normal`、`fit`、`zoom` 三项阅读证据，每项为 `{ status: PASS|FAIL|UNVERIFIED, evidence }`。
 - `designNotes.groupExplanations`：对 `cross-cutting` 或 `overlay` 分组提供 `{ groupId, meaning }`；也可以由图例项通过 `targets` 解释，但不能省略语义说明。
+- `designNotes.sharedConvergences`：可选的共享汇合声明数组，项为 `{ nodeId, port, direction, edgeIds }`；`direction` 限 `incoming`、`outgoing`，`edgeIds` 必须完整列出同一汇合端点的成员关系。没有该结构化证据时，同侧独立关系不得共享精确端点；它不能替代显式汇合/关联节点，也不是 Provider 私有总线字段。
+- `annotations[].id`：新建/调整图的稳定注释 ID；同一图内不得重复，也不得与节点、连线或分组 ID 冲突。旧资产缺少该字段时可以兼容渲染，但必须返回 `MIGRATION_REQUIRED`，不能作为新注释映射通过证据。
 - `groups[].semanticType`：限 `exclusive`、`nested`、`cross-cutting`、`overlay`；`members` 是直接节点 ID 数组，不得把坐标包围当作成员声明；`nested` 必须有 `parent`，且嵌套深度不超过两层；`cross-cutting` 与 `overlay` 的 `members` 必须为空。
+- `lifelines`：仅用于 `sequence` 图，数组项为 `{ participant, x }`；每个参与者节点必须恰好有一条生命线，`x` 是消息端点使用的源坐标。它是 V1 的共享语义扩展，不是 Provider 私有字段。
 - `legend`：使用 `{ placement, title?, items }`，通用 V1 的 `placement` 仅为 `bottom`；`items` 每项为 `{ id, label, meaning, sample: { kind, ref }, targets: [{ kind, ref }] }`，`kind` 限 `node`、`edge`、`group`。`sample` 必须是 `targets` 中的对象，所有目标的可见样式必须与样本一致；目标必须能追溯到源对象。图例布局坐标由渲染器/Provider 根据实际内容计算，不在契约中添加私有坐标字段。
 
 这些字段属于 AI-DLC 的共享语义契约，不是某个 Provider 的私有渲染字段。Provider 必须消费图例和分组语义，或明确返回 `NEEDS_CAPABILITY`；不得静默忽略字段后声称语义/视觉通过。未来若把可选字段改为所有历史资产的必填字段、改变既有字段含义或需要破坏旧消费者，必须定义 `version: 2` 并提供迁移，不得无版本化修改 V1。
@@ -74,7 +78,8 @@ Provider 生成的静态 SVG、PNG 或 PDF 是目标交付物，路径由目标�
 | 分组 | `group-<id>`、`data-group-role`、`data-group-members` | 分组 ID、语义类型和直接成员必须可由 SVG 反查；缺少新字段的旧资产只可标记迁移状态 |
 | 箭头尖端 | `data-edge-arrow`、`data-arrow-target`、`data-edge` | 每个箭头尖端必须能反查所属边和目标节点/端口；双向边的两个尖端分别记录各自目标 |
 | 生命线 | `data-lifeline-for`、生命线几何 `x` | `sequence` 图每个参与者生命线必须能反查参与者 ID；消息端点不得落在标题矩形，首末 `x` 必须与生命线一致 |
-| Design Notes | 结果记录或清单中的 `designNotes` | 源结构、图例决定、分组关系、图型混合和拆图证据必须能定位到同一图表 ID |
+| 注释 | `data-note="<annotation.id>"` | 每条结构化注释恰好对应一个 SVG 注释容器；JSON 与 SVG 的注释 ID 集合和数量必须一致，不得把多条注释合并后丢失 ID |
+| Design Notes | 结果记录或清单中的 `designNotes` | 源结构、布局方向/主轴/层级/分支规则、图例决定、分组关系、图型混合和拆图证据必须能定位到同一图表 ID |
 
 ### 结构化语义的最小验证
 
@@ -131,8 +136,8 @@ SVG 必须是静态、独立和安全的：
 
 - 布局完成后，以节点、分组、文字、标签背景、路径点和箭头尖端的联合边界计算 `canvas`；画布不能预先固定后再把内容强行塞入；
 - 所有可见元素必须落在 `viewBox` 内，并保留 `common-diagram-design-standards.md` 所定义的稳定内边距；
-- 分组背景先于连线主体；随后严格按连线主体 → 节点及节点文字 → 边标签 → 箭头尖端 overlay → 图例绘制。箭头尖端不得依赖一个位于节点下方的 `marker-end` 保证可见；图例必须位于全部业务分组、泳道和系统边界之外，并与最外边界保留稳定间距；分组边界与标题只能使用预留留白，不能覆盖内部节点、文字、标签或箭头；
-- 图例的画布范围由实际图例项、样本、文字和换行结果计算；图例超出 `viewBox`、被裁切、压入业务主体或没有最外边界间距均为几何失败；
+- 分组背景先于连线主体；业务主体随后按连线主体 → 节点及节点文字 → 边标签 → 箭头尖端 overlay 绘制，再按 `business → legend → annotations` 绘制图例和注释。箭头尖端不得依赖一个位于节点下方的 `marker-end` 保证可见；图例必须位于全部业务分组、泳道和系统边界之外，并与最外边界保留稳定间距；注释默认位于图例下方；分组边界与标题只能使用预留留白，不能覆盖内部节点、文字、标签或箭头。
+- 图例和注释的画布范围由实际图例项、样本、文字、换行结果和注释边界共同计算；图例超出 `viewBox`、被裁切、压入业务主体或没有最外边界间距均为几何失败。必要时扩展画布高度并允许页面纵向滚动；不得用整体缩放、缩小字体或压扁业务层级取消滚动。
 - 连接器必须位于背景之上；标签背景与文字完整包围所属标签；节点和其文字必须保持可读，不得被分组或无关标签遮挡；
 - 不得用整体缩放、负坐标裁切或把元素移出 `viewBox` 修复空间不足。应重算布局、扩展对象或拆图。
 
@@ -224,6 +229,8 @@ AIDLC 负责：
 Kiro Power 无内置 SVG Provider 时，只能引用安装包中已有的静态 SVG；需要新图或重渲染时必须由已验证 Provider、源码仓可选命令或用户提供的工具完成。相关状态必须如实记录为“UNVERIFIED”。
 
 ## 验收顺序与证据
+
+本文件定义源格式和 SVG 语义/结构证据；Semantic QA、Geometry QA、Render QA、Risk Assessment、Browser Routing 及状态汇总按 `common-diagram-validation-standards.md` 执行。这里保留源—SVG 契约和目标环境证据边界，不重复定义验证算法或风险分值。
 
 验收对象分为两种：
 

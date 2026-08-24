@@ -19,7 +19,7 @@ Claude Code 通过 `.claude-plugin/plugin.json` 和 `.claude-plugin/marketplace.
 - **Skills**：`skills/` 仅作为平台无关薄入口，负责加载与路由，不复制共享流程规则。它是可选加速路径；未被装载时按 `steering/core-workflow.md` 的降级规则直接加载对应 steering，能力边界与质量门禁不变。
 - **子 Agent**：共享指令位于 `agents/`；Construction 分段执行可由 `.claude/workflows/aidlc-construction-batch.js` 适配 Claude Code。
 - **会话延续**：工作流状态记录在业务项目的 `docs/aidlc/state.md`。
-- **图表设计**：正式图表按 `steering/common-diagram-design-standards.md` 的 Blueprinter SVG 设计规则生成可审阅的 SVG 源，可选生成 `.diagram.json` 语义伴随清单和 Provider Request；外部 Provider 负责目标预览、渲染、导出和目标环境视觉检查。插件清单未声明已验证的 SVG Provider，因此不能把现有配置当作运行时生成、渲染、`.drawio → SVG` 导出或 Preview 成功的证据；无 Provider 时可交付源并将目标几何/视觉标为 `UNVERIFIED`，只有用户明确要求目标操作但无可验证 Provider 时才返回 `NEEDS_CAPABILITY`，或经用户同意降级为文字/表格。Claude Code 运行时 SVG 生成仍为未验证状态。
+- **图表设计**：正式图表按 `steering/common-diagram-design-standards.md` 的 Blueprinter SVG 设计规则生成可审阅的 SVG 源，可选生成 `.diagram.json` 结构化清单和 Provider Request；Semantic/Geometry/Risk/Browser 状态按 `steering/common-diagram-validation-standards.md` 记录。外部 Provider 负责目标预览、渲染、导出和目标环境视觉检查。插件清单未声明已验证的 SVG Provider，因此不能把现有配置当作运行时生成、渲染、`.drawio → SVG` 导出或 Preview 成功的证据；无 Provider 时可交付源并将目标几何/视觉标为 `UNVERIFIED`，只有用户明确要求目标操作但无可验证 Provider 时才返回 `NEEDS_CAPABILITY`，或经用户同意降级为文字/表格。Claude Code 运行时 SVG 生成仍为未验证状态。
 
 ## MCP 集成
 

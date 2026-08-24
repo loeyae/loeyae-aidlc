@@ -41,7 +41,7 @@
 | 多模块项目执行审计、自检、交叉验证或批量修复 | `common-module-scope-guard.md` |
 | TDD、构建测试 | `common-test-execution-strategy.md` |
 | 存量分布式系统 | 按需加载 `common-runtime-dependency-analysis.md`、`common-contract-governance.md`、`common-configuration-governance.md`、`common-distributed-consistency.md` |
-| 需要图表设计时 | `common-diagram-design-standards.md` |
+| 需要图表设计时 | `common-diagram-design-standards.md` + `common-svg-diagram-standards.md` + `common-diagram-validation-standards.md` |
 | 检测到技术栈证据 | 按 state.md 加载对应的 `common-tech-*` 条件适配 |
 
 禁止启动时预加载全部规则。目录、审计、协作、提问和交接分别按 `common-directory-structure.md`、`common-audit-logging.md`、`common-team-collaboration.md`、`common-question-format-guide.md`、`common-session-handoff.md` 按需加载。
@@ -63,8 +63,8 @@ Phase 产物需要图表时，按以下协议调用 `aidlc-diagram-design`（独
    - `target_operations`（可选）：`source-only`、`preview`、`render`、`export` 中用户或目标产物实际要求的操作；
    - `target_reading_environment`（可选）：目标浏览器、编辑器、容器尺寸或交付环境；未提供时不得假设目标 Preview 可用；
    - `constraints`（可选）：当前阶段特殊约束。
-3. 调用 `aidlc-diagram-design`，传入上述 Request；能力按 Blueprinter 设计规则生成 SVG 源，可选生成语义伴随清单，并生成 Provider Request，不调用或默认绑定本地渲染器。
-4. 接收 Diagram Result：SVG 源路径、可选 `.diagram.json` 路径、Provider Request、Design Notes、源/语义 Validation、目标 Provider Validation（如有）和 Delivery Status。
+3. 调用 `aidlc-diagram-design`，传入上述 Request；能力按 Blueprinter 设计规则生成 SVG 源，可选生成结构化清单和 Provider Request，并按 `common-diagram-validation-standards.md` 执行分层源验证、风险评估和浏览器路由决策；不调用或默认绑定本地渲染器。
+4. 接收 Diagram Result：SVG 源路径、可选 `.diagram.json` 路径、Provider Request、Design Notes，以及 `semantic`、`geometry`、`render`、`risk`、`browser` 和 `delivery` 结果；路由决定不等于 Provider 执行证据。
 5. Phase 仅在目标产物需要时引用 SVG 源；只有外部 Provider 实际返回静态 SVG/预览/导出物并有对应证据时，才能引用或声明该目标交付物已完成。没有 Provider 时保留源检查结果，将目标几何/视觉标为 `UNVERIFIED`；用户明确要求目标操作而无可验证 Provider 时返回 `NEEDS_CAPABILITY`，它不表示源不存在。
 
 每张具有不同语义目的的图应单独调用，不要在一次调用中合并多个独立语义视角。不需要图表时（简单字段列表、两实体简单关系、纯线性步骤、事实不足）正常使用文字或表格，不强制调用。

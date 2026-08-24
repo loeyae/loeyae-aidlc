@@ -5,14 +5,25 @@ import { relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { renderDeliveryBusinessFlowSvg } from "./render-delivery-business-flow-svg.mjs"
 import { getDiagramMigrationWarnings, renderDiagram } from "./render-svg-diagrams.mjs"
+import { hasMigrationRequired, VALIDATION_STATUS, validateDiagramPipeline } from "./diagram-validation.mjs"
 import { GENERIC_SVG_MANIFESTS, STRICT_SVG_DIAGRAMS } from "./svg-diagram-catalog.mjs"
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)))
 const UNSAFE_SVG = /<\s*(?:script|foreignObject|image|style)\b|<[^>]*\b(?:href|on[a-zA-Z]+|style)\s*=|<[^>]*url\s*\(\s*(?!#)[^)]*\)/i
 const MERMAID_FENCE = /^(?: {0,3})(?:`{3,}|~{3,})[ \t]*mermaid\b/im
+const JSON_OUTPUT = process.argv.includes("--json")
 
 function assert(condition, message) {
   if (!condition) throw new Error(message)
+}
+
+const STATUS_PRIORITY = [VALIDATION_STATUS.PASS, VALIDATION_STATUS.SOURCE_READY, VALIDATION_STATUS.UNVERIFIED, VALIDATION_STATUS.NEEDS_CAPABILITY, VALIDATION_STATUS.MIGRATION_REQUIRED, VALIDATION_STATUS.FAIL]
+
+function summarizeDeliveryStatus(results) {
+  return results.reduce((current, result) => {
+    const candidate = result.validation?.delivery?.status ?? VALIDATION_STATUS.FAIL
+    return STATUS_PRIORITY.indexOf(candidate) > STATUS_PRIORITY.indexOf(current) ? candidate : current
+  }, VALIDATION_STATUS.PASS)
 }
 
 function readJson(path) {
@@ -81,6 +92,7 @@ function walkMarkdown(directory, results = []) {
 try {
   let diagramCount = 0
   const migrationWarnings = []
+  const validationResults = []
   for (const entry of GENERIC_SVG_MANIFESTS) {
     const manifestPath = resolve(root, entry.input)
     assert(existsSync(manifestPath), `缺少结构化图表源：${entry.input}`)
@@ -91,6 +103,12 @@ try {
       assert(!outputs.has(diagram.output), `${entry.input} 存在重复输出：${diagram.output}`)
       outputs.add(diagram.output)
       const expectedSvg = renderDiagram(diagram)
+      const validation = validateDiagramPipeline(diagram, { targetOperations: ["source-only"], svg: expectedSvg })
+      validationResults.push({ source: entry.input, diagramId: diagram.id, validation })
+      assert(validation.semantic.status !== "FAIL", `图 ${diagram.id} 语义验证失败：${validation.semantic.issues.map(issue => `[${issue.code}] ${issue.message}`).join("；")}`)
+      assert(validation.geometry.status !== "FAIL", `图 ${diagram.id} 几何验证失败：${validation.geometry.issues.map(issue => `[${issue.code}] ${issue.message}`).join("；")}`)
+      assert(validation.render.status !== "FAIL", `图 ${diagram.id} Render QA 验证失败：${validation.render.issues.map(issue => `[${issue.code}] ${issue.message}`).join("；")}`)
+      assert(validation.svg.status !== "FAIL", `图 ${diagram.id} SVG 追溯验证失败：${validation.svg.issues.map(issue => `[${issue.code}] ${issue.message}`).join("；")}`)
       validateSvg(resolve(root, entry.outputDirectory, diagram.output), diagram.nodes.length, (diagram.edges ?? []).length, expectedSvg, diagram.legend?.items?.length ?? 0)
       migrationWarnings.push(...getDiagramMigrationWarnings(diagram).map(warning => `${entry.input}: ${warning}`))
       diagramCount += 1
@@ -102,19 +120,52 @@ try {
     const inputPath = resolve(root, entry.input)
     assert(existsSync(inputPath), `缺少严格端点结构化源：${entry.input}`)
     const diagram = readJson(inputPath)
-    validateSvg(resolve(root, entry.output), diagram.nodes.length, diagram.edges.length, renderDeliveryBusinessFlowSvg(diagram), 0)
+    const strictSvg = renderDeliveryBusinessFlowSvg(diagram)
+    validateSvg(resolve(root, entry.output), diagram.nodes.length, diagram.edges.length, strictSvg, 0)
+    validationResults.push({
+      source: entry.input,
+      diagramId: diagram.id,
+      profile: "delivery-business-flow-strict",
+      validation: {
+        semantic: { status: "PASS", stage: "semantic", issues: [] },
+        geometry: { status: "PASS", stage: "geometry", issues: [], provider: "scripts/render-delivery-business-flow-svg.mjs" },
+        render: { status: VALIDATION_STATUS.UNVERIFIED, stage: "render", issues: [{ code: "RENDER_NOT_EXECUTED", severity: "info" }] },
+        svg: { status: VALIDATION_STATUS.PASS, stage: "svg", issues: [], provider: "scripts/render-delivery-business-flow-svg.mjs" },
+        risk: null,
+        browser: { status: "UNVERIFIED", required: false, executed: false },
+        delivery: { status: "SOURCE_READY" },
+      },
+    })
     validateReferences([{ document: entry.document, outputs: [entry.output.split("/").at(-1)] }])
   }
 
   const mermaidFiles = walkMarkdown(root).filter(path => MERMAID_FENCE.test(readFileSync(path, "utf8")))
   assert(mermaidFiles.length === 0, `仍存在 Mermaid 图块：${mermaidFiles.map(path => relative(root, path)).join(", ")}`)
-  if (migrationWarnings.length > 0) {
-    console.warn(`SVG 图表静态验证完成：${diagramCount} 个通用场景，${STRICT_SVG_DIAGRAMS.length} 个严格端点场景；旧资产待迁移 ${migrationWarnings.length} 项：${migrationWarnings.join("；")}`)
+  const status = summarizeDeliveryStatus(validationResults)
+  const migrationRequired = status === VALIDATION_STATUS.MIGRATION_REQUIRED
+  const migrationCount = Math.max(migrationWarnings.length, validationResults.filter(result => hasMigrationRequired(result.validation)).length)
+  if (JSON_OUTPUT) {
+    console.log(JSON.stringify({
+      status,
+      diagrams: validationResults,
+      migrationWarnings,
+      mermaidFiles: mermaidFiles.map(path => relative(root, path)),
+    }, null, 2))
+    if (status === VALIDATION_STATUS.FAIL) process.exitCode = 1
+    else if ([VALIDATION_STATUS.MIGRATION_REQUIRED, VALIDATION_STATUS.NEEDS_CAPABILITY, VALIDATION_STATUS.UNVERIFIED].includes(status)) process.exitCode = 2
+  } else if (status === VALIDATION_STATUS.MIGRATION_REQUIRED) {
+    console.warn(`SVG 图表静态验证完成：${diagramCount} 个通用场景，${STRICT_SVG_DIAGRAMS.length} 个严格端点场景；旧资产待迁移 ${migrationCount} 项：${migrationWarnings.join("；")}`)
     process.exitCode = 2
+  } else if (status === VALIDATION_STATUS.UNVERIFIED || status === VALIDATION_STATUS.NEEDS_CAPABILITY) {
+    console.warn(`SVG 图表源级验证完成：${diagramCount} 个通用场景，${STRICT_SVG_DIAGRAMS.length} 个严格端点场景；目标状态：${status}`)
+    process.exitCode = 2
+  } else if (status === VALIDATION_STATUS.SOURCE_READY) {
+    console.log(`SVG 图表源级验证完成：${diagramCount} 个通用场景，${STRICT_SVG_DIAGRAMS.length} 个严格端点场景；目标环境仍需 Provider 验证。`)
   } else {
     console.log(`SVG 图表验证通过：${diagramCount} 个通用场景，${STRICT_SVG_DIAGRAMS.length} 个严格端点场景，且无 Mermaid 图块。`)
   }
 } catch (error) {
-  console.error(`SVG 图表验证失败：${error.message}`)
+  if (JSON_OUTPUT) console.log(JSON.stringify({ status: "FAIL", issues: [{ code: "VALIDATION_ERROR", message: error.message }] }, null, 2))
+  else console.error(`SVG 图表验证失败：${error.message}`)
   process.exitCode = 1
 }

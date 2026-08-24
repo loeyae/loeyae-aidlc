@@ -10,6 +10,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
+import { multilineTextBounds } from "./diagram-text-geometry.mjs"
 
 const PORTS = new Set(["top", "right", "bottom", "left"])
 const SHAPES = new Set(["round", "rect", "diamond", "ellipse", "database", "actor", "note"])
@@ -38,6 +39,9 @@ const SPLIT_STATUSES = new Set(["not-needed", "split", "kept-single"])
 const EVIDENCE_STATUSES = new Set(["PASS", "FAIL", "UNVERIFIED"])
 const LEGEND_MARGIN = 24
 const LEGEND_GAP = 24
+const LAYOUT_DIRECTIONS = new Set(["TD", "LR"])
+const LAYOUT_EXCEPTION_TYPES = new Set(["cross-group", "explicit-wrap", "obstacle-avoidance"])
+const CONTENT_ORDER = ["business", "legend", "annotations"]
 const GROUP_BORDER_DASHES = {
   legacy: "6 4",
   exclusive: "6 4",
@@ -152,8 +156,13 @@ function isStructuredDiagram(diagram) {
 }
 
 export function getDiagramMigrationWarnings(diagram) {
-  if (isStructuredDiagram(diagram)) return []
-  return [`${diagram.id}: MIGRATION_REQUIRED（旧 V1 资产缺少 diagramType/designNotes、图例决定或分组语义字段）`]
+  const warnings = []
+  if (!isStructuredDiagram(diagram)) warnings.push(`${diagram.id}: MIGRATION_REQUIRED（旧 V1 资产缺少 diagramType/designNotes、图例决定或分组语义字段）`)
+  else {
+    if (diagram.designNotes?.layout === undefined) warnings.push(`${diagram.id}: MIGRATION_REQUIRED（缺少 designNotes.layout 布局语义）`)
+    if ((diagram.annotations ?? []).some(annotation => typeof annotation.id !== "string" || annotation.id.length === 0)) warnings.push(`${diagram.id}: MIGRATION_REQUIRED（结构化注释缺少稳定 ID）`)
+  }
+  return warnings
 }
 
 function observedVisualValues(diagram) {
@@ -297,6 +306,41 @@ function validateEvidence(evidence, path, diagram) {
   assert(evidence.status !== "FAIL", `图 ${diagram.id} 的 ${path} 已失败，不能保留当前单图决策`)
 }
 
+function validateLayoutContract(diagram, maps) {
+  const layout = diagram.designNotes?.layout
+  if (layout === undefined) return
+  assert(layout && typeof layout === "object", `图 ${diagram.id} 的 designNotes.layout 必须为对象`)
+  assert(LAYOUT_DIRECTIONS.has(layout.direction), `图 ${diagram.id} 的 layout.direction 必须为 TD 或 LR`)
+  const expectedMainCoordinate = layout.direction === "TD" ? "x" : "y"
+  assert(layout.mainAxis && layout.mainAxis.coordinate === expectedMainCoordinate && Number.isFinite(layout.mainAxis.value), `图 ${diagram.id} 的 layout.mainAxis 必须声明有效正交坐标和值`)
+  if (layout.mainAxis.tolerance !== undefined) assert(Number.isFinite(layout.mainAxis.tolerance) && layout.mainAxis.tolerance > 0, `图 ${diagram.id} 的 layout.mainAxis.tolerance 必须为正数`)
+  if (layout.mainAxis.symmetricNodePairs !== undefined) {
+    assert(Array.isArray(layout.mainAxis.symmetricNodePairs), `图 ${diagram.id} 的 symmetricNodePairs 必须为数组`)
+    for (const pair of layout.mainAxis.symmetricNodePairs) assert(Array.isArray(pair) && pair.length === 2 && pair.every(nodeId => maps.nodes.has(nodeId)), `图 ${diagram.id} 的 symmetricNodePairs 引用了无效节点`)
+  }
+  if (layout.levels !== undefined) {
+    assert(Array.isArray(layout.levels), `图 ${diagram.id} 的 layout.levels 必须为数组`)
+    const levelIds = new Set()
+    for (const level of layout.levels) {
+      assert(level && typeof level.id === "string" && !levelIds.has(level.id) && Number.isFinite(level.coordinate) && Array.isArray(level.nodeIds) && level.nodeIds.length > 0, `图 ${diagram.id} 的 layout level 无效`)
+      levelIds.add(level.id)
+      for (const nodeId of level.nodeIds) assert(maps.nodes.has(nodeId), `图 ${diagram.id} 的 layout level 引用了不存在的节点：${nodeId}`)
+    }
+  }
+  if (layout.branchRules !== undefined) {
+    assert(Array.isArray(layout.branchRules), `图 ${diagram.id} 的 layout.branchRules 必须为数组`)
+    for (const rule of layout.branchRules) {
+      assert(rule && maps.nodes.has(rule.decisionNodeId) && Array.isArray(rule.edgeIds) && rule.edgeIds.length > 0 && Array.isArray(rule.targetNodeIds) && rule.targetNodeIds.length > 0 && PORTS.has(rule.targetPort), `图 ${diagram.id} 的 branchRule 无效`)
+      for (const edgeId of rule.edgeIds) {
+        const edge = maps.edges.get(edgeId)
+        assert(edge && edge.from === rule.decisionNodeId && rule.targetNodeIds.includes(edge.to), `图 ${diagram.id} 的 branchRule 引用了不匹配的边：${edgeId}`)
+      }
+      if (rule.exception !== undefined) assert(LAYOUT_EXCEPTION_TYPES.has(rule.exception?.type) && typeof rule.exception.reason === "string" && rule.exception.reason.length > 0, `图 ${diagram.id} 的 branchRule exception 无效`)
+    }
+  }
+  if (layout.contentOrder !== undefined) assert(Array.isArray(layout.contentOrder) && layout.contentOrder.length === CONTENT_ORDER.length && layout.contentOrder.every((item, index) => item === CONTENT_ORDER[index]), `图 ${diagram.id} 的 layout.contentOrder 必须为 business → legend → annotations`)
+}
+
 function validateStructuredDesign(diagram, maps, groupInfo) {
   if (!isStructuredDiagram(diagram)) return
   assert(DIAGRAM_TYPES.has(diagram.diagramType), `图 ${diagram.id} 缺少有效 diagramType`)
@@ -345,6 +389,8 @@ function validateStructuredDesign(diagram, maps, groupInfo) {
   if (decision.status === "not-needed") assert(semanticChannels.length === 0 && !hasLegend, `图 ${diagram.id} 的 legendDecision 为 not-needed，但存在图例或语义化视觉差异`)
 
   if (hasLegend) validateLegend(diagram, maps, semanticChannels)
+
+  validateLayoutContract(diagram, maps)
 
   if (groupInfo.specialGroups.length > 0) {
     const explainedGroupIds = new Set((notes.groupExplanations ?? []).map(item => item?.groupId))
@@ -439,14 +485,29 @@ function validateDiagram(diagram, documentPath) {
     if (group.tone !== undefined) assert(TONES[group.tone], `图 ${diagram.id} 的分组 ${group.id} 使用了未知颜色语义`)
   }
 
+  const annotationIds = new Set()
   for (const annotation of diagram.annotations ?? []) {
-    toLines(annotation.text)
+    const lines = toLines(annotation.text)
     assert(Number.isFinite(annotation.x) && Number.isFinite(annotation.y), `图 ${diagram.id} 存在无效注释坐标`)
+    if (annotation.id !== undefined) {
+      assert(typeof annotation.id === "string" && annotation.id.length > 0 && !annotationIds.has(annotation.id), `图 ${diagram.id} 的注释 ID 无效或重复：${annotation.id}`)
+      assert(!nodeIds.has(annotation.id) && !edgeIds.has(annotation.id) && !groupIds.has(annotation.id), `图 ${diagram.id} 的注释 ID 与节点/连线/分组冲突：${annotation.id}`)
+      annotationIds.add(annotation.id)
+    }
     validateOptionalPositiveNumber(annotation.fontSize, `图 ${diagram.id} 存在无效注释字体大小`)
     validateOptionalPositiveNumber(annotation.lineHeight, `图 ${diagram.id} 存在无效注释行高`)
     if (annotation.anchor !== undefined) assert(TEXT_ANCHORS.has(annotation.anchor), `图 ${diagram.id} 存在无效注释对齐方式`)
     if (annotation.weight !== undefined) assert(FONT_WEIGHTS.has(String(annotation.weight)), `图 ${diagram.id} 存在无效注释字重`)
     if (annotation.tone !== undefined) assert(TONES[annotation.tone], `图 ${diagram.id} 存在未知注释颜色语义`)
+    const bounds = multilineTextBounds({
+      lines,
+      x: annotation.x,
+      y: annotation.y,
+      fontSize: annotation.fontSize ?? 13,
+      anchor: annotation.anchor ?? "middle",
+      lineHeight: annotation.lineHeight ?? 17,
+    })
+    assert(bounds.left >= 0 && bounds.top >= 0 && bounds.right <= diagram.canvas.width && bounds.bottom <= diagram.canvas.height, `图 ${diagram.id} 的注释超出 viewBox：${annotation.id ?? "<legacy>"}`)
   }
 
   const maps = { nodes: nodesById, edges: edgesById, groups: groupsById }
@@ -456,9 +517,20 @@ function validateDiagram(diagram, documentPath) {
 }
 
 function renderMultilineText({ lines, x, y, fontSize = 16, fill = "#0f172a", anchor = "middle", weight = "500", lineHeight = 20, className = "" }) {
-  const top = y - ((lines.length - 1) * lineHeight) / 2
-  const tspans = lines.map((line, index) => `<tspan x="${x}" y="${top + index * lineHeight}">${escapeXml(line)}</tspan>`).join("")
+  const layout = multilineTextBounds({ lines, x, y, fontSize, anchor, lineHeight })
+  const tspans = lines.map((line, index) => `<tspan x="${x}" y="${layout.firstBaseline + index * lineHeight}">${escapeXml(line)}</tspan>`).join("")
   return `<text${className ? ` class="${className}"` : ""} text-anchor="${anchor}" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="${fontSize}" font-weight="${weight}" fill="${fill}">${tspans}</text>`
+}
+
+function annotationBounds(annotation) {
+  return multilineTextBounds({
+    lines: toLines(annotation.text),
+    x: annotation.x,
+    y: annotation.y,
+    fontSize: annotation.fontSize ?? 13,
+    anchor: annotation.anchor ?? "middle",
+    lineHeight: annotation.lineHeight ?? 17,
+  })
 }
 
 function wrapLegendText(value, maxChars) {
@@ -487,11 +559,13 @@ function createLegendLayout(diagram) {
   }
 
   const contentHeight = 24 + rows.reduce((total, row) => total + row.height, 0) + 16
+  const annotationTop = Math.min(...(diagram.annotations ?? []).map(annotation => annotationBounds(annotation).top), Number.POSITIVE_INFINITY)
+  const bottom = Math.min(diagram.canvas.height - LEGEND_MARGIN, Number.isFinite(annotationTop) ? annotationTop - LEGEND_GAP : diagram.canvas.height - LEGEND_MARGIN)
   const bounds = {
     left: LEGEND_MARGIN,
-    top: diagram.canvas.height - LEGEND_MARGIN - contentHeight,
+    top: bottom - contentHeight,
     right: diagram.canvas.width - LEGEND_MARGIN,
-    bottom: diagram.canvas.height - LEGEND_MARGIN,
+    bottom,
   }
   let y = bounds.top + 24
   for (const row of rows) {
@@ -640,7 +714,7 @@ function renderEdgeLabel(edge) {
 }
 
 function renderAnnotation(annotation) {
-  return renderMultilineText({
+  const text = renderMultilineText({
     lines: toLines(annotation.text),
     x: annotation.x,
     y: annotation.y,
@@ -650,6 +724,7 @@ function renderAnnotation(annotation) {
     weight: annotation.weight ?? "400",
     lineHeight: annotation.lineHeight ?? 17,
   })
+  return annotation.id === undefined ? text : `<g data-note="${escapeXml(annotation.id)}">\n${text}\n</g>`
 }
 
 function renderLegendShape(shape, tone, x, y, width, height) {
@@ -734,10 +809,10 @@ export function renderDiagram(diagram) {
     `<g id="nodes">`,
     ...diagram.nodes.map(renderNode),
     `</g>`,
+    ...(diagram.legend ? [renderLegend(diagram, maps)] : []),
     `<g id="annotations">`,
     ...(diagram.annotations ?? []).map(renderAnnotation),
     `</g>`,
-    ...(diagram.legend ? [renderLegend(diagram, maps)] : []),
     `</svg>`,
     "",
   ].join("\n")
